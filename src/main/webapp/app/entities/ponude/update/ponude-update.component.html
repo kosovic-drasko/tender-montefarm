@@ -8,21 +8,21 @@
       <div>
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+        <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+        <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        <div class="form-floating" [hidden]="editForm.get('id')!.value == null"></div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPostupka" for="field_sifraPostupka">Sifra Postupka</label>
+        <div class="form-floating">
           <input
             type="number"
             class="form-control"
+            placeholder="Sifra Postuka"
             name="sifraPostupka"
             id="field_sifraPostupka"
             data-cy="sifraPostupka"
             formControlName="sifraPostupka"
           />
+          <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPostupka" for="field_sifraPostupka">Sifra Postupka</label>
           <div
             *ngIf="
               editForm.get('sifraPostupka')!.invalid && (editForm.get('sifraPostupka')!.dirty || editForm.get('sifraPostupka')!.touched)
@@ -45,16 +45,17 @@
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPonude" for="field_sifraPonude">Sifra Ponude</label>
+        <div class="form-floating">
           <input
             type="number"
             class="form-control"
+            placeholder="Sifra Ponude"
             name="sifraPonude"
             id="field_sifraPonude"
             data-cy="sifraPonude"
             formControlName="sifraPonude"
           />
+          <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPonude" for="field_sifraPonude">Sifra Ponude</label>
           <div *ngIf="editForm.get('sifraPonude')!.invalid && (editForm.get('sifraPonude')!.dirty || editForm.get('sifraPonude')!.touched)">
             <small
               class="form-text text-danger"
@@ -73,16 +74,18 @@
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="tenderApp.ponude.brojPartije" for="field_brojPartije">Broj Partije</label>
+        <div class="form-floating">
           <input
             type="number"
             class="form-control"
+            placeholder="Broj Partije"
             name="brojPartije"
             id="field_brojPartije"
             data-cy="brojPartije"
             formControlName="brojPartije"
           />
+          <label class="form-label" jhiTranslate="tenderApp.ponude.brojPartije" for="field_brojPartije">Broj Partije</label>
+
           <div *ngIf="editForm.get('brojPartije')!.invalid && (editForm.get('brojPartije')!.dirty || editForm.get('brojPartije')!.touched)">
             <small
               class="form-text text-danger"
@@ -101,44 +104,47 @@
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="tenderApp.ponude.nazivProizvodjaca" for="field_nazivProizvodjaca"
-            >Naziv Proizvodjaca</label
-          >
+        <div class="form-floating">
           <input
             type="text"
             class="form-control"
             name="nazivProizvodjaca"
+            placeholder="Naziv Proizvodjaca"
             id="field_nazivProizvodjaca"
             data-cy="nazivProizvodjaca"
             formControlName="nazivProizvodjaca"
           />
+          <label class="form-label" jhiTranslate="tenderApp.ponude.nazivProizvodjaca" for="field_nazivProizvodjaca"
+            >Naziv Proizvodjaca</label
+          >
         </div>
 
-        <div class="row mb-3">
+        <div class="form-floating">
           <label class="form-label" jhiTranslate="tenderApp.ponude.zasticeniNaziv" for="field_zasticeniNaziv">Zasticeni Naziv</label>
           <input
             type="text"
             class="form-control"
             name="zasticeniNaziv"
+            placeholder="Zasticeni Naziv"
             id="field_zasticeniNaziv"
             data-cy="zasticeniNaziv"
             formControlName="zasticeniNaziv"
           />
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="tenderApp.ponude.ponudjenaVrijednost" for="field_ponudjenaVrijednost"
-            >Ponudjena Vrijednost</label
-          >
+        <div class="form-floating">
           <input
             type="number"
             class="form-control"
             name="ponudjenaVrijednost"
+            placeholder="Ponudjena Vrijednost"
             id="field_ponudjenaVrijednost"
             data-cy="ponudjenaVrijednost"
             formControlName="ponudjenaVrijednost"
           />
+          <label class="form-label" jhiTranslate="tenderApp.ponude.ponudjenaVrijednost" for="field_ponudjenaVrijednost"
+            >Ponudjena Vrijednost</label
+          >
           <div
             *ngIf="
               editForm.get('ponudjenaVrijednost')!.invalid &&
@@ -162,49 +168,51 @@
           </div>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="tenderApp.ponude.rokIsporuke" for="field_rokIsporuke">Rok Isporuke</label>
+        <div class="form-floating">
           <input
             type="number"
             class="form-control"
             name="rokIsporuke"
+            placeholder="Rok Isporuke"
             id="field_rokIsporuke"
             data-cy="rokIsporuke"
             formControlName="rokIsporuke"
           />
+          <label class="form-label" jhiTranslate="tenderApp.ponude.rokIsporuke" for="field_rokIsporuke">Rok Isporuke</label>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="tenderApp.ponude.jedinicnaCijena" for="field_jedinicnaCijena">Jedinicna Cijena</label>
+        <div class="form-floating">
           <input
             type="number"
             class="form-control"
             name="jedinicnaCijena"
+            placeholder="Jedinicna Cijena"
             id="field_jedinicnaCijena"
             data-cy="jedinicnaCijena"
             formControlName="jedinicnaCijena"
           />
+          <label class="form-label" jhiTranslate="tenderApp.ponude.jedinicnaCijena" for="field_jedinicnaCijena">Jedinicna Cijena</label>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="tenderApp.ponude.selected" for="field_selected">Selected</label>
-          <input type="checkbox" class="form-check" name="selected" id="field_selected" data-cy="selected" formControlName="selected" />
-        </div>
+        <!--        <div class="form-floating">-->
+        <!--          <label class="form-label" jhiTranslate="tenderApp.ponude.selected" for="field_selected">Selected</label>-->
+        <!--          <input type="checkbox" class="form-check" name="selected" id="field_selected" data-cy="selected" formControlName="selected" />-->
+        <!--        </div>-->
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPonudjaca" for="field_sifraPonudjaca">Sifra Ponudjaca</label>
+        <div class="form-floating">
           <input
             type="number"
             class="form-control"
             name="sifraPonudjaca"
+            placeholder="Sifra Ponudjaca"
             id="field_sifraPonudjaca"
             data-cy="sifraPonudjaca"
             formControlName="sifraPonudjaca"
           />
+          <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPonudjaca" for="field_sifraPonudjaca">Sifra Ponudjaca</label>
         </div>
 
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="tenderApp.ponude.ponudjaci" for="field_ponudjaci">Ponudjaci</label>
+        <div class="form-floating">
           <select class="form-control" id="field_ponudjaci" data-cy="ponudjaci" name="ponudjaci" formControlName="ponudjaci">
             <option [ngValue]="null"></option>
             <option
@@ -214,6 +222,8 @@
               {{ ponudjaciOption.id }}
             </option>
           </select>
+
+          <label class="form-label" jhiTranslate="tenderApp.ponude.ponudjaci" for="field_ponudjaci">Ponudjaci</label>
         </div>
       </div>
 
