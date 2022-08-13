@@ -1,0 +1,8 @@
+{
+  "generator-jhipster:7.8.0": {
+    "promptValues": {
+      "packageName": "tender",
+      "nativeLanguage": "sr"
+    }
+  }
+}
