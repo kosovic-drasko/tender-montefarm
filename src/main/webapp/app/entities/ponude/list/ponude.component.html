@@ -1,0 +1,132 @@
+<div>
+  <h2 id="page-heading" data-cy="PonudeHeading">
+    <span jhiTranslate="tenderApp.ponude.home.title">Ponudes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="tenderApp.ponude.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ponude"
+        [routerLink]="['/ponude/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="tenderApp.ponude.home.createLabel"> Create a new Ponude </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="ponudes?.length === 0">
+    <span jhiTranslate="tenderApp.ponude.home.notFound">No ponudes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="ponudes && ponudes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="sifraPostupka">
+            <span jhiTranslate="tenderApp.ponude.sifraPostupka">Sifra Postupka</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sifraPonude">
+            <span jhiTranslate="tenderApp.ponude.sifraPonude">Sifra Ponude</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="brojPartije">
+            <span jhiTranslate="tenderApp.ponude.brojPartije">Broj Partije</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nazivProizvodjaca">
+            <span jhiTranslate="tenderApp.ponude.nazivProizvodjaca">Naziv Proizvodjaca</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="zasticeniNaziv">
+            <span jhiTranslate="tenderApp.ponude.zasticeniNaziv">Zasticeni Naziv</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="ponudjenaVrijednost">
+            <span jhiTranslate="tenderApp.ponude.ponudjenaVrijednost">Ponudjena Vrijednost</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rokIsporuke">
+            <span jhiTranslate="tenderApp.ponude.rokIsporuke">Rok Isporuke</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="jedinicnaCijena">
+            <span jhiTranslate="tenderApp.ponude.jedinicnaCijena">Jedinicna Cijena</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="selected">
+            <span jhiTranslate="tenderApp.ponude.selected">Selected</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sifraPonudjaca">
+            <span jhiTranslate="tenderApp.ponude.sifraPonudjaca">Sifra Ponudjaca</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="ponudjaci.id">
+            <span jhiTranslate="tenderApp.ponude.ponudjaci">Ponudjaci</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ponude of ponudes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/ponude', ponude.id, 'view']">{{ ponude.id }}</a>
+          </td>
+          <td>{{ ponude.sifraPostupka }}</td>
+          <td>{{ ponude.sifraPonude }}</td>
+          <td>{{ ponude.brojPartije }}</td>
+          <td>{{ ponude.nazivProizvodjaca }}</td>
+          <td>{{ ponude.zasticeniNaziv }}</td>
+          <td>{{ ponude.ponudjenaVrijednost }}</td>
+          <td>{{ ponude.rokIsporuke }}</td>
+          <td>{{ ponude.jedinicnaCijena }}</td>
+          <td>{{ ponude.selected }}</td>
+          <td>{{ ponude.sifraPonudjaca }}</td>
+          <td>
+            <div *ngIf="ponude.ponudjaci">
+              <a [routerLink]="['/ponudjaci', ponude.ponudjaci?.id, 'view']">{{ ponude.ponudjaci?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/ponude', ponude.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/ponude', ponude.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(ponude)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="ponudes && ponudes.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

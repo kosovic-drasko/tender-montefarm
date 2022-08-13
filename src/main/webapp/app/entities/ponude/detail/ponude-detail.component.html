@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="ponude">
+      <h2 data-cy="ponudeDetailsHeading"><span jhiTranslate="tenderApp.ponude.detail.title">Ponude</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ ponude.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="tenderApp.ponude.sifraPostupka">Sifra Postupka</span></dt>
+        <dd>
+          <span>{{ ponude.sifraPostupka }}</span>
+        </dd>
+        <dt><span jhiTranslate="tenderApp.ponude.sifraPonude">Sifra Ponude</span></dt>
+        <dd>
+          <span>{{ ponude.sifraPonude }}</span>
+        </dd>
+        <dt><span jhiTranslate="tenderApp.ponude.brojPartije">Broj Partije</span></dt>
+        <dd>
+          <span>{{ ponude.brojPartije }}</span>
+        </dd>
+        <dt><span jhiTranslate="tenderApp.ponude.nazivProizvodjaca">Naziv Proizvodjaca</span></dt>
+        <dd>
+          <span>{{ ponude.nazivProizvodjaca }}</span>
+        </dd>
+        <dt><span jhiTranslate="tenderApp.ponude.zasticeniNaziv">Zasticeni Naziv</span></dt>
+        <dd>
+          <span>{{ ponude.zasticeniNaziv }}</span>
+        </dd>
+        <dt><span jhiTranslate="tenderApp.ponude.ponudjenaVrijednost">Ponudjena Vrijednost</span></dt>
+        <dd>
+          <span>{{ ponude.ponudjenaVrijednost }}</span>
+        </dd>
+        <dt><span jhiTranslate="tenderApp.ponude.rokIsporuke">Rok Isporuke</span></dt>
+        <dd>
+          <span>{{ ponude.rokIsporuke }}</span>
+        </dd>
+        <dt><span jhiTranslate="tenderApp.ponude.jedinicnaCijena">Jedinicna Cijena</span></dt>
+        <dd>
+          <span>{{ ponude.jedinicnaCijena }}</span>
+        </dd>
+        <dt><span jhiTranslate="tenderApp.ponude.selected">Selected</span></dt>
+        <dd>
+          <span>{{ ponude.selected }}</span>
+        </dd>
+        <dt><span jhiTranslate="tenderApp.ponude.sifraPonudjaca">Sifra Ponudjaca</span></dt>
+        <dd>
+          <span>{{ ponude.sifraPonudjaca }}</span>
+        </dd>
+        <dt><span jhiTranslate="tenderApp.ponude.ponudjaci">Ponudjaci</span></dt>
+        <dd>
+          <div *ngIf="ponude.ponudjaci">
+            <a [routerLink]="['/ponudjaci', ponude.ponudjaci?.id, 'view']">{{ ponude.ponudjaci?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/ponude', ponude.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
