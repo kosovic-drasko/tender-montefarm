@@ -58,7 +58,9 @@ export class NavbarComponent implements OnInit {
   collapseNavbar(): void {
     this.isNavbarCollapsed = true;
   }
-
+  addPrijava(): any {
+    this.dialog.open(LoginComponent);
+  }
   login(): void {
     this.router.navigate(['/login']);
   }
