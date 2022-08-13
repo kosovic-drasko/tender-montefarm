@@ -2,8 +2,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
 </head>
 
-<h2 mat-dialog-title>Prijava</h2>
-<mat-dialog-content class="mat-typography">
+<div class="modal-content">
   <div id="centar">
     <div id="text">
       <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication" data-cy="loginError">
@@ -49,4 +48,4 @@
       </form>
     </div>
   </div>
-</mat-dialog-content>
+</div>

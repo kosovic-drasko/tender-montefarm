@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'app/login/login.service';
 import { AccountService } from 'app/core/auth/account.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-login',
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     private loginService: LoginService,
     private router: Router,
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<LoginComponent>
+    protected modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.username.nativeElement.focus();
   }
   close(): any {
-    this.dialogRef.close();
+    this.modalService.dismissAll();
   }
 
   login(): void {
