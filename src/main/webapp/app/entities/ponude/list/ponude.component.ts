@@ -9,6 +9,7 @@ import { IPonude } from '../ponude.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { PonudeService } from '../service/ponude.service';
 import { PonudeDeleteDialogComponent } from '../delete/ponude-delete-dialog.component';
+import { PonudeUpdateComponent } from '../update/ponude-update.component';
 
 @Component({
   selector: 'jhi-ponude',
@@ -113,5 +114,14 @@ export class PonudeComponent implements OnInit {
 
   protected onError(): void {
     this.ngbPaginationPage = this.page ?? 1;
+  }
+
+  update(dialog: IPonude): void {
+    const modalRef = this.modalService.open(PonudeUpdateComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.dialog = this.ponudes;
+    // unsubscribe not needed because closed completes on modal close
+    modalRef.closed.subscribe(reason => {
+      this.handleNavigation();
+    });
   }
 }
