@@ -116,11 +116,38 @@ export class PonudeComponent implements OnInit {
     this.ngbPaginationPage = this.page ?? 1;
   }
 
-  update(dialog: IPonude): void {
+  update(
+    id?: number,
+    sifraPostupka?: number,
+    sifraPonude?: number,
+    brojPartije?: number,
+    sifraPonudjaca?: number | null,
+    nazivProizvodjaca?: string | null,
+    zasticeniNaziv?: string | null,
+    ponudjenaVrijednost?: number,
+    jedinicnaCijena?: number | null,
+    selected?: boolean | null,
+    rokIsporuke?: number
+  ): void {
     const modalRef = this.modalService.open(PonudeUpdateComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.dialog = this.ponudes;
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.sifraPostupka = sifraPostupka;
+    modalRef.componentInstance.sifraPonude = sifraPonude;
+    modalRef.componentInstance.brojPartije = brojPartije;
+    modalRef.componentInstance.sifraPonudjaca = sifraPonudjaca;
+    modalRef.componentInstance.nazivProizvodjaca = nazivProizvodjaca;
+    modalRef.componentInstance.zasticeniNaziv = zasticeniNaziv;
+    modalRef.componentInstance.ponudjenaVrijednost = ponudjenaVrijednost;
+    modalRef.componentInstance.jedinicnaCijena = jedinicnaCijena;
+    modalRef.componentInstance.selected = selected;
+    modalRef.componentInstance.rokIsporuke = rokIsporuke;
+  }
+  add(): void {
+    const modalRef = this.modalService.open(PonudeUpdateComponent, { size: 'lg', backdrop: 'static' });
+    // modalRef.componentInstance.id = id;
+
     // unsubscribe not needed because closed completes on modal close
-    modalRef.closed.subscribe(reason => {
+    modalRef.closed.subscribe(() => {
       this.handleNavigation();
     });
   }

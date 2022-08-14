@@ -8,13 +8,7 @@
         <span jhiTranslate="tenderApp.ponude.home.refreshListLabel">Refresh List</span>
       </button>
 
-      <button
-        *ngFor="let dialog of ponudes; trackBy: trackId"
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-ponude"
-        (click)="update(dialog)"
-      >
+      <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="add()">
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="tenderApp.ponude.home.createLabel"> Create a new Ponude </span>
       </button>
@@ -97,7 +91,26 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" (click)="update(ponude)" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <button
+                type="submit"
+                (click)="
+                  update(
+                    ponude.id,
+                    ponude.sifraPostupka,
+                    ponude.sifraPonude,
+                    ponude.brojPartije,
+                    ponude.sifraPonudjaca,
+                    ponude.nazivProizvodjaca,
+                    ponude.zasticeniNaziv,
+                    ponude.ponudjenaVrijednost,
+                    ponude.jedinicnaCijena,
+                    ponude.selected,
+                    ponude.rokIsporuke
+                  )
+                "
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
@@ -9,6 +8,7 @@ import { IPonude, Ponude } from '../ponude.model';
 import { PonudeService } from '../service/ponude.service';
 import { IPonudjaci } from 'app/entities/ponudjaci/ponudjaci.model';
 import { PonudjaciService } from 'app/entities/ponudjaci/service/ponudjaci.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-ponude-update',
@@ -18,7 +18,18 @@ export class PonudeUpdateComponent implements OnInit {
   isSaving = false;
 
   ponudjacisSharedCollection: IPonudjaci[] = [];
-
+  @Input() public dialog: any;
+  @Input() public id: any;
+  @Input() public sifraPostupka: any;
+  @Input() public sifraPonude: any;
+  @Input() public brojPartije: any;
+  @Input() public sifraPonudjaca: any;
+  @Input() public nazivProizvodjaca: any;
+  @Input() public zasticeniNaziv: any;
+  @Input() public ponudjenaVrijednost: any;
+  @Input() public jedinicnaCijena: any;
+  @Input() public selected: any;
+  @Input() public rokIsporuke: any;
   editForm = this.fb.group({
     id: [],
     sifraPostupka: [null, [Validators.required]],
@@ -37,20 +48,19 @@ export class PonudeUpdateComponent implements OnInit {
   constructor(
     protected ponudeService: PonudeService,
     protected ponudjaciService: PonudjaciService,
-    protected activatedRoute: ActivatedRoute,
+    protected activeModal: NgbActiveModal,
     protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ ponude }) => {
-      this.updateForm(ponude);
+    this.updateForm(this.dialog);
 
-      this.loadRelationshipsOptions();
-    });
+    this.loadRelationshipsOptions();
+    console.log(this.dialog);
   }
 
   previousState(): void {
-    window.history.back();
+    this.activeModal.close();
   }
 
   save(): void {
@@ -75,7 +85,7 @@ export class PonudeUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    this.activeModal.close();
   }
 
   protected onSaveError(): void {
@@ -88,17 +98,17 @@ export class PonudeUpdateComponent implements OnInit {
 
   protected updateForm(ponude: IPonude): void {
     this.editForm.patchValue({
-      id: ponude.id,
-      sifraPostupka: ponude.sifraPostupka,
-      sifraPonude: ponude.sifraPonude,
-      brojPartije: ponude.brojPartije,
-      nazivProizvodjaca: ponude.nazivProizvodjaca,
-      zasticeniNaziv: ponude.zasticeniNaziv,
-      ponudjenaVrijednost: ponude.ponudjenaVrijednost,
-      rokIsporuke: ponude.rokIsporuke,
-      jedinicnaCijena: ponude.jedinicnaCijena,
-      selected: ponude.selected,
-      sifraPonudjaca: ponude.sifraPonudjaca,
+      id: this.id,
+      sifraPostupka: this.sifraPostupka,
+      sifraPonude: this.sifraPonude,
+      brojPartije: this.brojPartije,
+      nazivProizvodjaca: this.nazivProizvodjaca,
+      zasticeniNaziv: this.zasticeniNaziv,
+      ponudjenaVrijednost: this.ponudjenaVrijednost,
+      rokIsporuke: this.rokIsporuke,
+      jedinicnaCijena: this.jedinicnaCijena,
+      selected: this.selected,
+      sifraPonudjaca: this.sifraPonudjaca,
       ponudjaci: ponude.ponudjaci,
     });
 

@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="ponude">
+    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="ponude update">
       <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.spec.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/ponude.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/ponude.model.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/update/ponude-update.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/update/ponude-update.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/update/ponude-update.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/update/ponude-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/update/ponude-update.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +99,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1660370002313</updated>
-      <workItem from="1660370007065" duration="7227000" />
+      <workItem from="1660370007065" duration="15356000" />
     </task>
     <task id="LOCAL-00001" summary="init-tabele-osnovne">
       <created>1660374945836</created>
@@ -125,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660414454032</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="ponude update">
+      <created>1660417652784</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1660417652784</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +158,7 @@
     <MESSAGE value="init-tabele-osnovne" />
     <MESSAGE value="init-login" />
     <MESSAGE value="ponude" />
-    <option name="LAST_COMMIT_MESSAGE" value="ponude" />
+    <MESSAGE value="ponude update" />
+    <option name="LAST_COMMIT_MESSAGE" value="ponude update" />
   </component>
 </project>
