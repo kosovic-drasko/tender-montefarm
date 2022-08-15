@@ -10,12 +10,15 @@ import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants
 import { PonudeService } from '../service/ponude.service';
 import { PonudeDeleteDialogComponent } from '../delete/ponude-delete-dialog.component';
 import { PonudeUpdateComponent } from '../update/ponude-update.component';
+import { IPonudjaci } from '../../ponudjaci/ponudjaci.model';
+import { PonudjaciService } from '../../ponudjaci/service/ponudjaci.service';
 
 @Component({
   selector: 'jhi-ponude',
   templateUrl: './ponude.component.html',
 })
 export class PonudeComponent implements OnInit {
+  ponudjaci?: IPonudjaci[] = [];
   ponudes?: IPonude[];
   isLoading = false;
   totalItems = 0;
@@ -29,6 +32,7 @@ export class PonudeComponent implements OnInit {
     protected ponudeService: PonudeService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
+    protected ponudjaciService: PonudjaciService,
     protected modalService: NgbModal
   ) {}
 
@@ -143,7 +147,9 @@ export class PonudeComponent implements OnInit {
     modalRef.componentInstance.rokIsporuke = rokIsporuke;
 
     modalRef.closed.subscribe(() => {
-      this.loadPage();
+      modalRef.closed.subscribe(reason => {
+        this.loadPage();
+      });
     });
   }
   add(): void {
@@ -152,7 +158,7 @@ export class PonudeComponent implements OnInit {
 
     // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(() => {
-      this.handleNavigation();
+      this.loadPage();
     });
   }
 }

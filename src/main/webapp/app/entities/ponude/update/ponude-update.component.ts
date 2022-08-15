@@ -16,7 +16,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PonudeUpdateComponent implements OnInit {
   isSaving = false;
-  ponudjaci: IPonudjaci[] = [];
+  ponudjacis1: IPonudjaci[] = [];
+
   ponudes: IPonude[] = [];
   ponudjacisSharedCollection: IPonudjaci[] = [];
   @Input() public dialog: any;
@@ -54,12 +55,13 @@ export class PonudeUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateForm(this.dialog);
-
     this.loadAllPonudjaci();
+    console.log('___________________>', this.ponudjacis1);
   }
   loadAllPonudjaci(): void {
     this.ponudjaciService.query().subscribe((res: HttpResponse<IPonudjaci[]>) => {
-      this.ponudjaci = res.body ?? [];
+      this.ponudjacis1 = res.body ?? [];
+      // console.log('___________________>',res.body ?? [])
     });
   }
   previousState(): void {
@@ -84,7 +86,7 @@ export class PonudeUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    this.activeModal.dismiss();
   }
   close(): any {
     this.activeModal.dismiss();
@@ -112,10 +114,10 @@ export class PonudeUpdateComponent implements OnInit {
       sifraPonudjaca: this.sifraPonudjaca,
     });
 
-    this.ponudjacisSharedCollection = this.ponudjaciService.addPonudjaciToCollectionIfMissing(
-      this.ponudjacisSharedCollection,
-      ponude.ponudjaci
-    );
+    // this.ponudjacisSharedCollection = this.ponudjaciService.addPonudjaciToCollectionIfMissing(
+    //   this.ponudjacisSharedCollection,
+    //   ponude.ponudjaci
+    // );
   }
 
   // protected loadRelationshipsOptions(): void {
