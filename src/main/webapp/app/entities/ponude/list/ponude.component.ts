@@ -141,6 +141,10 @@ export class PonudeComponent implements OnInit {
     modalRef.componentInstance.jedinicnaCijena = jedinicnaCijena;
     modalRef.componentInstance.selected = selected;
     modalRef.componentInstance.rokIsporuke = rokIsporuke;
+
+    modalRef.closed.subscribe(() => {
+      this.handleNavigation();
+    });
   }
   add(): void {
     const modalRef = this.modalService.open(PonudeUpdateComponent, { size: 'lg', backdrop: 'static' });

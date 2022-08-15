@@ -16,7 +16,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PonudeUpdateComponent implements OnInit {
   isSaving = false;
-
+  ponudjaci: IPonudjaci[] = [];
+  ponudes: IPonude[] = [];
   ponudjacisSharedCollection: IPonudjaci[] = [];
   @Input() public dialog: any;
   @Input() public id: any;
@@ -54,12 +55,15 @@ export class PonudeUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.updateForm(this.dialog);
 
-    this.loadRelationshipsOptions();
-    console.log(this.dialog);
+    this.loadAllPonudjaci();
   }
-
+  loadAllPonudjaci(): void {
+    this.ponudjaciService.query().subscribe((res: HttpResponse<IPonudjaci[]>) => {
+      this.ponudjaci = res.body ?? [];
+    });
+  }
   previousState(): void {
-    this.activeModal.close();
+    this.activeModal.dismiss();
   }
 
   save(): void {
@@ -72,21 +76,19 @@ export class PonudeUpdateComponent implements OnInit {
     }
   }
 
-  trackPonudjaciById(_index: number, item: IPonudjaci): number {
-    return item.id!;
-  }
-
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IPonude>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      next: () => this.onSaveSuccess(),
+      // next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
     });
   }
 
-  protected onSaveSuccess(): void {
-    this.activeModal.close();
+  // protected onSaveSuccess(): void {
+  //   this.previousState();
+  // }
+  close(): any {
+    this.activeModal.dismiss();
   }
-
   protected onSaveError(): void {
     // Api for inheritance.
   }
@@ -116,17 +118,17 @@ export class PonudeUpdateComponent implements OnInit {
     );
   }
 
-  protected loadRelationshipsOptions(): void {
-    this.ponudjaciService
-      .query()
-      .pipe(map((res: HttpResponse<IPonudjaci[]>) => res.body ?? []))
-      .pipe(
-        map((ponudjacis: IPonudjaci[]) =>
-          this.ponudjaciService.addPonudjaciToCollectionIfMissing(ponudjacis, this.editForm.get('ponudjaci')!.value)
-        )
-      )
-      .subscribe((ponudjacis: IPonudjaci[]) => (this.ponudjacisSharedCollection = ponudjacis));
-  }
+  // protected loadRelationshipsOptions(): void {
+  //   this.ponudjaciService
+  //     .query()
+  //     .pipe(map((res: HttpResponse<IPonudjaci[]>) => res.body ?? []))
+  //     .pipe(
+  //       map((ponudjacis: IPonudjaci[]) =>
+  //         this.ponudjaciService.addPonudjaciToCollectionIfMissing(ponudjacis, this.editForm.get('ponudjaci')!.value)
+  //       )
+  //     )
+  //     .subscribe((ponudjacis: IPonudjaci[]) => (this.ponudjacisSharedCollection = ponudjacis));
+  // }
 
   protected createFromForm(): IPonude {
     return {

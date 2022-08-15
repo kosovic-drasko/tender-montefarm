@@ -199,11 +199,6 @@
             <label class="form-label" jhiTranslate="tenderApp.ponude.jedinicnaCijena" for="field_jedinicnaCijena">Jedinicna Cijena</label>
           </div>
 
-          <!--          <div class="form-floating">-->
-          <!--            <label class="form-label" jhiTranslate="tenderApp.ponude.selected" for="field_selected">Selected</label>-->
-          <!--            <input type="checkbox" class="form-check" name="selected" id="field_selected" data-cy="selected" formControlName="selected" />-->
-          <!--          </div>-->
-
           <div class="form-floating">
             <input
               type="number"
@@ -218,13 +213,13 @@
           </div>
 
           <div class="form-floating">
-            <select class="form-control" id="field_ponudjaci" data-cy="ponudjaci" name="ponudjaci" formControlName="ponudjaci">
+            <select class="form-control" id="field_ponudjaci" data-cy="ponudjaci" name="ponudjaci" formControlName="sifraPonudjaca">
               <option [ngValue]="null"></option>
               <option
                 [ngValue]="ponudjaciOption.id === editForm.get('ponudjaci')!.value?.id ? editForm.get('ponudjaci')!.value : ponudjaciOption"
-                *ngFor="let ponudjaciOption of ponudjacisSharedCollection; trackBy: trackPonudjaciById"
+                *ngFor="let ponudjaciOption of ponudjacisSharedCollection"
               >
-                {{ ponudjaciOption.nazivPonudjaca }}
+                {{ ponudjaciOption.id }}
               </option>
             </select>
 
