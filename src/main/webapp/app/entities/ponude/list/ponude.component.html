@@ -81,7 +81,7 @@
           <td>{{ ponude.sifraPonudjaca }}</td>
           <td>
             <div *ngIf="ponude.ponudjaci">
-              <a [routerLink]="['/ponudjaci', ponude.ponudjaci?.id, 'view']">{{ ponude.ponudjaci?.id }}</a>
+              <a [routerLink]="['/ponudjaci', ponude.ponudjaci?.id, 'view']">{{ ponude.ponudjaci?.nazivPonudjaca }}</a>
             </div>
           </td>
           <td class="text-end">

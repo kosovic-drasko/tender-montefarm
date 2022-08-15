@@ -42,7 +42,6 @@ export class PonudeUpdateComponent implements OnInit {
     jedinicnaCijena: [],
     selected: [],
     sifraPonudjaca: [],
-    ponudjaci: [],
   });
 
   constructor(
@@ -109,7 +108,6 @@ export class PonudeUpdateComponent implements OnInit {
       jedinicnaCijena: this.jedinicnaCijena,
       selected: this.selected,
       sifraPonudjaca: this.sifraPonudjaca,
-      ponudjaci: ponude.ponudjaci,
     });
 
     this.ponudjacisSharedCollection = this.ponudjaciService.addPonudjaciToCollectionIfMissing(
@@ -144,7 +142,6 @@ export class PonudeUpdateComponent implements OnInit {
       jedinicnaCijena: this.editForm.get(['jedinicnaCijena'])!.value,
       selected: this.editForm.get(['selected'])!.value,
       sifraPonudjaca: this.editForm.get(['sifraPonudjaca'])!.value,
-      ponudjaci: this.editForm.get(['ponudjaci'])!.value,
     };
   }
 }

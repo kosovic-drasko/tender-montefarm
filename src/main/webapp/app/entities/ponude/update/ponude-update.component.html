@@ -125,7 +125,6 @@
           </div>
 
           <div class="form-floating">
-            <label class="form-label" jhiTranslate="tenderApp.ponude.zasticeniNaziv" for="field_zasticeniNaziv">Zasticeni Naziv</label>
             <input
               type="text"
               class="form-control"
@@ -135,6 +134,7 @@
               data-cy="zasticeniNaziv"
               formControlName="zasticeniNaziv"
             />
+            <label class="form-label" jhiTranslate="tenderApp.ponude.zasticeniNaziv" for="field_zasticeniNaziv">Zasticeni Naziv</label>
           </div>
 
           <div class="form-floating">
@@ -199,10 +199,10 @@
             <label class="form-label" jhiTranslate="tenderApp.ponude.jedinicnaCijena" for="field_jedinicnaCijena">Jedinicna Cijena</label>
           </div>
 
-          <div class="form-floating">
-            <label class="form-label" jhiTranslate="tenderApp.ponude.selected" for="field_selected">Selected</label>
-            <input type="checkbox" class="form-check" name="selected" id="field_selected" data-cy="selected" formControlName="selected" />
-          </div>
+          <!--          <div class="form-floating">-->
+          <!--            <label class="form-label" jhiTranslate="tenderApp.ponude.selected" for="field_selected">Selected</label>-->
+          <!--            <input type="checkbox" class="form-check" name="selected" id="field_selected" data-cy="selected" formControlName="selected" />-->
+          <!--          </div>-->
 
           <div class="form-floating">
             <input
@@ -224,7 +224,7 @@
                 [ngValue]="ponudjaciOption.id === editForm.get('ponudjaci')!.value?.id ? editForm.get('ponudjaci')!.value : ponudjaciOption"
                 *ngFor="let ponudjaciOption of ponudjacisSharedCollection; trackBy: trackPonudjaciById"
               >
-                {{ ponudjaciOption.id }}
+                {{ ponudjaciOption.nazivPonudjaca }}
               </option>
             </select>
 
