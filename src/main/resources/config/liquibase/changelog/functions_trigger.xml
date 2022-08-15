@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity Ponude.
+    -->
+    <changeSet id="1" author="me">
+        <createProcedure>
+   CREATE OR REPLACE FUNCTION public.sifra()
+   RETURNS trigger
+   LANGUAGE plpgsql
+   AS $function$
+   begin
+	  if new.ponudjaci_id is null then new.ponudjaci_id=0;
+    end if;
+     new.ponudjaci_id=new.sifra_ponudjaca;
+      RETURN NEW;
+   END;
+  $function$
+;
+    </createProcedure>
+
+    </changeSet>
+
+    <changeSet id="3" author="drasko">
+        <sql>
+            create trigger "moj-triger" before
+            insert or update
+                on
+                public.ponude for each row execute function sifra()
+    </sql>
+
+    </changeSet>
+</databaseChangeLog>
