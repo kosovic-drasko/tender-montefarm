@@ -78,14 +78,14 @@ export class PonudeUpdateComponent implements OnInit {
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IPonude>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
-      // next: () => this.onSaveSuccess(),
+      next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
     });
   }
 
-  // protected onSaveSuccess(): void {
-  //   this.previousState();
-  // }
+  protected onSaveSuccess(): void {
+    this.previousState();
+  }
   close(): any {
     this.activeModal.dismiss();
   }
