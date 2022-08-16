@@ -9,6 +9,9 @@ import { IPostupci } from '../postupci.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { PostupciService } from '../service/postupci.service';
 import { PostupciDeleteDialogComponent } from '../delete/postupci-delete-dialog.component';
+import { PonudjaciUpdateComponent } from '../../ponudjaci/update/ponudjaci-update.component';
+import dayjs from 'dayjs/esm';
+import { PostupciUpdateComponent } from '../update/postupci-update.component';
 
 @Component({
   selector: 'jhi-postupci',
@@ -113,5 +116,40 @@ export class PostupciComponent implements OnInit {
 
   protected onError(): void {
     this.ngbPaginationPage = this.page ?? 1;
+  }
+
+  update(
+    id?: number,
+    sifraPostupka?: number,
+    brojTendera?: string | null,
+    opisPostupka?: string,
+    vrstaPostupka?: string,
+    datumObjave?: dayjs.Dayjs | null,
+    datumOtvaranja?: dayjs.Dayjs | null,
+    kriterijumCijena?: number,
+    drugiKriterijum?: number
+  ): void {
+    const modalRef = this.modalService.open(PostupciUpdateComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.sifraPostupka = sifraPostupka;
+    modalRef.componentInstance.brojTendera = brojTendera;
+    modalRef.componentInstance.opisPostupka = opisPostupka;
+    modalRef.componentInstance.vrstaPostupka = vrstaPostupka;
+
+    modalRef.componentInstance.datumObjave = datumObjave;
+    modalRef.componentInstance.datumOtvaranja = datumOtvaranja;
+    modalRef.componentInstance.kriterijumCijena = kriterijumCijena;
+    modalRef.componentInstance.drugiKriterijum = drugiKriterijum;
+
+    modalRef.closed.subscribe(() => {
+      this.loadPage();
+    });
+  }
+
+  add(): void {
+    const modalRef = this.modalService.open(PostupciUpdateComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.closed.subscribe(() => {
+      this.loadPage();
+    });
   }
 }

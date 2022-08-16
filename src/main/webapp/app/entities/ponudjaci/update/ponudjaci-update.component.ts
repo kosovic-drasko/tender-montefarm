@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -15,7 +15,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PonudjaciUpdateComponent implements OnInit {
   isSaving = false;
-
+  @Input() public id: any;
+  @Input() public nazivPonudjaca: any;
+  @Input() public odgovornoLice: any;
+  @Input() public adresaPonudjaca: any;
+  @Input() public bankaRacun: any;
   editForm = this.fb.group({
     id: [],
     nazivPonudjaca: [],
@@ -32,9 +36,7 @@ export class PonudjaciUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ ponudjaci }) => {
-      this.updateForm(ponudjaci);
-    });
+    this.updateForm();
   }
 
   previousState(): void {
@@ -70,13 +72,13 @@ export class PonudjaciUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(ponudjaci: IPonudjaci): void {
+  protected updateForm(): void {
     this.editForm.patchValue({
-      id: ponudjaci.id,
-      nazivPonudjaca: ponudjaci.nazivPonudjaca,
-      odgovornoLice: ponudjaci.odgovornoLice,
-      adresaPonudjaca: ponudjaci.adresaPonudjaca,
-      bankaRacun: ponudjaci.bankaRacun,
+      id: this.id,
+      nazivPonudjaca: this.nazivPonudjaca,
+      odgovornoLice: this.odgovornoLice,
+      adresaPonudjaca: this.adresaPonudjaca,
+      bankaRacun: this.bankaRacun,
     });
   }
 
