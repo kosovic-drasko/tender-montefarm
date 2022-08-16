@@ -7,6 +7,7 @@ import { finalize } from 'rxjs/operators';
 
 import { IPonudjaci, Ponudjaci } from '../ponudjaci.model';
 import { PonudjaciService } from '../service/ponudjaci.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-ponudjaci-update',
@@ -23,7 +24,12 @@ export class PonudjaciUpdateComponent implements OnInit {
     bankaRacun: [],
   });
 
-  constructor(protected ponudjaciService: PonudjaciService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected ponudjaciService: PonudjaciService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder,
+    protected activeModal: NgbActiveModal
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ ponudjaci }) => {
@@ -32,7 +38,7 @@ export class PonudjaciUpdateComponent implements OnInit {
   }
 
   previousState(): void {
-    window.history.back();
+    this.activeModal.close();
   }
 
   save(): void {
@@ -53,7 +59,7 @@ export class PonudjaciUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    this.activeModal.close();
   }
 
   protected onSaveError(): void {
