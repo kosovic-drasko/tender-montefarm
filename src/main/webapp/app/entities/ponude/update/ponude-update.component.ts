@@ -54,15 +54,13 @@ export class PonudeUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.updateForm(this.dialog);
+    this.updateForm();
     this.loadAllPonudjaci();
     // console.log('___________________>', this.ponudjacis1);
   }
   loadAllPonudjaci(): void {
     this.ponudjaciService.query().subscribe((res: HttpResponse<IPonudjaci[]>) => {
       this.ponudjacis1 = res.body ?? [];
-      console.log('___________________>', this.ponudjacis1);
-      // console.log('___________________>',res.body ?? [])
     });
   }
   previousState(): void {
@@ -100,7 +98,7 @@ export class PonudeUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(dialog: any): void {
+  protected updateForm(): void {
     this.editForm.patchValue({
       id: this.id,
       sifraPostupka: this.sifraPostupka,
