@@ -147,16 +147,11 @@ export class PonudeComponent implements OnInit {
     modalRef.componentInstance.rokIsporuke = rokIsporuke;
 
     modalRef.closed.subscribe(() => {
-      modalRef.closed.subscribe(() => {
-        this.loadPage();
-      });
+      this.loadPage();
     });
   }
   add(): void {
     const modalRef = this.modalService.open(PonudeUpdateComponent, { size: 'lg', backdrop: 'static' });
-    // modalRef.componentInstance.id = id;
-
-    // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(() => {
       this.loadPage();
     });

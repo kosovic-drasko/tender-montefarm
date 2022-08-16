@@ -199,19 +199,6 @@
             <label class="form-label" jhiTranslate="tenderApp.ponude.jedinicnaCijena" for="field_jedinicnaCijena">Jedinicna Cijena</label>
           </div>
 
-          <!--          <div class="form-floating">-->
-          <!--            <input-->
-          <!--              type="number"-->
-          <!--              class="form-control"-->
-          <!--              name="sifraPonudjaca"-->
-          <!--              placeholder="Sifra Ponudjaca"-->
-          <!--              id="field_sifraPonudjaca"-->
-          <!--              data-cy="sifraPonudjaca"-->
-          <!--              formControlName="sifraPonudjaca"-->
-          <!--            />-->
-          <!--            <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPonudjaca" for="field_sifraPonudjaca">Sifra Ponudjaca</label>-->
-          <!--          </div>-->
-
           <div class="form-floating">
             <select
               class="form-control"
@@ -227,7 +214,7 @@
                     ? editForm.get('sifraPonudjaca')!.value
                     : ponudjaciOption.id
                 "
-                *ngFor="let ponudjaciOption of ponudjacis1"
+                *ngFor="let ponudjaciOption of ponudjaci"
               >
                 {{ ponudjaciOption.nazivPonudjaca }}
               </option>
