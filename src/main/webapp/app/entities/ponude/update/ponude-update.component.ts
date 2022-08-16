@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { IPonude, Ponude } from '../ponude.model';
 import { PonudeService } from '../service/ponude.service';
@@ -19,7 +19,7 @@ export class PonudeUpdateComponent implements OnInit {
   ponudjacis1: IPonudjaci[] = [];
 
   ponudes: IPonude[] = [];
-  ponudjacisSharedCollection: IPonudjaci[] = [];
+
   @Input() public dialog: any;
   @Input() public id: any;
   @Input() public sifraPostupka: any;
@@ -100,7 +100,7 @@ export class PonudeUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(ponude: IPonude): void {
+  protected updateForm(dialog: any): void {
     this.editForm.patchValue({
       id: this.id,
       sifraPostupka: this.sifraPostupka,

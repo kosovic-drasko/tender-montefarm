@@ -147,7 +147,7 @@ export class PonudeComponent implements OnInit {
     modalRef.componentInstance.rokIsporuke = rokIsporuke;
 
     modalRef.closed.subscribe(() => {
-      modalRef.closed.subscribe(reason => {
+      modalRef.closed.subscribe(() => {
         this.loadPage();
       });
     });
