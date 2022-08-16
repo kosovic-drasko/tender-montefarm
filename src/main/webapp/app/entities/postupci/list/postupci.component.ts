@@ -9,7 +9,6 @@ import { IPostupci } from '../postupci.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { PostupciService } from '../service/postupci.service';
 import { PostupciDeleteDialogComponent } from '../delete/postupci-delete-dialog.component';
-import { PonudjaciUpdateComponent } from '../../ponudjaci/update/ponudjaci-update.component';
 import dayjs from 'dayjs/esm';
 import { PostupciUpdateComponent } from '../update/postupci-update.component';
 

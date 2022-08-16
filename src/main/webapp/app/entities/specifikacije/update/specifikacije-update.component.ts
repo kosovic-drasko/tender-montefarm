@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -7,6 +7,7 @@ import { finalize } from 'rxjs/operators';
 
 import { ISpecifikacije, Specifikacije } from '../specifikacije.model';
 import { SpecifikacijeService } from '../service/specifikacije.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-specifikacije-update',
@@ -14,7 +15,17 @@ import { SpecifikacijeService } from '../service/specifikacije.service';
 })
 export class SpecifikacijeUpdateComponent implements OnInit {
   isSaving = false;
-
+  @Input() public id: any;
+  @Input() public sifraPostupka: any;
+  @Input() public brojPartije: any;
+  @Input() public atc: any;
+  @Input() public inn: any;
+  @Input() public farmaceutskiOblikLijeka: any;
+  @Input() public jacinaLijeka: any;
+  @Input() public trazenaKolicina: any;
+  @Input() public pakovanje: any;
+  @Input() public jedinicaMjere: any;
+  @Input() public procijenjenaVrijednost: any;
   editForm = this.fb.group({
     id: [],
     sifraPostupka: [null, [Validators.required]],
@@ -29,16 +40,19 @@ export class SpecifikacijeUpdateComponent implements OnInit {
     procijenjenaVrijednost: [null, [Validators.required]],
   });
 
-  constructor(protected specifikacijeService: SpecifikacijeService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
+  constructor(
+    protected activeModal: NgbActiveModal,
+    protected specifikacijeService: SpecifikacijeService,
+    protected activatedRoute: ActivatedRoute,
+    protected fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ specifikacije }) => {
-      this.updateForm(specifikacije);
-    });
+    this.updateForm();
   }
 
   previousState(): void {
-    window.history.back();
+    this.activeModal.close();
   }
 
   save(): void {
@@ -59,7 +73,7 @@ export class SpecifikacijeUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    this.activeModal.close();
   }
 
   protected onSaveError(): void {
@@ -70,19 +84,19 @@ export class SpecifikacijeUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(specifikacije: ISpecifikacije): void {
+  protected updateForm(): void {
     this.editForm.patchValue({
-      id: specifikacije.id,
-      sifraPostupka: specifikacije.sifraPostupka,
-      brojPartije: specifikacije.brojPartije,
-      atc: specifikacije.atc,
-      inn: specifikacije.inn,
-      farmaceutskiOblikLijeka: specifikacije.farmaceutskiOblikLijeka,
-      jacinaLijeka: specifikacije.jacinaLijeka,
-      trazenaKolicina: specifikacije.trazenaKolicina,
-      pakovanje: specifikacije.pakovanje,
-      jedinicaMjere: specifikacije.jedinicaMjere,
-      procijenjenaVrijednost: specifikacije.procijenjenaVrijednost,
+      id: this.id,
+      sifraPostupka: this.sifraPostupka,
+      brojPartije: this.brojPartije,
+      atc: this.atc,
+      inn: this.inn,
+      farmaceutskiOblikLijeka: this.farmaceutskiOblikLijeka,
+      jacinaLijeka: this.jacinaLijeka,
+      trazenaKolicina: this.trazenaKolicina,
+      pakovanje: this.pakovanje,
+      jedinicaMjere: this.jedinicaMjere,
+      procijenjenaVrijednost: this.procijenjenaVrijednost,
     });
   }
 
