@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="home tenderi" />
+    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="specifikacije">
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/ponudjaci.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/ponudjaci.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/postupci.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/postupci.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/update/specifikacije-update.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/update/specifikacije-update.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/list/tenderi-home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/list/tenderi-home.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/list/tenderi-home.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/tenderi-home.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/tenderi-home.module.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -233,14 +240,7 @@
       <option name="project" value="LOCAL" />
       <updated>1660666544429</updated>
     </task>
-    <task id="LOCAL-00016" summary="home tenderi">
-      <created>1660680527439</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1660680527439</updated>
-    </task>
-    <option name="localTasksCounter" value="17" />
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,8 +282,7 @@
     <MESSAGE value="ponude update add zavrseno" />
     <MESSAGE value="postupci" />
     <MESSAGE value="specifikacije" />
-    <MESSAGE value="home tenderi" />
-    <option name="LAST_COMMIT_MESSAGE" value="home tenderi" />
+    <option name="LAST_COMMIT_MESSAGE" value="specifikacije" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
