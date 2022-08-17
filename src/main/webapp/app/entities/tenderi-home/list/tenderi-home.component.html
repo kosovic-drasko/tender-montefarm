@@ -1,16 +1,11 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link">Active</a>
-    <jhi-postupci></jhi-postupci>
+<ul ngbNav #nav="ngbNav" class="nav-tabs">
+  <li ngbNavItem>
+    <a ngbNavLink>First</a>
+    <ng-template ngbNavContent><jhi-specifikacije></jhi-specifikacije></ng-template>
   </li>
-  <li class="nav-item">
-    <a class="nav-link">Link</a>
-    <jhi-ponudjaci></jhi-ponudjaci>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled">Disabled</a>
+  <li ngbNavItem>
+    <a ngbNavLink>Second</a>
+    <ng-template ngbNavContent><jhi-ponude></jhi-ponude></ng-template>
   </li>
 </ul>
+<div [ngbNavOutlet]="nav"></div>
