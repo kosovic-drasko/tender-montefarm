@@ -1,0 +1,132 @@
+<div>
+  <h2 id="page-heading" data-cy="PrvorangiraniHeading">
+    <span jhiTranslate="tenderApp.prvorangirani.home.title">Prvorangiranis</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="tenderApp.prvorangirani.home.refreshListLabel">Refresh List</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="prvorangiranis?.length === 0">
+    <span jhiTranslate="tenderApp.prvorangirani.home.notFound">No prvorangiranis found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="prvorangiranis && prvorangiranis.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="sifraPostupka">
+            <span jhiTranslate="tenderApp.prvorangirani.sifraPostupka">Sifra Postupka</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nazivPonudjaca">
+            <span jhiTranslate="tenderApp.prvorangirani.nazivPonudjaca">Naziv Ponudjaca</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sifraPonude">
+            <span jhiTranslate="tenderApp.prvorangirani.sifraPonude">Sifra Ponude</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="brojPartije">
+            <span jhiTranslate="tenderApp.prvorangirani.brojPartije">Broj Partije</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="atc"><span jhiTranslate="tenderApp.prvorangirani.atc">Atc</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="trazenaKolicina">
+            <span jhiTranslate="tenderApp.prvorangirani.trazenaKolicina">Trazena Kolicina</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="procijenjenaVrijednost">
+            <span jhiTranslate="tenderApp.prvorangirani.procijenjenaVrijednost">Procijenjena Vrijednost</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nazivProizvodjaca">
+            <span jhiTranslate="tenderApp.prvorangirani.nazivProizvodjaca">Naziv Proizvodjaca</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="zasticeniNaziv">
+            <span jhiTranslate="tenderApp.prvorangirani.zasticeniNaziv">Zasticeni Naziv</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="jedinicnaCijena">
+            <span jhiTranslate="tenderApp.prvorangirani.jedinicnaCijena">Jedinicna Cijena</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="ponudjenaVrijednost">
+            <span jhiTranslate="tenderApp.prvorangirani.ponudjenaVrijednost">Ponudjena Vrijednost</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rokIsporuke">
+            <span jhiTranslate="tenderApp.prvorangirani.rokIsporuke">Rok Isporuke</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="vrstaPostupka">
+            <span jhiTranslate="tenderApp.prvorangirani.vrstaPostupka">Vrsta Postupka</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="bodCijena">
+            <span jhiTranslate="tenderApp.prvorangirani.bodCijena">Bod Cijena</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="bodRok">
+            <span jhiTranslate="tenderApp.prvorangirani.bodRok">Bod Rok</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="bodUkupno">
+            <span jhiTranslate="tenderApp.prvorangirani.bodUkupno">Bod Ukupno</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prvorangirani of prvorangiranis; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/prvorangirani', prvorangirani.id, 'view']">{{ prvorangirani.id }}</a>
+          </td>
+          <td>{{ prvorangirani.sifraPostupka }}</td>
+          <td>{{ prvorangirani.nazivPonudjaca }}</td>
+          <td>{{ prvorangirani.sifraPonude }}</td>
+          <td>{{ prvorangirani.brojPartije }}</td>
+          <td>{{ prvorangirani.atc }}</td>
+          <td>{{ prvorangirani.trazenaKolicina }}</td>
+          <td>{{ prvorangirani.procijenjenaVrijednost }}</td>
+          <td>{{ prvorangirani.nazivProizvodjaca }}</td>
+          <td>{{ prvorangirani.zasticeniNaziv }}</td>
+          <td>{{ prvorangirani.jedinicnaCijena }}</td>
+          <td>{{ prvorangirani.ponudjenaVrijednost }}</td>
+          <td>{{ prvorangirani.rokIsporuke }}</td>
+          <td>{{ prvorangirani.vrstaPostupka }}</td>
+          <td>{{ prvorangirani.bodCijena }}</td>
+          <td>{{ prvorangirani.bodRok }}</td>
+          <td>{{ prvorangirani.bodUkupno }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/prvorangirani', prvorangirani.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="prvorangiranis && prvorangiranis.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
