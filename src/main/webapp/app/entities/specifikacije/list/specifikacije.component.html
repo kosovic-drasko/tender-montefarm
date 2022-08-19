@@ -12,7 +12,7 @@
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-specifikacije"
-        [routerLink]="['/specifikacije/new']"
+        (click)="add()"
       >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="tenderApp.specifikacije.home.createLabel"> Create a new Specifikacije </span>
@@ -93,7 +93,21 @@
 
               <button
                 type="submit"
-                [routerLink]="['/specifikacije', specifikacije.id, 'edit']"
+                (click)="
+                  update(
+                    specifikacije.id,
+                    specifikacije.sifraPostupka,
+                    specifikacije.brojPartije,
+                    specifikacije.atc,
+                    specifikacije.inn,
+                    specifikacije.farmaceutskiOblikLijeka,
+                    specifikacije.jacinaLijeka,
+                    specifikacije.trazenaKolicina,
+                    specifikacije.pakovanje,
+                    specifikacije.jedinicaMjere,
+                    specifikacije.procijenjenaVrijednost
+                  )
+                "
                 class="btn btn-primary btn-sm"
                 data-cy="entityEditButton"
               >

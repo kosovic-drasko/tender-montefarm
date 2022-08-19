@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { IPonude, Ponude } from '../ponude.model';
 import { PonudeService } from '../service/ponude.service';
 import { IPonudjaci } from 'app/entities/ponudjaci/ponudjaci.model';
 import { PonudjaciService } from 'app/entities/ponudjaci/service/ponudjaci.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-ponude-update',
@@ -16,9 +16,22 @@ import { PonudjaciService } from 'app/entities/ponudjaci/service/ponudjaci.servi
 })
 export class PonudeUpdateComponent implements OnInit {
   isSaving = false;
+  ponudjaci: IPonudjaci[] = [];
 
-  ponudjacisSharedCollection: IPonudjaci[] = [];
+  ponudes: IPonude[] = [];
 
+  @Input() public dialog: any;
+  @Input() public id: any;
+  @Input() public sifraPostupka: any;
+  @Input() public sifraPonude: any;
+  @Input() public brojPartije: any;
+  @Input() public sifraPonudjaca: any;
+  @Input() public nazivProizvodjaca: any;
+  @Input() public zasticeniNaziv: any;
+  @Input() public ponudjenaVrijednost: any;
+  @Input() public jedinicnaCijena: any;
+  @Input() public selected: any;
+  @Input() public rokIsporuke: any;
   editForm = this.fb.group({
     id: [],
     sifraPostupka: [null, [Validators.required]],
@@ -31,26 +44,29 @@ export class PonudeUpdateComponent implements OnInit {
     jedinicnaCijena: [],
     selected: [],
     sifraPonudjaca: [],
-    ponudjaci: [],
   });
 
   constructor(
     protected ponudeService: PonudeService,
     protected ponudjaciService: PonudjaciService,
-    protected activatedRoute: ActivatedRoute,
+    protected activeModal: NgbActiveModal,
     protected fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ ponude }) => {
-      this.updateForm(ponude);
+    this.updateForm();
+    this.loadAllPonudjaci();
+    // console.log('___________________>', this.ponudjacis1);
+  }
 
-      this.loadRelationshipsOptions();
+  loadAllPonudjaci(): void {
+    this.ponudjaciService.query().subscribe((res: HttpResponse<IPonudjaci[]>) => {
+      this.ponudjaci = res.body ?? [];
     });
   }
 
   previousState(): void {
-    window.history.back();
+    this.activeModal.dismiss();
   }
 
   save(): void {
@@ -63,10 +79,6 @@ export class PonudeUpdateComponent implements OnInit {
     }
   }
 
-  trackPonudjaciById(_index: number, item: IPonudjaci): number {
-    return item.id!;
-  }
-
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IPonude>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
@@ -75,7 +87,11 @@ export class PonudeUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.previousState();
+    this.activeModal.close();
+  }
+
+  close(): any {
+    this.activeModal.close();
   }
 
   protected onSaveError(): void {
@@ -86,40 +102,21 @@ export class PonudeUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(ponude: IPonude): void {
+  protected updateForm(): void {
     this.editForm.patchValue({
-      id: ponude.id,
-      sifraPostupka: ponude.sifraPostupka,
-      sifraPonude: ponude.sifraPonude,
-      brojPartije: ponude.brojPartije,
-      nazivProizvodjaca: ponude.nazivProizvodjaca,
-      zasticeniNaziv: ponude.zasticeniNaziv,
-      ponudjenaVrijednost: ponude.ponudjenaVrijednost,
-      rokIsporuke: ponude.rokIsporuke,
-      jedinicnaCijena: ponude.jedinicnaCijena,
-      selected: ponude.selected,
-      sifraPonudjaca: ponude.sifraPonudjaca,
-      ponudjaci: ponude.ponudjaci,
+      id: this.id,
+      sifraPostupka: this.sifraPostupka,
+      sifraPonude: this.sifraPonude,
+      brojPartije: this.brojPartije,
+      nazivProizvodjaca: this.nazivProizvodjaca,
+      zasticeniNaziv: this.zasticeniNaziv,
+      ponudjenaVrijednost: this.ponudjenaVrijednost,
+      rokIsporuke: this.rokIsporuke,
+      jedinicnaCijena: this.jedinicnaCijena,
+      selected: this.selected,
+      sifraPonudjaca: this.sifraPonudjaca,
     });
-
-    this.ponudjacisSharedCollection = this.ponudjaciService.addPonudjaciToCollectionIfMissing(
-      this.ponudjacisSharedCollection,
-      ponude.ponudjaci
-    );
   }
-
-  protected loadRelationshipsOptions(): void {
-    this.ponudjaciService
-      .query()
-      .pipe(map((res: HttpResponse<IPonudjaci[]>) => res.body ?? []))
-      .pipe(
-        map((ponudjacis: IPonudjaci[]) =>
-          this.ponudjaciService.addPonudjaciToCollectionIfMissing(ponudjacis, this.editForm.get('ponudjaci')!.value)
-        )
-      )
-      .subscribe((ponudjacis: IPonudjaci[]) => (this.ponudjacisSharedCollection = ponudjacis));
-  }
-
   protected createFromForm(): IPonude {
     return {
       ...new Ponude(),
@@ -134,7 +131,6 @@ export class PonudeUpdateComponent implements OnInit {
       jedinicnaCijena: this.editForm.get(['jedinicnaCijena'])!.value,
       selected: this.editForm.get(['selected'])!.value,
       sifraPonudjaca: this.editForm.get(['sifraPonudjaca'])!.value,
-      ponudjaci: this.editForm.get(['ponudjaci'])!.value,
     };
   }
 }

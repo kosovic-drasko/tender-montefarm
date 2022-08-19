@@ -4,25 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="prvorangirani">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/config/liquibase/changelog/view-prvorangirani.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tender-montefarm-prvorangirani.jdl" afterDir="false" />
+    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="prvorangirani 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jhipster/Vrednovanje.json" beforeDir="false" afterPath="$PROJECT_DIR$/.jhipster/Vrednovanje.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.yo-rc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.yo-rc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tender/config/CacheConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tender/config/CacheConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tender/service/VrednovanjeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tender/service/VrednovanjeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tender/web/rest/VrednovanjeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tender/web/rest/VrednovanjeResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/liquibase/master.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/liquibase/master.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/entity-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/entity-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/list/vrednovanje.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/list/vrednovanje.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/list/vrednovanje.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/list/vrednovanje.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/list/vrednovanje.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/list/vrednovanje.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/route/vrednovanje-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/route/vrednovanje-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/layouts/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/layouts/navbar/navbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/en/global.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/en/global.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/sr/global.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/sr/global.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tender-montefarm-vrednovanje.jdl" beforeDir="false" afterPath="$PROJECT_DIR$/tender-montefarm-vrednovanje.jdl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/ponude.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/ponude.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/ponude.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/ponude.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/update/ponude-update.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/update/ponude-update.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/update/ponude-update.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/update/ponude-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/update/ponude-update.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/list/ponudjaci.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/list/ponudjaci.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/list/ponudjaci.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/list/ponudjaci.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/list/ponudjaci.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/ponudjaci.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/ponudjaci.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/service/ponudjaci.service.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/update/ponudjaci-update.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/update/ponudjaci-update.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/update/ponudjaci-update.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/update/ponudjaci-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponudjaci/update/ponudjaci-update.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/list/postupci.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/list/postupci.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/list/postupci.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/list/postupci.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/list/postupci.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/postupci.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/postupci.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/update/postupci-update.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/update/postupci-update.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/update/postupci-update.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/update/postupci-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/update/postupci-update.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/specifikacije.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/specifikacije.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/update/specifikacije-update.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/update/specifikacije-update.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/update/specifikacije-update.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/update/specifikacije-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/update/specifikacije-update.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +97,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/pc/IdeaProjects/tender-montefarm",
+    "last_opened_file_path": "C:/Users/pc/IdeaProjects/tender-montefarm/src/main/webapp/app/entities",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -102,11 +115,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app\entities" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm" />
       <recent name="C:\Users\Win\IdeaProjects\tender-montefarm\src\main\java\tender\service" />
       <recent name="C:\Users\Win\IdeaProjects\tender-montefarm" />
       <recent name="C:\Users\Win\IdeaProjects\tender-montefarm\src\main\resources\config\liquibase\changelog" />
-      <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app\login" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="tender.web.rest" />

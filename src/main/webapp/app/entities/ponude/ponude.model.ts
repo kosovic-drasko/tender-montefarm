@@ -8,7 +8,7 @@ export interface IPonude {
   nazivProizvodjaca?: string | null;
   zasticeniNaziv?: string | null;
   ponudjenaVrijednost?: number;
-  rokIsporuke?: number | null;
+  rokIsporuke?: number;
   jedinicnaCijena?: number | null;
   selected?: boolean | null;
   sifraPonudjaca?: number | null;
@@ -24,7 +24,7 @@ export class Ponude implements IPonude {
     public nazivProizvodjaca?: string | null,
     public zasticeniNaziv?: string | null,
     public ponudjenaVrijednost?: number,
-    public rokIsporuke?: number | null,
+    public rokIsporuke?: number,
     public jedinicnaCijena?: number | null,
     public selected?: boolean | null,
     public sifraPonudjaca?: number | null,

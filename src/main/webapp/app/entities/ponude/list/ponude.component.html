@@ -8,12 +8,7 @@
         <span jhiTranslate="tenderApp.ponude.home.refreshListLabel">Refresh List</span>
       </button>
 
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-ponude"
-        [routerLink]="['/ponude/new']"
-      >
+      <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="add()">
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="tenderApp.ponude.home.createLabel"> Create a new Ponude </span>
       </button>
@@ -86,7 +81,7 @@
           <td>{{ ponude.sifraPonudjaca }}</td>
           <td>
             <div *ngIf="ponude.ponudjaci">
-              <a [routerLink]="['/ponudjaci', ponude.ponudjaci?.id, 'view']">{{ ponude.ponudjaci?.id }}</a>
+              <a [routerLink]="['/ponudjaci', ponude.ponudjaci?.id, 'view']">{{ ponude.ponudjaci?.nazivPonudjaca }}</a>
             </div>
           </td>
           <td class="text-end">
@@ -96,7 +91,26 @@
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
               </button>
 
-              <button type="submit" [routerLink]="['/ponude', ponude.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+              <button
+                type="submit"
+                (click)="
+                  update(
+                    ponude.id,
+                    ponude.sifraPostupka,
+                    ponude.sifraPonude,
+                    ponude.brojPartije,
+                    ponude.sifraPonudjaca,
+                    ponude.nazivProizvodjaca,
+                    ponude.zasticeniNaziv,
+                    ponude.ponudjenaVrijednost,
+                    ponude.jedinicnaCijena,
+                    ponude.selected,
+                    ponude.rokIsporuke
+                  )
+                "
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
                 <fa-icon icon="pencil-alt"></fa-icon>
                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
               </button>
