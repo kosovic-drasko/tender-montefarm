@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+  <changeSet author="Drasko" id="view-vrednovanje">
+    <createView catalogName="tender" schemaName="public" viewName="view_vrednovanje">
+SELECT ponude.*,
+    ponudjaci.naziv_ponudjaca,
+    specifikacije.atc,
+    specifikacije.trazena_kolicina,
+    specifikacije.procijenjena_vrijednost,
+    postupci.vrsta_postupka,
+    (((postupci.kriterijum_cijena)::double precision *
+    min(ponude.ponudjena_vrijednost) OVER (PARTITION BY ponude.broj_partije,
+    ponude.sifra_postupka)) / ponude.ponudjena_vrijednost) AS bod_cijena,
+    ((postupci.drugi_kriterijum * min(ponude.rok_isporuke) OVER (PARTITION BY ponude.broj_partije,
+    ponude.sifra_postupka)) / ponude.rok_isporuke) AS bod_rok,
+    ((((postupci.kriterijum_cijena)::double precision * min(ponude.ponudjena_vrijednost) OVER
+    (PARTITION BY ponude.broj_partije, ponude.sifra_postupka)) /
+    ponude.ponudjena_vrijednost) + (((postupci.drugi_kriterijum * min(ponude.rok_isporuke) OVER
+    (PARTITION BY ponude.broj_partije, ponude.sifra_postupka)) /
+    ponude.rok_isporuke))::double precision) AS bod_ukupno
+FROM
+  public.ponude
+  INNER JOIN public.postupci ON (public.ponude.sifra_postupka = public.postupci.sifra_postupka)
+   INNER JOIN public.ponudjaci ON (public.ponude.sifra_ponudjaca  = public.ponudjaci.id)
+  INNER JOIN public.specifikacije ON (public.ponude.sifra_postupka = public.specifikacije.sifra_postupka)
+  AND (public.ponude.broj_partije = public.specifikacije.broj_partije)
+        </createView>
+  </changeSet>
+
+</databaseChangeLog>

@@ -23,6 +23,10 @@
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20220813064046_added_entity_constraints_Ponude.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/functions_trigger.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/view_vrednovanje.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/view-maximalni_bod.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/view-prvorangirani.xml" relativeToChangelogFile="false"/>
+
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>
