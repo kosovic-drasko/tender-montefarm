@@ -8,7 +8,12 @@
         <span jhiTranslate="tenderApp.postupci.home.refreshListLabel">Refresh List</span>
       </button>
 
-      <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-postupci" (click)="add()">
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-postupci"
+        [routerLink]="['/postupci/new']"
+      >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="tenderApp.postupci.home.createLabel"> Create a new Postupci </span>
       </button>
@@ -82,19 +87,7 @@
 
               <button
                 type="submit"
-                (click)="
-                  update(
-                    postupci.id,
-                    postupci.sifraPostupka,
-                    postupci.brojTendera,
-                    postupci.opisPostupka,
-                    postupci.vrstaPostupka,
-                    postupci.datumObjave,
-                    postupci.datumOtvaranja,
-                    postupci.kriterijumCijena,
-                    postupci.drugiKriterijum
-                  )
-                "
+                [routerLink]="['/postupci', postupci.id, 'edit']"
                 class="btn btn-primary btn-sm"
                 data-cy="entityEditButton"
               >

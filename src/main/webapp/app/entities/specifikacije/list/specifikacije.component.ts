@@ -9,7 +9,6 @@ import { ISpecifikacije } from '../specifikacije.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { SpecifikacijeService } from '../service/specifikacije.service';
 import { SpecifikacijeDeleteDialogComponent } from '../delete/specifikacije-delete-dialog.component';
-import { SpecifikacijeUpdateComponent } from '../update/specifikacije-update.component';
 
 @Component({
   selector: 'jhi-specifikacije',
@@ -114,41 +113,5 @@ export class SpecifikacijeComponent implements OnInit {
 
   protected onError(): void {
     this.ngbPaginationPage = this.page ?? 1;
-  }
-  update(
-    id?: number,
-    sifraPostupka?: number,
-    brojPartije?: number,
-    atc?: string | null,
-    inn?: string | null,
-    farmaceutskiOblikLijeka?: string | null,
-    jacinaLijeka?: string | null,
-    trazenaKolicina?: number | null,
-    pakovanje?: string | null,
-    jedinicaMjere?: string | null,
-    procijenjenaVrijednost?: number
-  ): void {
-    const modalRef = this.modalService.open(SpecifikacijeUpdateComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.id = id;
-    modalRef.componentInstance.sifraPostupka = sifraPostupka;
-    modalRef.componentInstance.brojPartije = brojPartije;
-    modalRef.componentInstance.atc = atc;
-    modalRef.componentInstance.inn = inn;
-    modalRef.componentInstance.farmaceutskiOblikLijeka = farmaceutskiOblikLijeka;
-    modalRef.componentInstance.jacinaLijeka = jacinaLijeka;
-    modalRef.componentInstance.trazenaKolicina = trazenaKolicina;
-    modalRef.componentInstance.pakovanje = pakovanje;
-    modalRef.componentInstance.jedinicaMjere = jedinicaMjere;
-    modalRef.componentInstance.procijenjenaVrijednost = procijenjenaVrijednost;
-
-    modalRef.closed.subscribe(() => {
-      this.loadPage();
-    });
-  }
-  add(): void {
-    const modalRef = this.modalService.open(SpecifikacijeUpdateComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.closed.subscribe(() => {
-      this.loadPage();
-    });
   }
 }

@@ -10,6 +10,5 @@ import { PonudeRoutingModule } from './route/ponude-routing.module';
   imports: [SharedModule, PonudeRoutingModule],
   declarations: [PonudeComponent, PonudeDetailComponent, PonudeUpdateComponent, PonudeDeleteDialogComponent],
   entryComponents: [PonudeDeleteDialogComponent],
-  exports: [PonudeComponent],
 })
 export class PonudeModule {}

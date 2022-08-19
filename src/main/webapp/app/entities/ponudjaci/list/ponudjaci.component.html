@@ -8,7 +8,12 @@
         <span jhiTranslate="tenderApp.ponudjaci.home.refreshListLabel">Refresh List</span>
       </button>
 
-      <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponudjaci" (click)="add()">
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ponudjaci"
+        [routerLink]="['/ponudjaci/new']"
+      >
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="tenderApp.ponudjaci.home.createLabel"> Create a new Ponudjaci </span>
       </button>
@@ -66,9 +71,7 @@
 
               <button
                 type="submit"
-                (click)="
-                  update(ponudjaci.id, ponudjaci.nazivPonudjaca, ponudjaci.odgovornoLice, ponudjaci.adresaPonudjaca, ponudjaci.bankaRacun)
-                "
+                [routerLink]="['/ponudjaci', ponudjaci.id, 'edit']"
                 class="btn btn-primary btn-sm"
                 data-cy="entityEditButton"
               >

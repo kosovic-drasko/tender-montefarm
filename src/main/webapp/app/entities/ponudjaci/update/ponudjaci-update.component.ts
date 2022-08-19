@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -7,7 +7,6 @@ import { finalize } from 'rxjs/operators';
 
 import { IPonudjaci, Ponudjaci } from '../ponudjaci.model';
 import { PonudjaciService } from '../service/ponudjaci.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-ponudjaci-update',
@@ -15,11 +14,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PonudjaciUpdateComponent implements OnInit {
   isSaving = false;
-  @Input() public id: any;
-  @Input() public nazivPonudjaca: any;
-  @Input() public odgovornoLice: any;
-  @Input() public adresaPonudjaca: any;
-  @Input() public bankaRacun: any;
+
   editForm = this.fb.group({
     id: [],
     nazivPonudjaca: [],
@@ -28,19 +23,16 @@ export class PonudjaciUpdateComponent implements OnInit {
     bankaRacun: [],
   });
 
-  constructor(
-    protected ponudjaciService: PonudjaciService,
-    protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder,
-    protected activeModal: NgbActiveModal
-  ) {}
+  constructor(protected ponudjaciService: PonudjaciService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.updateForm();
+    this.activatedRoute.data.subscribe(({ ponudjaci }) => {
+      this.updateForm(ponudjaci);
+    });
   }
 
   previousState(): void {
-    this.activeModal.close();
+    window.history.back();
   }
 
   save(): void {
@@ -61,7 +53,7 @@ export class PonudjaciUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.activeModal.close();
+    this.previousState();
   }
 
   protected onSaveError(): void {
@@ -72,13 +64,13 @@ export class PonudjaciUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(): void {
+  protected updateForm(ponudjaci: IPonudjaci): void {
     this.editForm.patchValue({
-      id: this.id,
-      nazivPonudjaca: this.nazivPonudjaca,
-      odgovornoLice: this.odgovornoLice,
-      adresaPonudjaca: this.adresaPonudjaca,
-      bankaRacun: this.bankaRacun,
+      id: ponudjaci.id,
+      nazivPonudjaca: ponudjaci.nazivPonudjaca,
+      odgovornoLice: ponudjaci.odgovornoLice,
+      adresaPonudjaca: ponudjaci.adresaPonudjaca,
+      bankaRacun: ponudjaci.bankaRacun,
     });
   }
 

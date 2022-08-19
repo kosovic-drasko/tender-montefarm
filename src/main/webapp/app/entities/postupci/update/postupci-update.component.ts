@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -7,7 +7,6 @@ import { finalize } from 'rxjs/operators';
 
 import { IPostupci, Postupci } from '../postupci.model';
 import { PostupciService } from '../service/postupci.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'jhi-postupci-update',
@@ -15,16 +14,6 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PostupciUpdateComponent implements OnInit {
   isSaving = false;
-
-  @Input() public id: any;
-  @Input() public sifraPostupka: any;
-  @Input() public brojTendera: any;
-  @Input() public opisPostupka: any;
-  @Input() public vrstaPostupka: any;
-  @Input() public datumObjave: any;
-  @Input() public datumOtvaranja: any;
-  @Input() public kriterijumCijena: any;
-  @Input() public drugiKriterijum: any;
 
   editForm = this.fb.group({
     id: [],
@@ -38,19 +27,16 @@ export class PostupciUpdateComponent implements OnInit {
     drugiKriterijum: [null, [Validators.required]],
   });
 
-  constructor(
-    protected postupciService: PostupciService,
-    protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder,
-    protected activeModal: NgbActiveModal
-  ) {}
+  constructor(protected postupciService: PostupciService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.updateForm();
+    this.activatedRoute.data.subscribe(({ postupci }) => {
+      this.updateForm(postupci);
+    });
   }
 
   previousState(): void {
-    this.activeModal.close();
+    window.history.back();
   }
 
   save(): void {
@@ -71,7 +57,7 @@ export class PostupciUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.activeModal.close();
+    this.previousState();
   }
 
   protected onSaveError(): void {
@@ -82,17 +68,17 @@ export class PostupciUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(): void {
+  protected updateForm(postupci: IPostupci): void {
     this.editForm.patchValue({
-      id: this.id,
-      sifraPostupka: this.sifraPostupka,
-      brojTendera: this.brojTendera,
-      opisPostupka: this.opisPostupka,
-      vrstaPostupka: this.vrstaPostupka,
-      datumObjave: this.datumObjave,
-      datumOtvaranja: this.datumOtvaranja,
-      kriterijumCijena: this.kriterijumCijena,
-      drugiKriterijum: this.drugiKriterijum,
+      id: postupci.id,
+      sifraPostupka: postupci.sifraPostupka,
+      brojTendera: postupci.brojTendera,
+      opisPostupka: postupci.opisPostupka,
+      vrstaPostupka: postupci.vrstaPostupka,
+      datumObjave: postupci.datumObjave,
+      datumOtvaranja: postupci.datumOtvaranja,
+      kriterijumCijena: postupci.kriterijumCijena,
+      drugiKriterijum: postupci.drugiKriterijum,
     });
   }
 

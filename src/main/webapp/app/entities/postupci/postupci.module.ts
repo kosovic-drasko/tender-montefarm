@@ -10,6 +10,5 @@ import { PostupciRoutingModule } from './route/postupci-routing.module';
   imports: [SharedModule, PostupciRoutingModule],
   declarations: [PostupciComponent, PostupciDetailComponent, PostupciUpdateComponent, PostupciDeleteDialogComponent],
   entryComponents: [PostupciDeleteDialogComponent],
-  exports: [PostupciComponent],
 })
 export class PostupciModule {}

@@ -10,6 +10,5 @@ import { SpecifikacijeRoutingModule } from './route/specifikacije-routing.module
   imports: [SharedModule, SpecifikacijeRoutingModule],
   declarations: [SpecifikacijeComponent, SpecifikacijeDetailComponent, SpecifikacijeUpdateComponent, SpecifikacijeDeleteDialogComponent],
   entryComponents: [SpecifikacijeDeleteDialogComponent],
-  exports: [SpecifikacijeComponent],
 })
 export class SpecifikacijeModule {}

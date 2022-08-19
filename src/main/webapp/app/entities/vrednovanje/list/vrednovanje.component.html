@@ -1,0 +1,83 @@
+<div>
+  <h2 id="page-heading" data-cy="VrednovanjeHeading">
+    <span jhiTranslate="tenderApp.vrednovanje.home.title">Vrednovanjes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="tenderApp.vrednovanje.home.refreshListLabel">Refresh List</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="vrednovanjes?.length === 0">
+    <span jhiTranslate="tenderApp.vrednovanje.home.notFound">No vrednovanjes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="vrednovanjes && vrednovanjes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.sifraPostupka">Sifra Postupka</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.sifraPonude">Sifra Ponude</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.brojPartije">Broj Partije</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.nazivProizvodjaca">Naziv Proizvodjaca</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.zasticeniNaziv">Zasticeni Naziv</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.ponudjenaVrijednost">Ponudjena Vrijednost</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.rokIsporuke">Rok Isporuke</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.jedinicnaCijena">Jedinicna Cijena</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.nazivPonudjaca">Naziv Ponudjaca</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.atc">Atc</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.trazenaKolicina">Trazena Kolicina</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.procijenjenaVrijednost">Procijenjena Vrijednost</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.vrstaPostupka">Vrsta Postupka</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.bodCijena">Bod Cijena</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.bodRok">Bod Rok</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.bodUkupno">Bod Ukupno</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vrednovanje of vrednovanjes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/vrednovanje', vrednovanje.id, 'view']">{{ vrednovanje.id }}</a>
+          </td>
+          <td>{{ vrednovanje.sifraPostupka }}</td>
+          <td>{{ vrednovanje.sifraPonude }}</td>
+          <td>{{ vrednovanje.brojPartije }}</td>
+          <td>{{ vrednovanje.nazivProizvodjaca }}</td>
+          <td>{{ vrednovanje.zasticeniNaziv }}</td>
+          <td>{{ vrednovanje.ponudjenaVrijednost }}</td>
+          <td>{{ vrednovanje.rokIsporuke }}</td>
+          <td>{{ vrednovanje.jedinicnaCijena }}</td>
+          <td>{{ vrednovanje.nazivPonudjaca }}</td>
+          <td>{{ vrednovanje.atc }}</td>
+          <td>{{ vrednovanje.trazenaKolicina }}</td>
+          <td>{{ vrednovanje.procijenjenaVrijednost }}</td>
+          <td>{{ vrednovanje.vrstaPostupka }}</td>
+          <td>{{ vrednovanje.bodCijena }}</td>
+          <td>{{ vrednovanje.bodRok }}</td>
+          <td>{{ vrednovanje.bodUkupno }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/vrednovanje', vrednovanje.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

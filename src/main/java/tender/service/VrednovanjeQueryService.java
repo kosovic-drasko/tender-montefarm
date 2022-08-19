@@ -1,6 +1,7 @@
 package tender.service;
 
 import java.util.List;
+import javax.persistence.criteria.JoinType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -9,21 +10,27 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tech.jhipster.service.QueryService;
+import tender.domain.*; // for static metamodels
 import tender.domain.Vrednovanje;
-import tender.domain.Vrednovanje_;
 import tender.repository.VrednovanjeRepository;
 import tender.service.criteria.VrednovanjeCriteria;
 
+/**
+ * Service for executing complex queries for {@link Vrednovanje} entities in the database.
+ * The main input is a {@link VrednovanjeCriteria} which gets converted to {@link Specification},
+ * in a way that all the filters must apply.
+ * It returns a {@link List} of {@link Vrednovanje} or a {@link Page} of {@link Vrednovanje} which fulfills the criteria.
+ */
 @Service
 @Transactional(readOnly = true)
 public class VrednovanjeQueryService extends QueryService<Vrednovanje> {
 
     private final Logger log = LoggerFactory.getLogger(VrednovanjeQueryService.class);
 
-    private final VrednovanjeRepository VrednovanjeRepository;
+    private final VrednovanjeRepository vrednovanjeRepository;
 
-    public VrednovanjeQueryService(VrednovanjeRepository VrednovanjeRepository) {
-        this.VrednovanjeRepository = VrednovanjeRepository;
+    public VrednovanjeQueryService(VrednovanjeRepository vrednovanjeRepository) {
+        this.vrednovanjeRepository = vrednovanjeRepository;
     }
 
     /**
@@ -35,7 +42,7 @@ public class VrednovanjeQueryService extends QueryService<Vrednovanje> {
     public List<Vrednovanje> findByCriteria(VrednovanjeCriteria criteria) {
         log.debug("find by criteria : {}", criteria);
         final Specification<Vrednovanje> specification = createSpecification(criteria);
-        return VrednovanjeRepository.findAll(specification);
+        return vrednovanjeRepository.findAll(specification);
     }
 
     /**
@@ -48,7 +55,7 @@ public class VrednovanjeQueryService extends QueryService<Vrednovanje> {
     public Page<Vrednovanje> findByCriteria(VrednovanjeCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specification<Vrednovanje> specification = createSpecification(criteria);
-        return VrednovanjeRepository.findAll(specification, page);
+        return vrednovanjeRepository.findAll(specification, page);
     }
 
     /**
@@ -60,7 +67,7 @@ public class VrednovanjeQueryService extends QueryService<Vrednovanje> {
     public long countByCriteria(VrednovanjeCriteria criteria) {
         log.debug("count by criteria : {}", criteria);
         final Specification<Vrednovanje> specification = createSpecification(criteria);
-        return VrednovanjeRepository.count(specification);
+        return vrednovanjeRepository.count(specification);
     }
 
     /**
@@ -87,18 +94,12 @@ public class VrednovanjeQueryService extends QueryService<Vrednovanje> {
             if (criteria.getBrojPartije() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getBrojPartije(), Vrednovanje_.brojPartije));
             }
-            if (criteria.getAtc() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getAtc(), Vrednovanje_.atc));
+            if (criteria.getNazivProizvodjaca() != null) {
+                specification =
+                    specification.and(buildStringSpecification(criteria.getNazivProizvodjaca(), Vrednovanje_.nazivProizvodjaca));
             }
             if (criteria.getZasticeniNaziv() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getZasticeniNaziv(), Vrednovanje_.zasticeniNaziv));
-            }
-            if (criteria.getTrazenaKolicina() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getTrazenaKolicina(), Vrednovanje_.trazenaKolicina));
-            }
-            if (criteria.getProcijenjenaVrijednost() != null) {
-                specification =
-                    specification.and(buildRangeSpecification(criteria.getProcijenjenaVrijednost(), Vrednovanje_.procijenjenaVrijednost));
             }
             if (criteria.getPonudjenaVrijednost() != null) {
                 specification =
@@ -107,9 +108,24 @@ public class VrednovanjeQueryService extends QueryService<Vrednovanje> {
             if (criteria.getRokIsporuke() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getRokIsporuke(), Vrednovanje_.rokIsporuke));
             }
-
+            if (criteria.getJedinicnaCijena() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getJedinicnaCijena(), Vrednovanje_.jedinicnaCijena));
+            }
             if (criteria.getNazivPonudjaca() != null) {
-                specification = specification.and(buildStringSpecification(criteria.getNazivPonudjaca(), Vrednovanje_.sifraPonudjaca));
+                specification = specification.and(buildStringSpecification(criteria.getNazivPonudjaca(), Vrednovanje_.nazivPonudjaca));
+            }
+            if (criteria.getAtc() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getAtc(), Vrednovanje_.atc));
+            }
+            if (criteria.getTrazenaKolicina() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTrazenaKolicina(), Vrednovanje_.trazenaKolicina));
+            }
+            if (criteria.getProcijenjenaVrijednost() != null) {
+                specification =
+                    specification.and(buildRangeSpecification(criteria.getProcijenjenaVrijednost(), Vrednovanje_.procijenjenaVrijednost));
+            }
+            if (criteria.getVrstaPostupka() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getVrstaPostupka(), Vrednovanje_.vrstaPostupka));
             }
             if (criteria.getBodCijena() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getBodCijena(), Vrednovanje_.bodCijena));

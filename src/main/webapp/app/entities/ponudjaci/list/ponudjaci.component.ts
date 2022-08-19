@@ -9,7 +9,6 @@ import { IPonudjaci } from '../ponudjaci.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { PonudjaciService } from '../service/ponudjaci.service';
 import { PonudjaciDeleteDialogComponent } from '../delete/ponudjaci-delete-dialog.component';
-import { PonudjaciUpdateComponent } from '../update/ponudjaci-update.component';
 
 @Component({
   selector: 'jhi-ponudjaci',
@@ -114,30 +113,5 @@ export class PonudjaciComponent implements OnInit {
 
   protected onError(): void {
     this.ngbPaginationPage = this.page ?? 1;
-  }
-
-  update(
-    id?: number,
-    nazivPonudjaca?: string | null,
-    odgovornoLice?: string | null,
-    adresaPonudjaca?: string | null,
-    bankaRacun?: string | null
-  ): void {
-    const modalRef = this.modalService.open(PonudjaciUpdateComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.id = id;
-    modalRef.componentInstance.nazivPonudjaca = nazivPonudjaca;
-    modalRef.componentInstance.odgovornoLice = odgovornoLice;
-    modalRef.componentInstance.adresaPonudjaca = adresaPonudjaca;
-    modalRef.componentInstance.bankaRacun = bankaRacun;
-
-    modalRef.closed.subscribe(() => {
-      this.loadPage();
-    });
-  }
-  add(): void {
-    const modalRef = this.modalService.open(PonudjaciUpdateComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.closed.subscribe(() => {
-      this.loadPage();
-    });
   }
 }

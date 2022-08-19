@@ -1,0 +1,22 @@
+entity Vrednovanje (view_vrednovanje) {
+  sifraPostupka Integer
+  sifraPonude Integer
+  brojPartije Integer
+  nazivProizvodjaca String
+  zasticeniNaziv String
+  ponudjenaVrijednost Double
+  rokIsporuke Integer
+  jedinicnaCijena Double
+  nazivPonudjaca String
+  atc String
+  trazenaKolicina Integer
+  procijenjenaVrijednost Double
+  vrstaPostupka String
+  bodCijena Double
+  bodRok Double
+  bodUkupno Double
+}
+
+readOnly Vrednovanje
+service Vrednovanje with serviceClass
+filter Vrednovanje

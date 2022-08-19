@@ -10,6 +10,5 @@ import { PonudjaciRoutingModule } from './route/ponudjaci-routing.module';
   imports: [SharedModule, PonudjaciRoutingModule],
   declarations: [PonudjaciComponent, PonudjaciDetailComponent, PonudjaciUpdateComponent, PonudjaciDeleteDialogComponent],
   entryComponents: [PonudjaciDeleteDialogComponent],
-  exports: [PonudjaciComponent],
 })
 export class PonudjaciModule {}

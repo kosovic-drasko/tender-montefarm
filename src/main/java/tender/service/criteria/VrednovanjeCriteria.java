@@ -4,8 +4,23 @@ import java.io.Serializable;
 import java.util.Objects;
 import org.springdoc.api.annotations.ParameterObject;
 import tech.jhipster.service.Criteria;
-import tech.jhipster.service.filter.*;
+import tech.jhipster.service.filter.BooleanFilter;
+import tech.jhipster.service.filter.DoubleFilter;
+import tech.jhipster.service.filter.Filter;
+import tech.jhipster.service.filter.FloatFilter;
+import tech.jhipster.service.filter.IntegerFilter;
+import tech.jhipster.service.filter.LongFilter;
+import tech.jhipster.service.filter.StringFilter;
 
+/**
+ * Criteria class for the {@link tender.domain.Vrednovanje} entity. This class is used
+ * in {@link tender.web.rest.VrednovanjeResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /vrednovanjes?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
+ * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
+ * fix type specific filters.
+ */
 @ParameterObject
 public class VrednovanjeCriteria implements Serializable, Criteria {
 
@@ -19,21 +34,25 @@ public class VrednovanjeCriteria implements Serializable, Criteria {
 
     private IntegerFilter brojPartije;
 
-    private StringFilter atc;
+    private StringFilter nazivProizvodjaca;
 
     private StringFilter zasticeniNaziv;
-
-    private IntegerFilter trazenaKolicina;
-
-    private DoubleFilter procijenjenaVrijednost;
 
     private DoubleFilter ponudjenaVrijednost;
 
     private IntegerFilter rokIsporuke;
 
-    private StringFilter nazivProizvodjaca;
+    private DoubleFilter jedinicnaCijena;
 
     private StringFilter nazivPonudjaca;
+
+    private StringFilter atc;
+
+    private IntegerFilter trazenaKolicina;
+
+    private DoubleFilter procijenjenaVrijednost;
+
+    private StringFilter vrstaPostupka;
 
     private DoubleFilter bodCijena;
 
@@ -43,8 +62,6 @@ public class VrednovanjeCriteria implements Serializable, Criteria {
 
     private Boolean distinct;
 
-    public Object getSifraPonudjaca;
-
     public VrednovanjeCriteria() {}
 
     public VrednovanjeCriteria(VrednovanjeCriteria other) {
@@ -52,14 +69,16 @@ public class VrednovanjeCriteria implements Serializable, Criteria {
         this.sifraPostupka = other.sifraPostupka == null ? null : other.sifraPostupka.copy();
         this.sifraPonude = other.sifraPonude == null ? null : other.sifraPonude.copy();
         this.brojPartije = other.brojPartije == null ? null : other.brojPartije.copy();
-        this.atc = other.atc == null ? null : other.atc.copy();
+        this.nazivProizvodjaca = other.nazivProizvodjaca == null ? null : other.nazivProizvodjaca.copy();
         this.zasticeniNaziv = other.zasticeniNaziv == null ? null : other.zasticeniNaziv.copy();
-        this.trazenaKolicina = other.trazenaKolicina == null ? null : other.trazenaKolicina.copy();
-        this.procijenjenaVrijednost = other.procijenjenaVrijednost == null ? null : other.procijenjenaVrijednost.copy();
         this.ponudjenaVrijednost = other.ponudjenaVrijednost == null ? null : other.ponudjenaVrijednost.copy();
         this.rokIsporuke = other.rokIsporuke == null ? null : other.rokIsporuke.copy();
-        this.nazivProizvodjaca = other.nazivProizvodjaca == null ? null : other.nazivProizvodjaca.copy();
+        this.jedinicnaCijena = other.jedinicnaCijena == null ? null : other.jedinicnaCijena.copy();
         this.nazivPonudjaca = other.nazivPonudjaca == null ? null : other.nazivPonudjaca.copy();
+        this.atc = other.atc == null ? null : other.atc.copy();
+        this.trazenaKolicina = other.trazenaKolicina == null ? null : other.trazenaKolicina.copy();
+        this.procijenjenaVrijednost = other.procijenjenaVrijednost == null ? null : other.procijenjenaVrijednost.copy();
+        this.vrstaPostupka = other.vrstaPostupka == null ? null : other.vrstaPostupka.copy();
         this.bodCijena = other.bodCijena == null ? null : other.bodCijena.copy();
         this.bodRok = other.bodRok == null ? null : other.bodRok.copy();
         this.bodUkupno = other.bodUkupno == null ? null : other.bodUkupno.copy();
@@ -131,6 +150,96 @@ public class VrednovanjeCriteria implements Serializable, Criteria {
         this.brojPartije = brojPartije;
     }
 
+    public StringFilter getNazivProizvodjaca() {
+        return nazivProizvodjaca;
+    }
+
+    public StringFilter nazivProizvodjaca() {
+        if (nazivProizvodjaca == null) {
+            nazivProizvodjaca = new StringFilter();
+        }
+        return nazivProizvodjaca;
+    }
+
+    public void setNazivProizvodjaca(StringFilter nazivProizvodjaca) {
+        this.nazivProizvodjaca = nazivProizvodjaca;
+    }
+
+    public StringFilter getZasticeniNaziv() {
+        return zasticeniNaziv;
+    }
+
+    public StringFilter zasticeniNaziv() {
+        if (zasticeniNaziv == null) {
+            zasticeniNaziv = new StringFilter();
+        }
+        return zasticeniNaziv;
+    }
+
+    public void setZasticeniNaziv(StringFilter zasticeniNaziv) {
+        this.zasticeniNaziv = zasticeniNaziv;
+    }
+
+    public DoubleFilter getPonudjenaVrijednost() {
+        return ponudjenaVrijednost;
+    }
+
+    public DoubleFilter ponudjenaVrijednost() {
+        if (ponudjenaVrijednost == null) {
+            ponudjenaVrijednost = new DoubleFilter();
+        }
+        return ponudjenaVrijednost;
+    }
+
+    public void setPonudjenaVrijednost(DoubleFilter ponudjenaVrijednost) {
+        this.ponudjenaVrijednost = ponudjenaVrijednost;
+    }
+
+    public IntegerFilter getRokIsporuke() {
+        return rokIsporuke;
+    }
+
+    public IntegerFilter rokIsporuke() {
+        if (rokIsporuke == null) {
+            rokIsporuke = new IntegerFilter();
+        }
+        return rokIsporuke;
+    }
+
+    public void setRokIsporuke(IntegerFilter rokIsporuke) {
+        this.rokIsporuke = rokIsporuke;
+    }
+
+    public DoubleFilter getJedinicnaCijena() {
+        return jedinicnaCijena;
+    }
+
+    public DoubleFilter jedinicnaCijena() {
+        if (jedinicnaCijena == null) {
+            jedinicnaCijena = new DoubleFilter();
+        }
+        return jedinicnaCijena;
+    }
+
+    public void setJedinicnaCijena(DoubleFilter jedinicnaCijena) {
+        this.jedinicnaCijena = jedinicnaCijena;
+    }
+
+    public StringFilter getNazivPonudjaca() {
+        return nazivPonudjaca;
+    }
+
+    public StringFilter nazivPonudjaca() {
+        if (nazivPonudjaca == null) {
+            nazivPonudjaca = new StringFilter();
+        }
+        return nazivPonudjaca;
+    }
+
+    public void setNazivPonudjaca(StringFilter nazivPonudjaca) {
+        this.nazivPonudjaca = nazivPonudjaca;
+    }
+
     public StringFilter getAtc() {
         return atc;
     }
@@ -176,64 +285,19 @@ public class VrednovanjeCriteria implements Serializable, Criteria {
         this.procijenjenaVrijednost = procijenjenaVrijednost;
     }
 
-    public DoubleFilter getPonudjenaVrijednost() {
-        return ponudjenaVrijednost;
+    public StringFilter getVrstaPostupka() {
+        return vrstaPostupka;
     }
 
-    public DoubleFilter ponudjenaVrijednost() {
-        if (ponudjenaVrijednost == null) {
-            ponudjenaVrijednost = new DoubleFilter();
+    public StringFilter vrstaPostupka() {
+        if (vrstaPostupka == null) {
+            vrstaPostupka = new StringFilter();
         }
-        return ponudjenaVrijednost;
+        return vrstaPostupka;
     }
 
-    public void setPonudjenaVrijednost(DoubleFilter ponudjenaVrijednost) {
-        this.ponudjenaVrijednost = ponudjenaVrijednost;
-    }
-
-    public IntegerFilter getRokIsporuke() {
-        return rokIsporuke;
-    }
-
-    public IntegerFilter rokIsporuke() {
-        if (rokIsporuke == null) {
-            rokIsporuke = new IntegerFilter();
-        }
-        return rokIsporuke;
-    }
-
-    public void setRokIsporuke(IntegerFilter rokIsporuke) {
-        this.rokIsporuke = rokIsporuke;
-    }
-
-    public StringFilter getNazivProizvodjaca() {
-        return nazivProizvodjaca;
-    }
-
-    public StringFilter nazivProizvodjaca() {
-        if (nazivProizvodjaca == null) {
-            nazivProizvodjaca = new StringFilter();
-        }
-        return nazivProizvodjaca;
-    }
-
-    public void setNazivProizvodjaca(StringFilter nazivProizvodjaca) {
-        this.nazivProizvodjaca = nazivProizvodjaca;
-    }
-
-    public StringFilter getNazivPonudjaca() {
-        return nazivPonudjaca;
-    }
-
-    public StringFilter nazivPonudjaca() {
-        if (nazivPonudjaca == null) {
-            nazivPonudjaca = new StringFilter();
-        }
-        return nazivPonudjaca;
-    }
-
-    public void setNazivPonudjaca(StringFilter nazivPonudjaca) {
-        this.nazivPonudjaca = nazivPonudjaca;
+    public void setVrstaPostupka(StringFilter vrstaPostupka) {
+        this.vrstaPostupka = vrstaPostupka;
     }
 
     public DoubleFilter getBodCijena() {
@@ -303,14 +367,16 @@ public class VrednovanjeCriteria implements Serializable, Criteria {
             Objects.equals(sifraPostupka, that.sifraPostupka) &&
             Objects.equals(sifraPonude, that.sifraPonude) &&
             Objects.equals(brojPartije, that.brojPartije) &&
-            Objects.equals(atc, that.atc) &&
+            Objects.equals(nazivProizvodjaca, that.nazivProizvodjaca) &&
             Objects.equals(zasticeniNaziv, that.zasticeniNaziv) &&
-            Objects.equals(trazenaKolicina, that.trazenaKolicina) &&
-            Objects.equals(procijenjenaVrijednost, that.procijenjenaVrijednost) &&
             Objects.equals(ponudjenaVrijednost, that.ponudjenaVrijednost) &&
             Objects.equals(rokIsporuke, that.rokIsporuke) &&
-            Objects.equals(nazivProizvodjaca, that.nazivProizvodjaca) &&
+            Objects.equals(jedinicnaCijena, that.jedinicnaCijena) &&
             Objects.equals(nazivPonudjaca, that.nazivPonudjaca) &&
+            Objects.equals(atc, that.atc) &&
+            Objects.equals(trazenaKolicina, that.trazenaKolicina) &&
+            Objects.equals(procijenjenaVrijednost, that.procijenjenaVrijednost) &&
+            Objects.equals(vrstaPostupka, that.vrstaPostupka) &&
             Objects.equals(bodCijena, that.bodCijena) &&
             Objects.equals(bodRok, that.bodRok) &&
             Objects.equals(bodUkupno, that.bodUkupno) &&
@@ -325,14 +391,16 @@ public class VrednovanjeCriteria implements Serializable, Criteria {
             sifraPostupka,
             sifraPonude,
             brojPartije,
-            atc,
+            nazivProizvodjaca,
             zasticeniNaziv,
-            trazenaKolicina,
-            procijenjenaVrijednost,
             ponudjenaVrijednost,
             rokIsporuke,
-            nazivProizvodjaca,
+            jedinicnaCijena,
             nazivPonudjaca,
+            atc,
+            trazenaKolicina,
+            procijenjenaVrijednost,
+            vrstaPostupka,
             bodCijena,
             bodRok,
             bodUkupno,
@@ -343,29 +411,25 @@ public class VrednovanjeCriteria implements Serializable, Criteria {
     // prettier-ignore
     @Override
     public String toString() {
-        return "ViewVrednovanjeCriteria{" +
+        return "VrednovanjeCriteria{" +
             (id != null ? "id=" + id + ", " : "") +
             (sifraPostupka != null ? "sifraPostupka=" + sifraPostupka + ", " : "") +
             (sifraPonude != null ? "sifraPonude=" + sifraPonude + ", " : "") +
             (brojPartije != null ? "brojPartije=" + brojPartije + ", " : "") +
-            (atc != null ? "atc=" + atc + ", " : "") +
-
+            (nazivProizvodjaca != null ? "nazivProizvodjaca=" + nazivProizvodjaca + ", " : "") +
             (zasticeniNaziv != null ? "zasticeniNaziv=" + zasticeniNaziv + ", " : "") +
-
-            (trazenaKolicina != null ? "trazenaKolicina=" + trazenaKolicina + ", " : "") +
-            (procijenjenaVrijednost != null ? "procijenjenaVrijednost=" + procijenjenaVrijednost + ", " : "") +
             (ponudjenaVrijednost != null ? "ponudjenaVrijednost=" + ponudjenaVrijednost + ", " : "") +
             (rokIsporuke != null ? "rokIsporuke=" + rokIsporuke + ", " : "") +
-            (nazivProizvodjaca != null ? "nazivProizvodjaca=" + nazivProizvodjaca + ", " : "") +
+            (jedinicnaCijena != null ? "jedinicnaCijena=" + jedinicnaCijena + ", " : "") +
             (nazivPonudjaca != null ? "nazivPonudjaca=" + nazivPonudjaca + ", " : "") +
+            (atc != null ? "atc=" + atc + ", " : "") +
+            (trazenaKolicina != null ? "trazenaKolicina=" + trazenaKolicina + ", " : "") +
+            (procijenjenaVrijednost != null ? "procijenjenaVrijednost=" + procijenjenaVrijednost + ", " : "") +
+            (vrstaPostupka != null ? "vrstaPostupka=" + vrstaPostupka + ", " : "") +
             (bodCijena != null ? "bodCijena=" + bodCijena + ", " : "") +
             (bodRok != null ? "bodRok=" + bodRok + ", " : "") +
             (bodUkupno != null ? "bodUkupno=" + bodUkupno + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
-    }
-
-    public StringFilter getZasticeniNaziv() {
-        return null;
     }
 }

@@ -9,16 +9,12 @@ import { IPonude } from '../ponude.model';
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { PonudeService } from '../service/ponude.service';
 import { PonudeDeleteDialogComponent } from '../delete/ponude-delete-dialog.component';
-import { PonudeUpdateComponent } from '../update/ponude-update.component';
-import { IPonudjaci } from '../../ponudjaci/ponudjaci.model';
-import { PonudjaciService } from '../../ponudjaci/service/ponudjaci.service';
 
 @Component({
   selector: 'jhi-ponude',
   templateUrl: './ponude.component.html',
 })
 export class PonudeComponent implements OnInit {
-  ponudjaci?: IPonudjaci[] = [];
   ponudes?: IPonude[];
   isLoading = false;
   totalItems = 0;
@@ -32,7 +28,6 @@ export class PonudeComponent implements OnInit {
     protected ponudeService: PonudeService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
-    protected ponudjaciService: PonudjaciService,
     protected modalService: NgbModal
   ) {}
 
@@ -118,42 +113,5 @@ export class PonudeComponent implements OnInit {
 
   protected onError(): void {
     this.ngbPaginationPage = this.page ?? 1;
-  }
-
-  update(
-    id?: number,
-    sifraPostupka?: number,
-    sifraPonude?: number,
-    brojPartije?: number,
-    sifraPonudjaca?: number | null,
-    nazivProizvodjaca?: string | null,
-    zasticeniNaziv?: string | null,
-    ponudjenaVrijednost?: number,
-    jedinicnaCijena?: number | null,
-    selected?: boolean | null,
-    rokIsporuke?: number
-  ): void {
-    const modalRef = this.modalService.open(PonudeUpdateComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.id = id;
-    modalRef.componentInstance.sifraPostupka = sifraPostupka;
-    modalRef.componentInstance.sifraPonude = sifraPonude;
-    modalRef.componentInstance.brojPartije = brojPartije;
-    modalRef.componentInstance.sifraPonudjaca = sifraPonudjaca;
-    modalRef.componentInstance.nazivProizvodjaca = nazivProizvodjaca;
-    modalRef.componentInstance.zasticeniNaziv = zasticeniNaziv;
-    modalRef.componentInstance.ponudjenaVrijednost = ponudjenaVrijednost;
-    modalRef.componentInstance.jedinicnaCijena = jedinicnaCijena;
-    modalRef.componentInstance.selected = selected;
-    modalRef.componentInstance.rokIsporuke = rokIsporuke;
-
-    modalRef.closed.subscribe(() => {
-      this.loadPage();
-    });
-  }
-  add(): void {
-    const modalRef = this.modalService.open(PonudeUpdateComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.closed.subscribe(() => {
-      this.loadPage();
-    });
   }
 }

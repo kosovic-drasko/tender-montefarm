@@ -30,20 +30,26 @@ public class Vrednovanje implements Serializable {
     @Column(name = "broj_partije")
     private Integer brojPartije;
 
-    @Column(name = "atc")
-    private String atc;
-
     @Column(name = "naziv_proizvodjaca")
     private String nazivProizvodjaca;
 
-    @Column(name = "sifra_ponudjaca")
-    private String sifraPonudjaca;
+    @Column(name = "zasticeni_naziv")
+    private String zasticeniNaziv;
+
+    @Column(name = "ponudjena_vrijednost")
+    private Double ponudjenaVrijednost;
+
+    @Column(name = "rok_isporuke")
+    private Integer rokIsporuke;
+
+    @Column(name = "jedinicna_cijena")
+    private Double jedinicnaCijena;
 
     @Column(name = "naziv_ponudjaca")
     private String nazivPonudjaca;
 
-    @Column(name = "zasticeni_naziv")
-    private String zasticeniNaziv;
+    @Column(name = "atc")
+    private String atc;
 
     @Column(name = "trazena_kolicina")
     private Integer trazenaKolicina;
@@ -51,11 +57,8 @@ public class Vrednovanje implements Serializable {
     @Column(name = "procijenjena_vrijednost")
     private Double procijenjenaVrijednost;
 
-    @Column(name = "ponudjena_vrijednost")
-    private Double ponudjenaVrijednost;
-
-    @Column(name = "rok_isporuke")
-    private Integer rokIsporuke;
+    @Column(name = "vrsta_postupka")
+    private String vrstaPostupka;
 
     @Column(name = "bod_cijena")
     private Double bodCijena;
@@ -70,10 +73,6 @@ public class Vrednovanje implements Serializable {
 
     public Long getId() {
         return this.id;
-    }
-
-    public String getNazivPonudjaca() {
-        return nazivPonudjaca;
     }
 
     public Vrednovanje id(Long id) {
@@ -124,19 +123,6 @@ public class Vrednovanje implements Serializable {
         this.brojPartije = brojPartije;
     }
 
-    public String getAtc() {
-        return this.atc;
-    }
-
-    public Vrednovanje atc(String atc) {
-        this.setAtc(atc);
-        return this;
-    }
-
-    public void setAtc(String atc) {
-        this.atc = atc;
-    }
-
     public String getNazivProizvodjaca() {
         return this.nazivProizvodjaca;
     }
@@ -154,14 +140,6 @@ public class Vrednovanje implements Serializable {
         return this.zasticeniNaziv;
     }
 
-    public String getSifraPonudjaca() {
-        return sifraPonudjaca;
-    }
-
-    public void setSifraPonudjaca(String sifraPonudjaca) {
-        this.sifraPonudjaca = sifraPonudjaca;
-    }
-
     public Vrednovanje zasticeniNaziv(String zasticeniNaziv) {
         this.setZasticeniNaziv(zasticeniNaziv);
         return this;
@@ -169,6 +147,71 @@ public class Vrednovanje implements Serializable {
 
     public void setZasticeniNaziv(String zasticeniNaziv) {
         this.zasticeniNaziv = zasticeniNaziv;
+    }
+
+    public Double getPonudjenaVrijednost() {
+        return this.ponudjenaVrijednost;
+    }
+
+    public Vrednovanje ponudjenaVrijednost(Double ponudjenaVrijednost) {
+        this.setPonudjenaVrijednost(ponudjenaVrijednost);
+        return this;
+    }
+
+    public void setPonudjenaVrijednost(Double ponudjenaVrijednost) {
+        this.ponudjenaVrijednost = ponudjenaVrijednost;
+    }
+
+    public Integer getRokIsporuke() {
+        return this.rokIsporuke;
+    }
+
+    public Vrednovanje rokIsporuke(Integer rokIsporuke) {
+        this.setRokIsporuke(rokIsporuke);
+        return this;
+    }
+
+    public void setRokIsporuke(Integer rokIsporuke) {
+        this.rokIsporuke = rokIsporuke;
+    }
+
+    public Double getJedinicnaCijena() {
+        return this.jedinicnaCijena;
+    }
+
+    public Vrednovanje jedinicnaCijena(Double jedinicnaCijena) {
+        this.setJedinicnaCijena(jedinicnaCijena);
+        return this;
+    }
+
+    public void setJedinicnaCijena(Double jedinicnaCijena) {
+        this.jedinicnaCijena = jedinicnaCijena;
+    }
+
+    public String getNazivPonudjaca() {
+        return this.nazivPonudjaca;
+    }
+
+    public Vrednovanje nazivPonudjaca(String nazivPonudjaca) {
+        this.setNazivPonudjaca(nazivPonudjaca);
+        return this;
+    }
+
+    public void setNazivPonudjaca(String nazivPonudjaca) {
+        this.nazivPonudjaca = nazivPonudjaca;
+    }
+
+    public String getAtc() {
+        return this.atc;
+    }
+
+    public Vrednovanje atc(String atc) {
+        this.setAtc(atc);
+        return this;
+    }
+
+    public void setAtc(String atc) {
+        this.atc = atc;
     }
 
     public Integer getTrazenaKolicina() {
@@ -197,30 +240,17 @@ public class Vrednovanje implements Serializable {
         this.procijenjenaVrijednost = procijenjenaVrijednost;
     }
 
-    public Double getPonudjenaVrijednost() {
-        return this.ponudjenaVrijednost;
+    public String getVrstaPostupka() {
+        return this.vrstaPostupka;
     }
 
-    public Vrednovanje ponudjenaVrijednost(Double ponudjenaVrijednost) {
-        this.setPonudjenaVrijednost(ponudjenaVrijednost);
+    public Vrednovanje vrstaPostupka(String vrstaPostupka) {
+        this.setVrstaPostupka(vrstaPostupka);
         return this;
     }
 
-    public void setPonudjenaVrijednost(Double ponudjenaVrijednost) {
-        this.ponudjenaVrijednost = ponudjenaVrijednost;
-    }
-
-    public Integer getRokIsporuke() {
-        return this.rokIsporuke;
-    }
-
-    public Vrednovanje rokIsporuke(Integer rokIsporuke) {
-        this.setRokIsporuke(rokIsporuke);
-        return this;
-    }
-
-    public void setRokIsporuke(Integer rokIsporuke) {
-        this.rokIsporuke = rokIsporuke;
+    public void setVrstaPostupka(String vrstaPostupka) {
+        this.vrstaPostupka = vrstaPostupka;
     }
 
     public Double getBodCijena() {
@@ -289,14 +319,16 @@ public class Vrednovanje implements Serializable {
             ", sifraPostupka=" + getSifraPostupka() +
             ", sifraPonude=" + getSifraPonude() +
             ", brojPartije=" + getBrojPartije() +
-            ", atc='" + getAtc() + "'" +
             ", nazivProizvodjaca='" + getNazivProizvodjaca() + "'" +
-            ", nazivPonudjaca='" + getSifraPonudjaca() + "'" +
             ", zasticeniNaziv='" + getZasticeniNaziv() + "'" +
-            ", trazenaKolicina=" + getTrazenaKolicina() +
-            ", procijenjenaVrijednost=" + getProcijenjenaVrijednost() +
             ", ponudjenaVrijednost=" + getPonudjenaVrijednost() +
             ", rokIsporuke=" + getRokIsporuke() +
+            ", jedinicnaCijena=" + getJedinicnaCijena() +
+            ", nazivPonudjaca='" + getNazivPonudjaca() + "'" +
+            ", atc='" + getAtc() + "'" +
+            ", trazenaKolicina=" + getTrazenaKolicina() +
+            ", procijenjenaVrijednost=" + getProcijenjenaVrijednost() +
+            ", vrstaPostupka='" + getVrstaPostupka() + "'" +
             ", bodCijena=" + getBodCijena() +
             ", bodRok=" + getBodRok() +
             ", bodUkupno=" + getBodUkupno() +
