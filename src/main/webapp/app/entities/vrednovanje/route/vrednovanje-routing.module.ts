@@ -10,6 +10,9 @@ const vrednovanjeRoute: Routes = [
   {
     path: '',
     component: VrednovanjeComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
     canActivate: [UserRouteAccessService],
   },
   {

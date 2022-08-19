@@ -1,0 +1,23 @@
+entity Prvorangirani (view_prvorangirani) {
+  sifraPostupka Integer
+  nazivPonudjaca String
+  sifraPonude Integer
+  brojPartije Integer
+  atc String
+  trazenaKolicina Integer
+  procijenjenaVrijednost Double
+  nazivProizvodjaca String
+  zasticeniNaziv String
+  jedinicnaCijena Double
+  ponudjenaVrijednost Double
+  rokIsporuke Integer
+  vrstaPostupka String
+  bodCijena Double
+  bodRok Double
+  bodUkupno Double
+}
+
+readOnly Prvorangirani
+service Prvorangirani with serviceClass
+filter Prvorangirani
+paginate Prvorangirani with pagination

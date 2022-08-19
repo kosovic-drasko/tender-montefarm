@@ -3,7 +3,7 @@
     <span jhiTranslate="tenderApp.vrednovanje.home.title">Vrednovanjes</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="tenderApp.vrednovanje.home.refreshListLabel">Refresh List</span>
       </button>
@@ -21,24 +21,54 @@
   <div class="table-responsive" id="entities" *ngIf="vrednovanjes && vrednovanjes.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.sifraPostupka">Sifra Postupka</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.sifraPonude">Sifra Ponude</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.brojPartije">Broj Partije</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.nazivProizvodjaca">Naziv Proizvodjaca</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.zasticeniNaziv">Zasticeni Naziv</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.ponudjenaVrijednost">Ponudjena Vrijednost</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.rokIsporuke">Rok Isporuke</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.jedinicnaCijena">Jedinicna Cijena</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.nazivPonudjaca">Naziv Ponudjaca</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.atc">Atc</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.trazenaKolicina">Trazena Kolicina</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.procijenjenaVrijednost">Procijenjena Vrijednost</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.vrstaPostupka">Vrsta Postupka</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.bodCijena">Bod Cijena</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.bodRok">Bod Rok</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.vrednovanje.bodUkupno">Bod Ukupno</span></th>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="sifraPostupka">
+            <span jhiTranslate="tenderApp.vrednovanje.sifraPostupka">Sifra Postupka</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sifraPonude">
+            <span jhiTranslate="tenderApp.vrednovanje.sifraPonude">Sifra Ponude</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="brojPartije">
+            <span jhiTranslate="tenderApp.vrednovanje.brojPartije">Broj Partije</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nazivProizvodjaca">
+            <span jhiTranslate="tenderApp.vrednovanje.nazivProizvodjaca">Naziv Proizvodjaca</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="zasticeniNaziv">
+            <span jhiTranslate="tenderApp.vrednovanje.zasticeniNaziv">Zasticeni Naziv</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="ponudjenaVrijednost">
+            <span jhiTranslate="tenderApp.vrednovanje.ponudjenaVrijednost">Ponudjena Vrijednost</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rokIsporuke">
+            <span jhiTranslate="tenderApp.vrednovanje.rokIsporuke">Rok Isporuke</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="jedinicnaCijena">
+            <span jhiTranslate="tenderApp.vrednovanje.jedinicnaCijena">Jedinicna Cijena</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nazivPonudjaca">
+            <span jhiTranslate="tenderApp.vrednovanje.nazivPonudjaca">Naziv Ponudjaca</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="atc"><span jhiTranslate="tenderApp.vrednovanje.atc">Atc</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="trazenaKolicina">
+            <span jhiTranslate="tenderApp.vrednovanje.trazenaKolicina">Trazena Kolicina</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="procijenjenaVrijednost">
+            <span jhiTranslate="tenderApp.vrednovanje.procijenjenaVrijednost">Procijenjena Vrijednost</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="vrstaPostupka">
+            <span jhiTranslate="tenderApp.vrednovanje.vrstaPostupka">Vrsta Postupka</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="bodCijena">
+            <span jhiTranslate="tenderApp.vrednovanje.bodCijena">Bod Cijena</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="bodRok">
+            <span jhiTranslate="tenderApp.vrednovanje.bodRok">Bod Rok</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="bodUkupno">
+            <span jhiTranslate="tenderApp.vrednovanje.bodUkupno">Bod Ukupno</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -79,5 +109,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div *ngIf="vrednovanjes && vrednovanjes.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
   </div>
 </div>

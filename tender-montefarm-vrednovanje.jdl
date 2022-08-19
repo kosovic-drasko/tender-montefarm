@@ -20,3 +20,4 @@ entity Vrednovanje (view_vrednovanje) {
 readOnly Vrednovanje
 service Vrednovanje with serviceClass
 filter Vrednovanje
+paginate Vrednovanje with pagination

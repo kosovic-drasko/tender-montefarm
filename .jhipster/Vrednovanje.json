@@ -73,7 +73,7 @@
   "fluentMethods": true,
   "jpaMetamodelFiltering": true,
   "name": "Vrednovanje",
-  "pagination": "no",
+  "pagination": "pagination",
   "readOnly": true,
   "relationships": [],
   "service": "serviceClass"
