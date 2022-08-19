@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="novi 2">
+    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="prije hvale ponude">
+      <change afterPath="$PROJECT_DIR$/src/main/java/tender/domain/HvalePonude.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tender/repository/HvalePonudeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tender/web/rest/HvalePonudeResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +70,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/pc/IdeaProjects/tender-montefarm/src/main/java/tender/web/rest",
+    "last_opened_file_path": "C:/Users/pc/IdeaProjects/tender-montefarm/.jhipster",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -85,17 +88,17 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\.jhipster" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\java\tender\web\rest" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\java\tender" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\java\tender\service" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app\entities" />
-      <recent name="C:\Users\pc\IdeaProjects\tender-montefarm" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="tender.web.rest" />
-      <recent name="tender.service.criteria" />
       <recent name="tender.repository" />
       <recent name="tender.domain" />
+      <recent name="tender.service.criteria" />
     </key>
   </component>
   <component name="RunManager" selected="npm.Angular CLI Server">
@@ -280,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660932527865</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="prije hvale ponude">
+      <created>1660935448430</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1660935448430</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,7 +337,8 @@
     <MESSAGE value="prvorangirani" />
     <MESSAGE value="novi" />
     <MESSAGE value="novi 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="novi 2" />
+    <MESSAGE value="prije hvale ponude" />
+    <option name="LAST_COMMIT_MESSAGE" value="prije hvale ponude" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
