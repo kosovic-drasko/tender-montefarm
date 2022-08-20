@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="subota">
+    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="subota2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/detail/ponude-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/detail/ponude-detail.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/update/ponude-update.component.spec.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/list/postupci.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/list/postupci.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/list/postupci.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/list/tenderi-home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/list/tenderi-home.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/list/tenderi-home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/list/tenderi-home.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/route/tenderi-home-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/route/tenderi-home-routing.module.ts" afterDir="false" />
     </list>
@@ -142,7 +136,7 @@
       <workItem from="1660538999657" duration="9226000" />
       <workItem from="1660796791103" duration="2111000" />
       <workItem from="1660920966217" duration="5809000" />
-      <workItem from="1661009189820" duration="6334000" />
+      <workItem from="1661009189820" duration="7482000" />
     </task>
     <task id="LOCAL-00001" summary="init-tabele-osnovne">
       <created>1660374945836</created>
@@ -305,7 +299,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661013311808</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="subota2">
+      <created>1661019640451</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1661019640451</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,7 +355,8 @@
     <MESSAGE value="novi 2" />
     <MESSAGE value="prije hvale ponude" />
     <MESSAGE value="subota" />
-    <option name="LAST_COMMIT_MESSAGE" value="subota" />
+    <MESSAGE value="subota2" />
+    <option name="LAST_COMMIT_MESSAGE" value="subota2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

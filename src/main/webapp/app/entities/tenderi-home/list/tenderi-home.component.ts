@@ -15,27 +15,9 @@ export class TenderiHomeComponent implements OnInit {
   parameterValue?: number;
   constructor(protected tenderiHomeService: TenderiHomeService, protected activatedRoute: ActivatedRoute) {}
 
-  loadAll(): void {
-    this.isLoading = true;
-
-    this.tenderiHomeService.query().subscribe({
-      next: (res: HttpResponse<ITenderiHome[]>) => {
-        this.isLoading = false;
-        this.tenderiHomes = res.body ?? [];
-      },
-      error: () => {
-        this.isLoading = false;
-      },
-    });
-  }
-
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(parameter => {
-      this.parameterValue = parameter.parameter;
+      this.parameterValue = parameter.id;
     });
-  }
-
-  trackId(_index: number, item: ITenderiHome): number {
-    return item.id!;
   }
 }

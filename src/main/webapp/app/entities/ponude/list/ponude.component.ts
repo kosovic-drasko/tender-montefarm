@@ -27,7 +27,7 @@ export class PonudeComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
-  public parameterValue = 10;
+  public parameterValue?: number;
   constructor(
     protected ponudeService: PonudeService,
     protected activatedRoute: ActivatedRoute,
@@ -42,6 +42,7 @@ export class PonudeComponent implements OnInit {
 
     this.ponudeService
       .query({
+        'sifraPostupka.in': this.parameterValue,
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
@@ -59,6 +60,9 @@ export class PonudeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(parameter => {
+      this.parameterValue = parameter.id;
+    });
     this.handleNavigation();
   }
 

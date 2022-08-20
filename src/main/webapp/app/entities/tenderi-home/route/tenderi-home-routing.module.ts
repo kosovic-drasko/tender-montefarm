@@ -15,14 +15,14 @@ const tenderiHomeRoute: Routes = [
     canActivate: [UserRouteAccessService],
     children: [
       {
-        path: 'ponude',
+        path: ':id/ponude',
         component: PonudeComponent,
         data: {
           defaultSort: 'id,asc',
         },
       },
       {
-        path: 'specifikacije',
+        path: ':id/specifikacije',
         component: SpecifikacijeComponent,
         data: {
           defaultSort: 'id,asc',
