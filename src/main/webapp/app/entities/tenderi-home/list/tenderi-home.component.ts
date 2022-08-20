@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpResponse } from '@angular/common/http';
-
 import { ITenderiHome } from '../tenderi-home.model';
 import { TenderiHomeService } from '../service/tenderi-home.service';
 import { ActivatedRoute } from '@angular/router';

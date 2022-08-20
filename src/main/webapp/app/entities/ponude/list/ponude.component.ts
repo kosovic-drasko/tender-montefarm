@@ -42,6 +42,27 @@ export class PonudeComponent implements OnInit {
 
     this.ponudeService
       .query({
+        page: pageToLoad - 1,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      })
+      .subscribe({
+        next: (res: HttpResponse<IPonude[]>) => {
+          this.isLoading = false;
+          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+        },
+        error: () => {
+          this.isLoading = false;
+          this.onError();
+        },
+      });
+  }
+  loadPageSifra(page?: number, dontNavigate?: boolean): void {
+    this.isLoading = true;
+    const pageToLoad: number = page ?? this.page ?? 1;
+
+    this.ponudeService
+      .query({
         'sifraPostupka.in': this.parameterValue,
         page: pageToLoad - 1,
         size: this.itemsPerPage,
@@ -63,7 +84,12 @@ export class PonudeComponent implements OnInit {
     this.activatedRoute.params.subscribe(parameter => {
       this.parameterValue = parameter.id;
     });
-    this.handleNavigation();
+    if (this.parameterValue !== undefined) {
+      this.handleNavigationSifra();
+    } else {
+      this.handleNavigation();
+    }
+    console.log('------------------>', this.parameterValue);
   }
 
   trackId(_index: number, item: IPonude): number {
@@ -103,7 +129,28 @@ export class PonudeComponent implements OnInit {
       }
     });
   }
+  protected handleNavigationSifra(): void {
+    combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
+      const page = params.get('page');
+      const pageNumber = +(page ?? 1);
+      const sort = (params.get(SORT) ?? data['defaultSort']).split(',');
+      const predicate = sort[0];
+      const ascending = sort[1] === ASC;
+      if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
+        this.predicate = predicate;
+        this.ascending = ascending;
+        this.loadPageSifra(pageNumber, true);
+      }
+    });
+  }
 
+  protected load(): void {
+    if (this.parameterValue !== null) {
+      this.handleNavigationSifra();
+    } else {
+      this.handleNavigation();
+    }
+  }
   protected onSuccess(data: IPonude[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
