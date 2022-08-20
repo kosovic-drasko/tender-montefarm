@@ -31,6 +31,13 @@ const tenderiHomeRoute: Routes = [
     ],
   },
   {
+    path: ':id',
+    component: TenderiHomeComponent,
+    data: {
+      title: 'Settings',
+    },
+  },
+  {
     path: ':id/view',
     component: TenderiHomeDetailComponent,
     resolve: {

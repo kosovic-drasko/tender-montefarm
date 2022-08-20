@@ -17,7 +17,6 @@ export class PonudeDetailComponent implements OnInit {
       this.ponude = ponude;
     });
   }
-
   previousState(): void {
     window.history.back();
   }

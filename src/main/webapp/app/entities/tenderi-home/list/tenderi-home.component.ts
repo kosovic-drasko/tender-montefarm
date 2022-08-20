@@ -3,6 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 
 import { ITenderiHome } from '../tenderi-home.model';
 import { TenderiHomeService } from '../service/tenderi-home.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'jhi-tenderi-home',
@@ -11,8 +12,8 @@ import { TenderiHomeService } from '../service/tenderi-home.service';
 export class TenderiHomeComponent implements OnInit {
   tenderiHomes?: ITenderiHome[];
   isLoading = false;
-
-  constructor(protected tenderiHomeService: TenderiHomeService) {}
+  parameterValue?: number;
+  constructor(protected tenderiHomeService: TenderiHomeService, protected activatedRoute: ActivatedRoute) {}
 
   loadAll(): void {
     this.isLoading = true;
@@ -29,7 +30,9 @@ export class TenderiHomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadAll();
+    this.activatedRoute.params.subscribe(parameter => {
+      this.parameterValue = parameter.parameter;
+    });
   }
 
   trackId(_index: number, item: ITenderiHome): number {

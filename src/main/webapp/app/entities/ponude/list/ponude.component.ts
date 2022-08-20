@@ -27,7 +27,7 @@ export class PonudeComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
-
+  public parameterValue = 10;
   constructor(
     protected ponudeService: PonudeService,
     protected activatedRoute: ActivatedRoute,
