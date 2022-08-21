@@ -28,6 +28,7 @@ export class PonudeComponent implements OnInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
   public parameterValue?: number;
+
   constructor(
     protected ponudeService: PonudeService,
     protected activatedRoute: ActivatedRoute,
@@ -57,6 +58,7 @@ export class PonudeComponent implements OnInit {
         },
       });
   }
+
   loadPageSifra(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
@@ -89,7 +91,6 @@ export class PonudeComponent implements OnInit {
     } else {
       this.handleNavigation();
     }
-    console.log('------------------>', this.parameterValue);
   }
 
   trackId(_index: number, item: IPonude): number {
@@ -129,6 +130,7 @@ export class PonudeComponent implements OnInit {
       }
     });
   }
+
   protected handleNavigationSifra(): void {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
       const page = params.get('page');
@@ -144,13 +146,6 @@ export class PonudeComponent implements OnInit {
     });
   }
 
-  protected load(): void {
-    if (this.parameterValue !== null) {
-      this.handleNavigationSifra();
-    } else {
-      this.handleNavigation();
-    }
-  }
   protected onSuccess(data: IPonude[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
@@ -201,6 +196,7 @@ export class PonudeComponent implements OnInit {
       this.loadPage();
     });
   }
+
   add(): void {
     const modalRef = this.modalService.open(PonudeUpdateComponent, { size: 'lg', backdrop: 'static' });
     modalRef.closed.subscribe(() => {

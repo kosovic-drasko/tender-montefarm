@@ -24,7 +24,7 @@ export class SpecifikacijeComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
-
+  public parameterValue?: number;
   constructor(
     protected specifikacijeService: SpecifikacijeService,
     protected activatedRoute: ActivatedRoute,
@@ -53,9 +53,38 @@ export class SpecifikacijeComponent implements OnInit {
         },
       });
   }
+  loadPageSifra(page?: number, dontNavigate?: boolean): void {
+    this.isLoading = true;
+    const pageToLoad: number = page ?? this.page ?? 1;
+
+    this.specifikacijeService
+      .query({
+        'sifraPostupka.in': this.parameterValue,
+        page: pageToLoad - 1,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      })
+      .subscribe({
+        next: (res: HttpResponse<ISpecifikacije[]>) => {
+          this.isLoading = false;
+          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+        },
+        error: () => {
+          this.isLoading = false;
+          this.onError();
+        },
+      });
+  }
 
   ngOnInit(): void {
-    this.handleNavigation();
+    this.activatedRoute.params.subscribe(parameter => {
+      this.parameterValue = parameter.id;
+    });
+    if (this.parameterValue !== undefined) {
+      this.handleNavigationSifra();
+    } else {
+      this.handleNavigation();
+    }
   }
 
   trackId(_index: number, item: ISpecifikacije): number {
@@ -92,6 +121,20 @@ export class SpecifikacijeComponent implements OnInit {
         this.predicate = predicate;
         this.ascending = ascending;
         this.loadPage(pageNumber, true);
+      }
+    });
+  }
+  protected handleNavigationSifra(): void {
+    combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
+      const page = params.get('page');
+      const pageNumber = +(page ?? 1);
+      const sort = (params.get(SORT) ?? data['defaultSort']).split(',');
+      const predicate = sort[0];
+      const ascending = sort[1] === ASC;
+      if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
+        this.predicate = predicate;
+        this.ascending = ascending;
+        this.loadPageSifra(pageNumber, true);
       }
     });
   }

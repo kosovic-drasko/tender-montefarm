@@ -1,10 +1,10 @@
 {{ parameterValue }}
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link" routerLink="specifikacije">Specifikacije</a>
+    <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="specifikacije">Specifikacije</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" routerLink="ponude">Ponude</a>
+    <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="ponude">Ponude</a>
   </li>
 </ul>
 <router-outlet></router-outlet>
