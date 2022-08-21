@@ -66,7 +66,7 @@ public class HvalePonudeResource {
     /**
      * {@code PUT  /hvale-ponudes/:id} : Updates an existing hvalePonude.
      *
-     * @param id the id of the hvalePonude to save.
+     * @param id          the id of the hvalePonude to save.
      * @param hvalePonude the hvalePonude to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated hvalePonude,
      * or with status {@code 400 (Bad Request)} if the hvalePonude is not valid,
@@ -100,7 +100,7 @@ public class HvalePonudeResource {
     /**
      * {@code PATCH  /hvale-ponudes/:id} : Partial updates given fields of an existing hvalePonude, field will ignore if it is null
      *
-     * @param id the id of the hvalePonude to save.
+     * @param id          the id of the hvalePonude to save.
      * @param hvalePonude the hvalePonude to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated hvalePonude,
      * or with status {@code 400 (Bad Request)} if the hvalePonude is not valid,

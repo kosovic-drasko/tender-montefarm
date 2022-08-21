@@ -22,13 +22,18 @@ export class HvalePonudeComponent implements OnInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
 
-  constructor(protected hvalePonudeService: HvalePonudeService, protected activatedRoute: ActivatedRoute, protected router: Router) {}
+  constructor(protected hvaleService: HvalePonudeService, protected activatedRoute: ActivatedRoute, protected router: Router) {}
 
+  public getSifraHvali(): void {
+    this.hvaleService.hvali(1).subscribe((res: IHvalePonude[]) => {
+      this.hvalePonudes = res;
+    });
+  }
   loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
 
-    this.hvalePonudeService
+    this.hvaleService
       .query({
         page: pageToLoad - 1,
         size: this.itemsPerPage,
@@ -47,7 +52,7 @@ export class HvalePonudeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.handleNavigation();
+    this.getSifraHvali();
   }
 
   trackId(_index: number, item: IHvalePonude): number {
