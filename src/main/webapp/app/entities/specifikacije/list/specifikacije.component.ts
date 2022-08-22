@@ -24,9 +24,13 @@ export class SpecifikacijeComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  brojObrazac?: number = 0;
   public parameterValue?: number;
   @ViewChild('fileInput') fileInput: any;
   message: string | undefined;
+  public resourceUrlExcelDownload = SERVER_API_URL + 'api/specifikacije/file';
+  public resourceUrlExcelDownloadPostupak = SERVER_API_URL + 'api/specifikacije/file/';
+
   constructor(
     protected specifikacijeService: SpecifikacijeService,
     protected activatedRoute: ActivatedRoute,
@@ -205,5 +209,13 @@ export class SpecifikacijeComponent implements OnInit {
       this.message = result.toString();
       this.loadPage();
     });
+  }
+
+  obrazacExcelPostupak(sifra: number): void {
+    window.location.href = `${this.resourceUrlExcelDownload}/${sifra}`;
+  }
+
+  obrazacExcel(): void {
+    window.location.href = `${this.resourceUrlExcelDownload}/${this.brojObrazac}`;
   }
 }

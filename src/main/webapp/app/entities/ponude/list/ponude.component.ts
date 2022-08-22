@@ -29,7 +29,7 @@ export class PonudeComponent implements OnInit {
   ngbPaginationPage = 1;
   public parameterValue?: number;
   @ViewChild('fileInput') fileInput: any;
-
+  public resourceUrlExcelDownloadPostupak = SERVER_API_URL + 'api/ponude/file/';
   constructor(
     protected ponudeService: PonudeService,
     protected activatedRoute: ActivatedRoute,
@@ -211,5 +211,8 @@ export class PonudeComponent implements OnInit {
     this.ponudeService.UploadExcel(formData).subscribe(() => {
       this.loadPage();
     });
+  }
+  obrazacExcelPostupak(sifra: number): void {
+    window.location.href = `${this.resourceUrlExcelDownloadPostupak}/${sifra}`;
   }
 }
