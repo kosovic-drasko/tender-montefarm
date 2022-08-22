@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
@@ -13,6 +13,7 @@ export type EntityArrayResponseType = HttpResponse<ISpecifikacije[]>;
 @Injectable({ providedIn: 'root' })
 export class SpecifikacijeService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/specifikacijes');
+  public resourceUrlExcelUpload = SERVER_API_URL + 'api/uploadfiles/specifikacije';
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -65,5 +66,14 @@ export class SpecifikacijeService {
       return [...specifikacijesToAdd, ...specifikacijeCollection];
     }
     return specifikacijeCollection;
+  }
+
+  UploadExcel(formData: FormData): any {
+    const headers = new HttpHeaders();
+
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+
+    return this.http.post(this.resourceUrlExcelUpload, formData, { headers });
   }
 }

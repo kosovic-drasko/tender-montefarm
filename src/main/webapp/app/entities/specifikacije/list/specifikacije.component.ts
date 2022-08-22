@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
@@ -25,6 +25,8 @@ export class SpecifikacijeComponent implements OnInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
   public parameterValue?: number;
+  @ViewChild('fileInput') fileInput: any;
+  message: string | undefined;
   constructor(
     protected specifikacijeService: SpecifikacijeService,
     protected activatedRoute: ActivatedRoute,
@@ -191,6 +193,16 @@ export class SpecifikacijeComponent implements OnInit {
   add(): void {
     const modalRef = this.modalService.open(SpecifikacijeUpdateComponent, { size: 'lg', backdrop: 'static' });
     modalRef.closed.subscribe(() => {
+      this.loadPage();
+    });
+  }
+
+  uploadFile(): any {
+    const formData = new FormData();
+    formData.append('files', this.fileInput.nativeElement.files[0]);
+
+    this.specifikacijeService.UploadExcel(formData).subscribe((result: { toString: () => string | undefined }) => {
+      this.message = result.toString();
       this.loadPage();
     });
   }

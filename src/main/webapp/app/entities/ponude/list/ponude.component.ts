@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
@@ -28,6 +28,7 @@ export class PonudeComponent implements OnInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
   public parameterValue?: number;
+  @ViewChild('fileInput') fileInput: any;
 
   constructor(
     protected ponudeService: PonudeService,
@@ -200,6 +201,14 @@ export class PonudeComponent implements OnInit {
   add(): void {
     const modalRef = this.modalService.open(PonudeUpdateComponent, { size: 'lg', backdrop: 'static' });
     modalRef.closed.subscribe(() => {
+      this.loadPage();
+    });
+  }
+
+  uploadFile(): any {
+    const formData = new FormData();
+    formData.append('files', this.fileInput.nativeElement.files[0]);
+    this.ponudeService.UploadExcel(formData).subscribe(() => {
       this.loadPage();
     });
   }

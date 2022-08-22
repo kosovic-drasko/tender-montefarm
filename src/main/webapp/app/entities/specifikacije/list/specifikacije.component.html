@@ -17,6 +17,15 @@
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="tenderApp.specifikacije.home.createLabel"> Create a new Specifikacije </span>
       </button>
+      <input hidden #fileInput type="file" id="file" />
+      <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-specifikacije" (click)="fileInput.click()">
+        <!--        <fa-icon icon="plus"></fa-icon>-->
+        <span> Nadji </span>
+      </button>
+      <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-specifikacije" (click)="uploadFile()">
+        <!--        <fa-icon icon="plus"></fa-icon>-->
+        <span>Dodaj Excel</span>
+      </button>
     </div>
   </h2>
 
