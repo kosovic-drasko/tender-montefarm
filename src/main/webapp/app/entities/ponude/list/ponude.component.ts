@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
+import { combineLatest, distinct, of } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IPonude } from '../ponude.model';
@@ -57,7 +57,11 @@ export class PonudeComponent implements OnInit {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
           this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
-          this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca);
+          // this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca);
+          const unique = [...new Set(res.body?.map(item => item.ponudjaci?.nazivPonudjaca))]; // [ 'A', 'B']
+          this.ucesnici = unique;
+          // console.log('To je ================>',unique);
+
           console.log('================>', this.ucesnici);
         },
         error: () => {
@@ -83,8 +87,10 @@ export class PonudeComponent implements OnInit {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
           this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
-          this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca);
-          console.log('================>', this.ucesnici);
+          const unique = [...new Set(res.body?.map(item => item.ponudjaci?.nazivPonudjaca))]; // [ 'A', 'B']
+          this.ucesnici = unique;
+          // this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca)
+          // console.log('===================>',res.body?.pop()?.ponudjaci?.nazivPonudjaca?.toUpperCase()) ;
         },
         error: () => {
           this.isLoading = false;
