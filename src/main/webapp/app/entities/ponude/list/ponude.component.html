@@ -2,11 +2,6 @@
   <h2 id="page-heading" data-cy="PonudeHeading">
     <span jhiTranslate="tenderApp.ponude.home.title">Ponudes</span>
     <div class="d-flex justify-content-end">
-      <!--      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">-->
-      <!--        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>-->
-      <!--        <span jhiTranslate="tenderApp.ponude.home.refreshListLabel">Refresh List</span>-->
-      <!--      </button>-->
-
       <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="add()">
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="tenderApp.ponude.home.createLabel"> Create a new Ponude </span>
@@ -98,11 +93,6 @@
           </td>
           <td class="text-end">
             <div class="btn-group">
-              <!--              <button type="submit" [routerLink]="['/ponude', ponude.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">-->
-              <!--                <fa-icon icon="eye"></fa-icon>-->
-              <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
-              <!--              </button>-->
-
               <button
                 type="submit"
                 (click)="
@@ -135,6 +125,18 @@
           </td>
         </tr>
       </tbody>
+
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Ukupno:</td>
+          <td>{{ ukupno }}</td>
+        </tr>
+      </tfoot>
     </table>
   </div>
 

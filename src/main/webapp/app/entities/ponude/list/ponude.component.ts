@@ -27,6 +27,7 @@ export class PonudeComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  ukupno?: number;
   public parameterValue?: number;
   @ViewChild('fileInput') fileInput: any;
   @Input() postupak: any;
@@ -54,6 +55,7 @@ export class PonudeComponent implements OnInit {
         next: (res: HttpResponse<IPonude[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+          this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
         },
         error: () => {
           this.isLoading = false;
