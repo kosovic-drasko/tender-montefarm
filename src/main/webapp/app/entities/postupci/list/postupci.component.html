@@ -3,11 +3,6 @@
     <span jhiTranslate="tenderApp.postupci.home.title">Postupcis</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="tenderApp.postupci.home.refreshListLabel">Refresh List</span>
-      </button>
-
       <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-postupci" (click)="add()">
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="tenderApp.postupci.home.createLabel"> Create a new Postupci </span>

@@ -11,6 +11,18 @@
       <jhi-ponude [postupak]="sifra"></jhi-ponude>
     </ng-template>
   </li>
+  <li [ngbNavItem]="3">
+    <a ngbNavLink>Vrednovanje</a>
+    <ng-template ngbNavContent>
+      <jhi-vrednovanje [postupak]="sifra"></jhi-vrednovanje>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="3">
+    <a ngbNavLink>Prvorangirani</a>
+    <ng-template ngbNavContent>
+      <jhi-prvorangirani [postupak]="sifra"></jhi-prvorangirani>
+    </ng-template>
+  </li>
 </ul>
 
 <div [ngbNavOutlet]="nav" class="mt-2"></div>

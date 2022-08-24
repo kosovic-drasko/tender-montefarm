@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
@@ -21,7 +21,7 @@ export class PrvorangiraniComponent implements OnInit {
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
-
+  @Input() postupak: any;
   constructor(protected prvorangiraniService: PrvorangiraniService, protected activatedRoute: ActivatedRoute, protected router: Router) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
@@ -30,6 +30,7 @@ export class PrvorangiraniComponent implements OnInit {
 
     this.prvorangiraniService
       .query({
+        'sifraPostupka.in': this.postupak,
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),

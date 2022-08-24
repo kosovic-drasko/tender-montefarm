@@ -5,9 +5,11 @@ import { TenderiHomeDetailComponent } from './detail/tenderi-home-detail.compone
 import { TenderiHomeRoutingModule } from './route/tenderi-home-routing.module';
 import { PonudeModule } from '../ponude/ponude.module';
 import { SpecifikacijeModule } from '../specifikacije/specifikacije.module';
+import { VrednovanjeModule } from '../vrednovanje/vrednovanje.module';
+import { PrvorangiraniModule } from '../prvorangirani/prvorangirani.module';
 
 @NgModule({
-  imports: [SharedModule, TenderiHomeRoutingModule, PonudeModule, SpecifikacijeModule],
+  imports: [SharedModule, TenderiHomeRoutingModule, PonudeModule, SpecifikacijeModule, VrednovanjeModule, PrvorangiraniModule],
   declarations: [TenderiHomeComponent, TenderiHomeDetailComponent],
 })
 export class TenderiHomeModule {}
