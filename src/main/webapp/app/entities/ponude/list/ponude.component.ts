@@ -28,6 +28,7 @@ export class PonudeComponent implements OnInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
   ukupno?: number;
+  ucesnici?: (string | null | undefined)[] | undefined;
   public parameterValue?: number;
   @ViewChild('fileInput') fileInput: any;
   @Input() postupak: any;
@@ -56,6 +57,8 @@ export class PonudeComponent implements OnInit {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
           this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
+          this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca);
+          console.log('================>', this.ucesnici);
         },
         error: () => {
           this.isLoading = false;
@@ -79,6 +82,9 @@ export class PonudeComponent implements OnInit {
         next: (res: HttpResponse<IPonude[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+          this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
+          this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca);
+          console.log('================>', this.ucesnici);
         },
         error: () => {
           this.isLoading = false;
