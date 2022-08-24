@@ -12,21 +12,18 @@ const tenderiHomeRoute: Routes = [
   {
     path: '',
     component: TenderiHomeComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
     canActivate: [UserRouteAccessService],
     children: [
       {
-        path: ':id/ponude',
+        path: 'ponude',
         component: PonudeComponent,
-        data: {
-          defaultSort: 'id,asc',
-        },
       },
       {
-        path: ':id/specifikacije',
+        path: 'specifikacije',
         component: SpecifikacijeComponent,
-        data: {
-          defaultSort: 'id,asc',
-        },
       },
     ],
   },

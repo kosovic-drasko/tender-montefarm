@@ -1,10 +1,28 @@
-{{ parameterValue }}
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="specifikacije">Specifikacije</a>
+{{ sifra }}
+<ul ngbNav #nav="ngbNav" class="nav-tabs">
+  <li [ngbNavItem]="1">
+    <a ngbNavLink>One</a>
+    <ng-template ngbNavContent>
+      <p>
+        Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse.
+        Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater
+        eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american
+        apparel, butcher voluptate nisi qui.
+      </p>
+    </ng-template>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="ponude">Ponude</a>
+  <li [ngbNavItem]="2">
+    <a ngbNavLink>Two</a>
+    <ng-template ngbNavContent>
+      <jhi-ponude [postupak]="sifra"></jhi-ponude>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="3">
+    <a ngbNavLink>Three</a>
+    <ng-template ngbNavContent>
+      <jhi-specifikacije></jhi-specifikacije>
+    </ng-template>
   </li>
 </ul>
-<router-outlet></router-outlet>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

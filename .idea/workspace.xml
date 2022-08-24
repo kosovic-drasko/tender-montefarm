@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="ponedeljak 2">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="ponedeljak 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tender/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tender/config/SecurityConfiguration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/list/postupci.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/list/postupci.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/list/tenderi-home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/list/tenderi-home.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/list/tenderi-home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/list/tenderi-home.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/route/tenderi-home-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/route/tenderi-home-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/tenderi-home.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/tenderi-home/tenderi-home.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/layouts/main/main.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/layouts/main/main.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,33 +64,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DELOMBOK_PRE_COMMIT": "false",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/pc/IdeaProjects/jhipster",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
-    "spring.configuration.checksum": "0a538a0ca54a9f51fc1334040fb89d64",
-    "ts.external.directory.path": "C:\\Users\\Win\\IdeaProjects\\tender-montefarm\\node_modules\\typescript\\lib"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DELOMBOK_PRE_COMMIT&quot;: &quot;false&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/pc/IdeaProjects/jhipster&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;0a538a0ca54a9f51fc1334040fb89d64&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Win\\IdeaProjects\\tender-montefarm\\node_modules\\typescript\\lib&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\.jhipster" />
@@ -104,7 +106,7 @@
       <recent name="tender.service.criteria" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.TenderApp">
+  <component name="RunManager" selected="npm.Angular CLI Server">
     <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
       <method v="2" />
     </configuration>
@@ -139,6 +141,7 @@
       <workItem from="1660796791103" duration="2111000" />
       <workItem from="1660920966217" duration="5809000" />
       <workItem from="1661009189820" duration="13670000" />
+      <workItem from="1661318917980" duration="2508000" />
     </task>
     <task id="LOCAL-00001" summary="init-tabele-osnovne">
       <created>1660374945836</created>
@@ -364,7 +367,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661151763695</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="ponedeljak 3">
+      <created>1661154106868</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1661154106868</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -394,7 +404,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="ponude update" />
     <MESSAGE value="ponude update 3" />
     <MESSAGE value="ponude update 4" />
     <MESSAGE value="ponude update 5" />
@@ -419,7 +428,8 @@
     <MESSAGE value="nedelja 21.08 br3" />
     <MESSAGE value="ponedeljak 1" />
     <MESSAGE value="ponedeljak 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="ponedeljak 2" />
+    <MESSAGE value="ponedeljak 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="ponedeljak 3" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
