@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
@@ -27,6 +27,7 @@ export class SpecifikacijeComponent implements OnInit {
   brojObrazac?: number = 0;
   public parameterValue?: number;
   @ViewChild('fileInput') fileInput: any;
+  @Input() postupak: any;
   message: string | undefined;
   public resourceUrlExcelDownload = SERVER_API_URL + 'api/specifikacije/file';
   public resourceUrlExcelDownloadPostupak = SERVER_API_URL + 'api/specifikacije/file/';
@@ -65,7 +66,7 @@ export class SpecifikacijeComponent implements OnInit {
 
     this.specifikacijeService
       .query({
-        'sifraPostupka.in': this.parameterValue,
+        'sifraPostupka.in': this.postupak,
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
@@ -86,7 +87,7 @@ export class SpecifikacijeComponent implements OnInit {
     this.activatedRoute.params.subscribe(parameter => {
       this.parameterValue = parameter.id;
     });
-    if (this.parameterValue !== undefined) {
+    if (this.postupak !== undefined) {
       this.handleNavigationSifra();
     } else {
       this.handleNavigation();

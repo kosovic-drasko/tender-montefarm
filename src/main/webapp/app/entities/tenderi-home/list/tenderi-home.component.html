@@ -1,26 +1,14 @@
-{{ sifra }}
 <ul ngbNav #nav="ngbNav" class="nav-tabs">
   <li [ngbNavItem]="1">
-    <a ngbNavLink>One</a>
+    <a ngbNavLink>Specikacije</a>
     <ng-template ngbNavContent>
-      <p>
-        Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse.
-        Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater
-        eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american
-        apparel, butcher voluptate nisi qui.
-      </p>
+      <jhi-specifikacije [postupak]="sifra"></jhi-specifikacije>
     </ng-template>
   </li>
   <li [ngbNavItem]="2">
-    <a ngbNavLink>Two</a>
+    <a ngbNavLink>Ponude</a>
     <ng-template ngbNavContent>
       <jhi-ponude [postupak]="sifra"></jhi-ponude>
-    </ng-template>
-  </li>
-  <li [ngbNavItem]="3">
-    <a ngbNavLink>Three</a>
-    <ng-template ngbNavContent>
-      <jhi-specifikacije></jhi-specifikacije>
     </ng-template>
   </li>
 </ul>

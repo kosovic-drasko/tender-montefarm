@@ -15,6 +15,7 @@ import { PostupciUpdateComponent } from '../update/postupci-update.component';
 @Component({
   selector: 'jhi-postupci',
   templateUrl: './postupci.component.html',
+  styleUrls: ['./postupci.component.scss'],
 })
 export class PostupciComponent implements OnInit {
   postupcis?: IPostupci[];

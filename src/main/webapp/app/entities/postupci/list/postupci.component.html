@@ -27,36 +27,52 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="id">
+            <span jhiTranslate="global.field.id">ID</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="sifraPostupka">
-            <span jhiTranslate="tenderApp.postupci.sifraPostupka">Sifra Postupka</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.postupci.sifraPostupka">Sifra Postupka</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="brojTendera">
-            <span jhiTranslate="tenderApp.postupci.brojTendera">Broj Tendera</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.postupci.brojTendera">Broj Tendera</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="opisPostupka">
-            <span jhiTranslate="tenderApp.postupci.opisPostupka">Opis Postupka</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.postupci.opisPostupka">Opis Postupka</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="vrstaPostupka">
-            <span jhiTranslate="tenderApp.postupci.vrstaPostupka">Vrsta Postupka</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.postupci.vrstaPostupka">Vrsta Postupka</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="datumObjave">
-            <span jhiTranslate="tenderApp.postupci.datumObjave">Datum Objave</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.postupci.datumObjave">Datum Objave</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="datumOtvaranja">
-            <span jhiTranslate="tenderApp.postupci.datumOtvaranja">Datum Otvaranja</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.postupci.datumOtvaranja">Datum Otvaranja</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="kriterijumCijena">
-            <span jhiTranslate="tenderApp.postupci.kriterijumCijena">Kriterijum Cijena</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.postupci.kriterijumCijena">Kriterijum Cijena</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="drugiKriterijum">
-            <span jhiTranslate="tenderApp.postupci.drugiKriterijum">Drugi Kriterijum</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.postupci.drugiKriterijum">Drugi Kriterijum</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let postupci of postupcis; trackBy: trackId" data-cy="entityTable">
+        <tr
+          *ngFor="let postupci of postupcis; trackBy: trackId"
+          data-cy="entityTable"
+          [routerLink]="['/tenderi-home']"
+          [queryParams]="{ sifra: postupci.sifraPostupka }"
+        >
           <td>
             <a [routerLink]="['/postupci', postupci.id, 'view']">{{ postupci.id }}</a>
           </td>
@@ -70,17 +86,6 @@
           <td>{{ postupci.drugiKriterijum }}</td>
           <td class="text-end">
             <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/tenderi-home']"
-                [queryParams]="{ sifra: postupci.sifraPostupka }"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">GGG</span>
-              </button>
-
               <button
                 type="submit"
                 (click)="
