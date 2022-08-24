@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="srijeda 24 kuca 5">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" afterDir="false" />
+    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="srijeda 24 kuca 6">
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -431,7 +429,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661370735184</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="srijeda 24 kuca 6">
+      <created>1661371642999</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1661371642999</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -461,7 +466,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="specifikacije" />
     <MESSAGE value="specifikacije kraj" />
     <MESSAGE value="vrednovanje 1" />
     <MESSAGE value="prvorangirani" />
@@ -486,7 +490,8 @@
     <MESSAGE value="srijeda 24 kuca 3" />
     <MESSAGE value="srijeda 24 kuca 4" />
     <MESSAGE value="srijeda 24 kuca 5" />
-    <option name="LAST_COMMIT_MESSAGE" value="srijeda 24 kuca 5" />
+    <MESSAGE value="srijeda 24 kuca 6" />
+    <option name="LAST_COMMIT_MESSAGE" value="srijeda 24 kuca 6" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

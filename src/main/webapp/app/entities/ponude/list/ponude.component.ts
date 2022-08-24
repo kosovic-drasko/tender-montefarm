@@ -106,7 +106,9 @@ export class PonudeComponent implements OnInit {
 
     this.ponudeService
       .query({
+        // 'sifraPostupka.in': this.postupak,
         'sifraPonude.in': this.brPonude,
+
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
