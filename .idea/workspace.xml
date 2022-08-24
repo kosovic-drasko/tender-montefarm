@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="srijeda 24 kuca 4">
+    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="srijeda 24 kuca 5">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -416,7 +417,21 @@
       <option name="project" value="LOCAL" />
       <updated>1661365036373</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="srijeda 24 kuca 5">
+      <created>1661370644495</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1661370644495</updated>
+    </task>
+    <task id="LOCAL-00042" summary="srijeda 24 kuca 5">
+      <created>1661370735184</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1661370735184</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,7 +461,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="postupci" />
     <MESSAGE value="specifikacije" />
     <MESSAGE value="specifikacije kraj" />
     <MESSAGE value="vrednovanje 1" />
@@ -471,7 +485,8 @@
     <MESSAGE value="srijeda 24 kuca 2" />
     <MESSAGE value="srijeda 24 kuca 3" />
     <MESSAGE value="srijeda 24 kuca 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="srijeda 24 kuca 4" />
+    <MESSAGE value="srijeda 24 kuca 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="srijeda 24 kuca 5" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

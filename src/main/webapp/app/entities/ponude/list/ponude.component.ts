@@ -20,6 +20,7 @@ import { PonudjaciService } from '../../ponudjaci/service/ponudjaci.service';
 export class PonudeComponent implements OnInit {
   ponudjaci?: IPonudjaci[] = [];
   ponudes?: IPonude[];
+  brPonude?: null;
   isLoading = false;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -97,6 +98,38 @@ export class PonudeComponent implements OnInit {
           this.onError();
         },
       });
+  }
+
+  loadPageSifraPonude(page?: number, dontNavigate?: boolean): void {
+    this.isLoading = true;
+    const pageToLoad: number = page ?? this.page ?? 1;
+
+    this.ponudeService
+      .query({
+        'sifraPonude.in': this.brPonude,
+        page: pageToLoad - 1,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      })
+      .subscribe({
+        next: (res: HttpResponse<IPonude[]>) => {
+          this.isLoading = false;
+          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+          this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
+          const unique = [...new Set(res.body?.map(item => item.ponudjaci?.nazivPonudjaca))]; // [ 'A', 'B']
+          this.ucesnici = unique;
+          // this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca)
+          // console.log('===================>',res.body?.pop()?.ponudjaci?.nazivPonudjaca?.toUpperCase()) ;
+        },
+        error: () => {
+          this.isLoading = false;
+          this.onError();
+        },
+      });
+  }
+  brPonudeNull(): void {
+    this.brPonude = null;
+    this.loadPage();
   }
 
   ngOnInit(): void {

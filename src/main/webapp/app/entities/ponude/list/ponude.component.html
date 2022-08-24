@@ -19,6 +19,9 @@
         <!--        <fa-icon icon="plus"></fa-icon>-->
         <span>Excel </span>
       </button>
+      <input type="text" class="form-control" [(ngModel)]="brPonude" />
+      <button class="btn btn-info" (click)="loadPageSifraPonude()">Ponuda</button>
+      <button class="btn btn-info" (click)="brPonudeNull()">Ponisti</button>
     </div>
   </h2>
   <div class="form-floating">
