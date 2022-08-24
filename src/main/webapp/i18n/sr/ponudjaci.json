@@ -2,11 +2,11 @@
   "tenderApp": {
     "ponudjaci": {
       "home": {
-        "title": "Ponudjacis",
+        "title": "Ponudjaci",
         "refreshListLabel": "Refresh list",
-        "createLabel": "Kreiraj novi Ponudjaci",
-        "createOrEditLabel": "Kreirajte ili izmenite Ponudjaci",
-        "notFound": "No Ponudjacis found"
+        "createLabel": "Kreiraj novog  Ponudjaca",
+        "createOrEditLabel": "Kreirajte ili izmenite Ponudjaca",
+        "notFound": "Nema poonudjaca"
       },
       "created": "Kreiran je novi Ponudjaci pod nazivom {{ param }}",
       "updated": "Ponudjaci pod nazivom {{ param }} je ažuriran",

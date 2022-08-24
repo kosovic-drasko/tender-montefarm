@@ -2,11 +2,11 @@
   "tenderApp": {
     "ponude": {
       "home": {
-        "title": "Ponudes",
+        "title": "Ponude",
         "refreshListLabel": "Refresh list",
         "createLabel": "Kreiraj novi Ponude",
         "createOrEditLabel": "Kreirajte ili izmenite Ponude",
-        "notFound": "No Ponudes found"
+        "notFound": "Nema ponude"
       },
       "created": "Kreiran je novi Ponude pod nazivom {{ param }}",
       "updated": "Ponude pod nazivom {{ param }} je ažuriran",
