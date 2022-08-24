@@ -2,12 +2,7 @@
   <h2 id="page-heading" data-cy="HvalePonudeHeading">
     <span jhiTranslate="tenderApp.hvalePonude.home.title">Hvale Ponudes</span>
 
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="tenderApp.hvalePonude.home.refreshListLabel">Refresh List</span>
-      </button>
-    </div>
+    <div class="d-flex justify-content-end"></div>
   </h2>
 
   <jhi-alert-error></jhi-alert-error>
@@ -22,26 +17,37 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="id">
+            <span jhiTranslate="global.field.id">ID</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="sifraPostupka">
-            <span jhiTranslate="tenderApp.hvalePonude.sifraPostupka">Sifra Postupka</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.hvalePonude.sifraPostupka">Sifra Postupka</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="brojPartije">
-            <span jhiTranslate="tenderApp.hvalePonude.brojPartije">Broj Partije</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.hvalePonude.brojPartije">Broj Partije</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="inn"><span jhiTranslate="tenderApp.hvalePonude.inn">Inn</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="inn">
+            <span jhiTranslate="tenderApp.hvalePonude.inn">Inn</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="farmaceutskiOblikLijeka">
             <span jhiTranslate="tenderApp.hvalePonude.farmaceutskiOblikLijeka">Farmaceutski Oblik Lijeka</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="pakovanje">
-            <span jhiTranslate="tenderApp.hvalePonude.pakovanje">Pakovanje</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.hvalePonude.pakovanje">Pakovanje</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="trazenaKolicina">
-            <span jhiTranslate="tenderApp.hvalePonude.trazenaKolicina">Trazena Kolicina</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.hvalePonude.trazenaKolicina">Trazena Kolicina</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="procijenjenaVrijednost">
-            <span jhiTranslate="tenderApp.hvalePonude.procijenjenaVrijednost">Procijenjena Vrijednost</span> <fa-icon icon="sort"></fa-icon>
+            <span jhiTranslate="tenderApp.hvalePonude.procijenjenaVrijednost">Procijenjena Vrijednost</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
@@ -59,17 +65,7 @@
           <td>{{ hvalePonude.trazenaKolicina }}</td>
           <td>{{ hvalePonude.procijenjenaVrijednost }}</td>
           <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/hvale-ponude', hvalePonude.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-              </button>
-            </div>
+            <div class="btn-group"></div>
           </td>
         </tr>
       </tbody>

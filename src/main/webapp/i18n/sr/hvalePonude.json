@@ -2,7 +2,7 @@
   "tenderApp": {
     "hvalePonude": {
       "home": {
-        "title": "Hvale Ponudes",
+        "title": "Hvale Ponude",
         "refreshListLabel": "Refresh list",
         "notFound": "No Hvale Ponudes found"
       },

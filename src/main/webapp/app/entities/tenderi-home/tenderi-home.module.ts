@@ -7,9 +7,18 @@ import { PonudeModule } from '../ponude/ponude.module';
 import { SpecifikacijeModule } from '../specifikacije/specifikacije.module';
 import { VrednovanjeModule } from '../vrednovanje/vrednovanje.module';
 import { PrvorangiraniModule } from '../prvorangirani/prvorangirani.module';
+import { HvalePonudeModule } from '../hvale-ponude/hvale-ponude.module';
 
 @NgModule({
-  imports: [SharedModule, TenderiHomeRoutingModule, PonudeModule, SpecifikacijeModule, VrednovanjeModule, PrvorangiraniModule],
+  imports: [
+    SharedModule,
+    TenderiHomeRoutingModule,
+    PonudeModule,
+    SpecifikacijeModule,
+    VrednovanjeModule,
+    PrvorangiraniModule,
+    HvalePonudeModule,
+  ],
   declarations: [TenderiHomeComponent, TenderiHomeDetailComponent],
 })
 export class TenderiHomeModule {}

@@ -2,9 +2,9 @@
   "tenderApp": {
     "prvorangirani": {
       "home": {
-        "title": "Prvorangiranis",
+        "title": "Prvorangirani",
         "refreshListLabel": "Refresh list",
-        "notFound": "No Prvorangiranis found"
+        "notFound": "Nema prvorangiranih"
       },
       "detail": {
         "title": "Prvorangirani"

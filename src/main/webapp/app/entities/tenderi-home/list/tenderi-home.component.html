@@ -17,10 +17,16 @@
       <jhi-vrednovanje [postupak]="sifra"></jhi-vrednovanje>
     </ng-template>
   </li>
-  <li [ngbNavItem]="3">
+  <li [ngbNavItem]="4">
     <a ngbNavLink>Prvorangirani</a>
     <ng-template ngbNavContent>
       <jhi-prvorangirani [postupak]="sifra"></jhi-prvorangirani>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="5">
+    <a ngbNavLink>Partije bez ponude</a>
+    <ng-template ngbNavContent>
+      <jhi-hvale-ponude [postupak]="sifra"></jhi-hvale-ponude>
     </ng-template>
   </li>
 </ul>
