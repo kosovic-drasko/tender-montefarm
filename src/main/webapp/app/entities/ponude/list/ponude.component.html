@@ -1,7 +1,10 @@
 <div>
   <h2 id="page-heading" data-cy="PonudeHeading">
     <span jhiTranslate="tenderApp.ponude.home.title">Ponudes</span>
-    <div class="d-flex justify-content-end">
+    <div>
+      <input type="text" class="form-control" [(ngModel)]="brPonude" />
+      <button class="btn btn-info" (click)="loadPageSifraPonude()">Ponuda</button>
+      <button class="btn btn-info" (click)="brPonudeNull()">Ponisti</button>
       <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="add()">
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="tenderApp.ponude.home.createLabel"> Create a new Ponude </span>
@@ -19,11 +22,9 @@
         <!--        <fa-icon icon="plus"></fa-icon>-->
         <span>Excel </span>
       </button>
-      <input type="text" class="form-control" [(ngModel)]="brPonude" />
-      <button class="btn btn-info" (click)="loadPageSifraPonude()">Ponuda</button>
-      <button class="btn btn-info" (click)="brPonudeNull()">Ponisti</button>
     </div>
   </h2>
+  <div></div>
   <div class="form-floating">
     <select class="form-control" id="field_sifraPonudjaca" data-cy="sifraPonudjaca" name="sifraPonudjaca">
       <option [ngValue]="null"></option>
