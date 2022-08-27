@@ -30,6 +30,8 @@ export class PonudeComponent implements OnInit {
   ngbPaginationPage = 1;
   ukupno?: number;
   ucesnici?: (string | null | undefined)[] | undefined;
+  postupci?: number;
+  sifraPonnude?: (number | undefined)[];
   public parameterValue?: number;
   @ViewChild('fileInput') fileInput: any;
   @Input() postupak: any;
@@ -41,7 +43,9 @@ export class PonudeComponent implements OnInit {
     protected router: Router,
     protected ponudjaciService: PonudjaciService,
     protected modalService: NgbModal
-  ) {}
+  ) {
+    this.postupci = this.postupak;
+  }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
@@ -59,8 +63,11 @@ export class PonudeComponent implements OnInit {
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
           this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
           // this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca);
-          const unique = [...new Set(res.body?.map(item => item.ponudjaci?.nazivPonudjaca))]; // [ 'A', 'B']
+
+          const unique = [...new Set(res.body?.map(item => item.ponudjaci?.nazivPonudjaca))];
+          // const unique1 = [...new Set(res.body?.map(item => item.sifraPonude))];// [ 'A', 'B']
           this.ucesnici = unique;
+          // this.brPonude=unique1;
           // console.log('To je ================>',unique);
 
           console.log('================>', this.ucesnici);
@@ -87,9 +94,17 @@ export class PonudeComponent implements OnInit {
         next: (res: HttpResponse<IPonude[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+
           this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
-          const unique = [...new Set(res.body?.map(item => item.ponudjaci?.nazivPonudjaca))]; // [ 'A', 'B']
+          const unique = [...new Set(res.body?.map(item => item.ponudjaci?.nazivPonudjaca))];
+
+          const unique1 = [...new Set(res.body?.map(item => item.sifraPonude))];
           this.ucesnici = unique;
+          this.sifraPonnude = unique1;
+          console.log('====================>', this.sifraPonnude);
+          console.log('====================>', this.ucesnici);
+          console.log('====================>', this.postupak);
+          console.log('Postupak je iz menija ........', this.postupak);
           // this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca)
           // console.log('===================>',res.body?.pop()?.ponudjaci?.nazivPonudjaca?.toUpperCase()) ;
         },
@@ -106,7 +121,33 @@ export class PonudeComponent implements OnInit {
 
     this.ponudeService
       .query({
-        // 'sifraPostupka.in': this.postupak,
+        'sifraPonude.in': this.brPonude,
+        page: pageToLoad - 1,
+        size: this.itemsPerPage,
+        sort: this.sort(),
+      })
+      .subscribe({
+        next: (res: HttpResponse<IPonude[]>) => {
+          this.isLoading = false;
+          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+          this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
+
+          // this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca)
+          // console.log('===================>',res.body?.pop()?.ponudjaci?.nazivPonudjaca?.toUpperCase()) ;
+        },
+        error: () => {
+          this.isLoading = false;
+          this.onError();
+        },
+      });
+  }
+  loadPageSifraPonudePostupak(page?: number, dontNavigate?: boolean): void {
+    this.isLoading = true;
+    const pageToLoad: number = page ?? this.page ?? 1;
+
+    this.ponudeService
+      .query({
+        'sifraPostupka.in': this.postupci,
         'sifraPonude.in': this.brPonude,
 
         page: pageToLoad - 1,
@@ -117,9 +158,11 @@ export class PonudeComponent implements OnInit {
         next: (res: HttpResponse<IPonude[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+          // this.ponudes = res.body?.filter(val => val.sifraPonude === this.brPonude);
           this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
           const unique = [...new Set(res.body?.map(item => item.ponudjaci?.nazivPonudjaca))]; // [ 'A', 'B']
           this.ucesnici = unique;
+          console.log('Postupak je ........', this.postupak);
           // this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca)
           // console.log('===================>',res.body?.pop()?.ponudjaci?.nazivPonudjaca?.toUpperCase()) ;
         },
@@ -133,11 +176,16 @@ export class PonudeComponent implements OnInit {
     this.brPonude = null;
     this.loadPage();
   }
+  brPonudeNullSifra(): void {
+    this.brPonude = null;
+    this.handleNavigationSifra();
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(parameter => {
       this.parameterValue = parameter.id;
     });
+
     if (this.postupak !== undefined) {
       this.handleNavigationSifra();
     } else {
@@ -182,6 +230,20 @@ export class PonudeComponent implements OnInit {
       }
     });
   }
+  // public handleNavigationPonudePostupak(): void {
+  //   combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
+  //     const page = params.get('page');
+  //     const pageNumber = +(page ?? 1);
+  //     const sort = (params.get(SORT) ?? data['defaultSort']).split(',');
+  //     const predicate = sort[0];
+  //     const ascending = sort[1] === ASC;
+  //     if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
+  //       this.predicate = predicate;
+  //       this.ascending = ascending;
+  //       this.loadPageSifraPonudePostupak(pageNumber, true);
+  //     }
+  //   });
+  // }
 
   protected handleNavigationSifra(): void {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {

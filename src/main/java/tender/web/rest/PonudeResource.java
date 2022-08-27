@@ -185,6 +185,12 @@ public class PonudeResource {
         return ResponseUtil.wrapOrNotFound(ponude);
     }
 
+    @GetMapping("/distinct")
+    public ResponseEntity<?> getDistinct() {
+        Optional<?> ponude = Optional.ofNullable(ponudeRepository.getAll());
+        return ResponseUtil.wrapOrNotFound(ponude);
+    }
+
     /**
      * {@code DELETE  /ponudes/:id} : delete the "id" ponude.
      *

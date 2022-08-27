@@ -21,6 +21,9 @@ public interface PonudeRepository extends JpaRepository<Ponude, Long>, JpaSpecif
     @Query("select p from Ponude p where p.sifraPostupka=:sifraPostupka")
     List<Ponude> findBySifraPostupkaList(@Param("sifraPostupka") Integer sifraPostupka);
 
+    @Query("select distinct p.sifraPonude,p.ponudjaci.nazivPonudjaca from Ponude p where p.sifraPostupka=:sifraPostupka")
+    List<?> distinctBy(@Param("sifraPostupka") Integer sifraPostupka);
+
     @Modifying
     @Transactional
     @Query("DELETE from Ponude p WHERE p.selected = true")
@@ -30,4 +33,6 @@ public interface PonudeRepository extends JpaRepository<Ponude, Long>, JpaSpecif
     @Transactional
     @Query("UPDATE Ponude p SET p.selected=true WHERE p.id = :Id")
     void updateSlected(@Param("Id") Long Id);
+
+    List<?> getAll();
 }

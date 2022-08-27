@@ -3,6 +3,7 @@ package tender.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -13,6 +14,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "ponude")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+//@NamedQuery(name = "distinctPonude", query = "select distinct p.sifraPonude,p.ponudjaci.nazivPonudjaca from Ponude p where p.sifraPostupka=:sifraPostupka")
+//@NamedQuery(name = "Ponude.distinctPonude", query = "select sifra_postupka FROM Ponude p ")
+@NamedQuery(name = "Ponude.getAll", query = "SELECT distinct p.sifraPonude,p.ponudjaci.nazivPonudjaca from Ponude p ")
 public class Ponude implements Serializable {
 
     private static final long serialVersionUID = 1L;
