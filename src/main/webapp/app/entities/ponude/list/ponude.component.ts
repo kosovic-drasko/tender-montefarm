@@ -20,6 +20,7 @@ import { PonudjaciService } from '../../ponudjaci/service/ponudjaci.service';
 export class PonudeComponent implements OnInit {
   ponudjaci?: IPonudjaci[] = [];
   ponudes?: IPonude[];
+  ponudjaciPostupak?: any;
   brPonude?: null;
   isLoading = false;
   totalItems = 0;
@@ -32,11 +33,13 @@ export class PonudeComponent implements OnInit {
   ucesnici?: (string | null | undefined)[] | undefined;
   postupci?: number;
   sifraPonnude?: (number | undefined)[];
+
   public parameterValue?: number;
   @ViewChild('fileInput') fileInput: any;
   @Input() postupak: any;
 
   resourceUrlExcelDownloadPostupak = SERVER_API_URL + 'api/ponude/file/';
+
   constructor(
     protected ponudeService: PonudeService,
     protected activatedRoute: ActivatedRoute,
@@ -115,6 +118,15 @@ export class PonudeComponent implements OnInit {
       });
   }
 
+  ponudePonudjaci(sifraPostupka: number): void {
+    this.ponudeService.ponudePonudjaci(sifraPostupka).subscribe({
+      next: res => {
+        this.ponudjaciPostupak = res;
+        console.log('Ponudjaci za postupak su ', this.ponudjaciPostupak);
+      },
+    });
+  }
+
   loadPageSifraPonude(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
@@ -141,6 +153,7 @@ export class PonudeComponent implements OnInit {
         },
       });
   }
+
   loadPageSifraPonudePostupak(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
@@ -172,10 +185,12 @@ export class PonudeComponent implements OnInit {
         },
       });
   }
+
   brPonudeNull(): void {
     this.brPonude = null;
     this.loadPage();
   }
+
   brPonudeNullSifra(): void {
     this.brPonude = null;
     this.handleNavigationSifra();
@@ -185,7 +200,7 @@ export class PonudeComponent implements OnInit {
     this.activatedRoute.params.subscribe(parameter => {
       this.parameterValue = parameter.id;
     });
-
+    this.ponudePonudjaci(this.postupak);
     if (this.postupak !== undefined) {
       this.handleNavigationSifra();
     } else {
@@ -230,6 +245,7 @@ export class PonudeComponent implements OnInit {
       }
     });
   }
+
   // public handleNavigationPonudePostupak(): void {
   //   combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
   //     const page = params.get('page');
@@ -325,6 +341,7 @@ export class PonudeComponent implements OnInit {
       this.loadPage();
     });
   }
+
   obrazacExcelPostupak(sifra: number): void {
     window.location.href = `${this.resourceUrlExcelDownloadPostupak}/${sifra}`;
   }

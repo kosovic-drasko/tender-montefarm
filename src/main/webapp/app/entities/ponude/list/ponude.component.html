@@ -40,8 +40,8 @@
       cl="loadPageSifraPonude()"
     >
       <option [ngValue]="null"></option>
-      <option [ngValue]="ponudjaciOption" *ngFor="let ponudjaciOption of ucesnici">
-        {{ ponudjaciOption }}
+      <option [ngValue]="ponudjaciOption.sifraPonude" *ngFor="let ponudjaciOption of ponudjaciPostupak">
+        {{ ponudjaciOption.ponudjaci.nazivPonudjaca }}
       </option>
     </select>
     <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPonudjaca" for="field_sifraPonudjaca">Sifra Ponudjaca</label>

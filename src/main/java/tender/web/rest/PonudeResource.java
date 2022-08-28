@@ -185,9 +185,21 @@ public class PonudeResource {
         return ResponseUtil.wrapOrNotFound(ponude);
     }
 
-    @GetMapping("/distinct")
+    @GetMapping("/distinct/{sifra}")
+    public ResponseEntity<?> getDistinct(@PathVariable Integer sifra) {
+        Optional<?> ponude = Optional.ofNullable(ponudeRepository.distinctBy(sifra));
+        return ResponseUtil.wrapOrNotFound(ponude);
+    }
+
+    @GetMapping("/sifra-ponude-ponudjaci")
     public ResponseEntity<?> getDistinct() {
-        Optional<?> ponude = Optional.ofNullable(ponudeRepository.getAll());
+        Optional<? extends List<?>> ponude = Optional.ofNullable(ponudeRepository.namedNativeQuery());
+        return ResponseUtil.wrapOrNotFound(ponude);
+    }
+
+    @GetMapping("/ponude-ponudjaci/{sifra}")
+    public ResponseEntity<?> getPonudePonudjaci(@PathVariable Integer sifra) {
+        Optional<? extends List<?>> ponude = Optional.ofNullable(ponudeRepository.findBySifraPostupkaPonudjaci(sifra));
         return ResponseUtil.wrapOrNotFound(ponude);
     }
 

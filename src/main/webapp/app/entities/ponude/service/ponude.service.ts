@@ -13,6 +13,7 @@ export type EntityArrayResponseType = HttpResponse<IPonude[]>;
 @Injectable({ providedIn: 'root' })
 export class PonudeService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/ponudes');
+  protected resourceUrlPonudePonudjaci = this.applicationConfigService.getEndpointFor('api/ponude-ponudjaci');
   public resourceUrlExcelUpload = SERVER_API_URL + 'api/upload';
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
@@ -31,6 +32,9 @@ export class PonudeService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IPonude>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+  ponudePonudjaci(sifraPostupka: number): Observable<IPonude> {
+    return this.http.get<IPonude>(`${this.resourceUrlPonudePonudjaci}/${sifraPostupka}`);
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

@@ -14,9 +14,19 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "ponude")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-//@NamedQuery(name = "distinctPonude", query = "select distinct p.sifraPonude,p.ponudjaci.nazivPonudjaca from Ponude p where p.sifraPostupka=:sifraPostupka")
-//@NamedQuery(name = "Ponude.distinctPonude", query = "select sifra_postupka FROM Ponude p ")
-@NamedQuery(name = "Ponude.getAll", query = "SELECT distinct p.sifraPonude,p.ponudjaci.nazivPonudjaca from Ponude p ")
+@NamedNativeQuery(
+    name = "Ponude.namedNativeQuery",
+    query = "SELECT * FROM (SELECT \n" +
+    "  public.ponude.*,\n" +
+    "  public.ponudjaci.naziv_ponudjaca,\n" +
+    "  ROW_NUMBER() over(partition BY ponude.sifra_ponude ORDER BY \n" +
+    "ponude.id DESC)rn\n" +
+    "FROM\n" +
+    "  public.ponude\n" +
+    "  INNER JOIN public.ponudjaci ON (public.ponude.ponudjaci_id = public.ponudjaci.id))a\n" +
+    "WHERE rn=1",
+    resultClass = Ponude.class
+)
 public class Ponude implements Serializable {
 
     private static final long serialVersionUID = 1L;
