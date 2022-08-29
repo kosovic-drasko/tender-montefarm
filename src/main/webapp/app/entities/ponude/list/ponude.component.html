@@ -1,52 +1,65 @@
-{{ postupak }}
+<!--{{ postupak }}-->
 <div>
-  <h2 id="page-heading" data-cy="PonudeHeading">
+  <h2>
     <span jhiTranslate="tenderApp.ponude.home.title">Ponudes</span>
-    <div>
-      <input type="text" class="form-control" [(ngModel)]="brPonude" />
-      <button class="btn btn-info" (click)="loadPageSifraPonude()">Ponuda</button>
-      <button class="btn btn-info" (click)="brPonudeNull()">Ponisti</button>
-      <input type="text" class="form-control" [(ngModel)]="brPonude" />
-      <input type="text" class="form-control" [(ngModel)]="postupci" />
-      <button class="btn btn-warning" (click)="loadPageSifraPonudePostupak()">PonudaPostupak</button>
-      <button class="btn btn-info" (click)="brPonudeNullSifra()">PonistiSifra</button>
-      <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="add()">
-        <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="tenderApp.ponude.home.createLabel"> Create a new Ponude </span>
-      </button>
-      <input hidden #fileInput type="file" id="file" />
-      <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-specifikacije" (click)="fileInput.click()">
-        <!--        <fa-icon icon="plus"></fa-icon>-->
-        <span> Nadji </span>
-      </button>
-      <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-specifikacije" (click)="uploadFile()">
-        <!--        <fa-icon icon="plus"></fa-icon>-->
-        <span>Dodaj Excel</span>
-      </button>
-      <button class="btn btn-warning" (click)="obrazacExcelPostupak(1)">
-        <!--        <fa-icon icon="plus"></fa-icon>-->
-        <span>Excel </span>
-      </button>
-    </div>
   </h2>
-  <div></div>
-  <div class="form-floating">
-    <select
-      class="form-control"
-      id="field_sifraPonudjaca"
-      data-cy="sifraPonudjaca"
-      name="sifraPonudjaca"
-      [(ngModel)]="brPonude"
-      cl="loadPageSifraPonude()"
-    >
-      <option [ngValue]="null"></option>
-      <option [ngValue]="ponudjaciOption.sifraPonude" *ngFor="let ponudjaciOption of ponudjaciPostupak">
-        {{ ponudjaciOption.ponudjaci.nazivPonudjaca }}
-      </option>
-    </select>
-    <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPonudjaca" for="field_sifraPonudjaca">Sifra Ponudjaca</label>
+
+  <div *ngIf="postupak; else elseBlock">
+    <div class="form-floating">
+      <input id="ponuda1" placeholder="ponuda" type="text" class="form-control" [(ngModel)]="brPonude" />
+      <label class="form-label" for="ponuda1">Ponuda</label>
+    </div>
+    <button *ngIf="postupak" class="btn btn-warning" (click)="loadPageSifraPonudePostupakNadji()">PonudaPostupak</button>
+    <button *ngIf="postupak" class="btn btn-info" (click)="brPonudeNullSifra()">PonistiSifra</button>
   </div>
+  <ng-template #elseBlock>
+    <div class="form-floating">
+      <input id="ponuda" placeholder="ponuda" type="text" class="form-control" [(ngModel)]="brPonude" />
+      <label class="form-label" for="ponuda">Ponuda</label>
+    </div>
+    <button class="btn btn-info" (click)="nadji()">Ponuda</button>
+    <button class="btn btn-info" (click)="brPonudeNull()">Ponisti</button>
+  </ng-template>
+
+  <!--      <input type="text" class="form-control" [(ngModel)]="brPonude" />-->
+  <!--      <input type="text" class="form-control" [(ngModel)]="postupci" />-->
+
+  <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="add()">
+    <fa-icon icon="plus"></fa-icon>
+    <span jhiTranslate="tenderApp.ponude.home.createLabel"> Create a new Ponude </span>
+  </button>
+  <input hidden #fileInput type="file" id="file" />
+  <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-specifikacije" (click)="fileInput.click()">
+    <!--        <fa-icon icon="plus"></fa-icon>-->
+    <span> Nadji </span>
+  </button>
+  <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-specifikacije" (click)="uploadFile()">
+    <!--        <fa-icon icon="plus"></fa-icon>-->
+    <span>Dodaj Excel</span>
+  </button>
+  <button class="btn btn-warning" (click)="obrazacExcelPostupak(1)">
+    <!--        <fa-icon icon="plus"></fa-icon>-->
+    <span>Excel </span>
+  </button>
 </div>
+
+<div class="form-floating">
+  <select
+    class="form-control"
+    id="field_sifraPonudjaca"
+    data-cy="sifraPonudjaca"
+    name="sifraPonudjaca"
+    [(ngModel)]="brPonude"
+    cl="loadPageSifraPonude()"
+  >
+    <option [ngValue]="null"></option>
+    <option [ngValue]="ponudjaciOption.sifraPonude" *ngFor="let ponudjaciOption of ponudjaciPostupak">
+      {{ ponudjaciOption.ponudjaci.nazivPonudjaca }}
+    </option>
+  </select>
+  <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPonudjaca" for="field_sifraPonudjaca">Sifra Ponudjaca</label>
+</div>
+
 <jhi-alert-error></jhi-alert-error>
 
 <jhi-alert></jhi-alert>
