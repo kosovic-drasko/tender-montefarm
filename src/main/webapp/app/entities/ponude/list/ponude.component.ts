@@ -178,7 +178,7 @@ export class PonudeComponent implements OnInit {
 
   brPonudeNullSifra(): void {
     this.brPonude = null;
-    this.handleNavigationSifra();
+    this.ponudePostupciSifra();
   }
 
   ponudePostupci(): void {
@@ -337,7 +337,11 @@ export class PonudeComponent implements OnInit {
     modalRef.componentInstance.rokIsporuke = rokIsporuke;
 
     modalRef.closed.subscribe(() => {
-      this.loadPage();
+      if (this.postupak !== undefined) {
+        this.ponudePostupci();
+      } else {
+        this.loadPage();
+      }
     });
   }
 
