@@ -11,7 +11,7 @@
     </div>
 
     <button *ngIf="postupak" class="btn btn-warning" (click)="ponudePostupci()">PonudaPostupak</button>
-    <button *ngIf="postupak" class="btn btn-info" (click)="brPonudeNullSifra()">Ponisti</button>
+    <button *ngIf="postupak" class="btn btn-info" (click)="ponudePostupciSifra()">Ponisti</button>
   </div>
   <ng-template #elseBlock>
     <div class="form-floating">
@@ -22,12 +22,12 @@
     <button class="btn btn-info" (click)="loadPageSifraPonude()">Ponuda</button>
     <button class="btn btn-info" (click)="brPonudeNull()">Ponisti</button>
   </ng-template>
-  <button class="btn btn-info" (click)="ponudePostupciSifra()">Load</button>
+  <!--  <button class="btn btn-info" (click)="loadPageSifra()">Load</button>-->
 
   <!--      <input type="text" class="form-control" [(ngModel)]="brPonude" />-->
-  <input type="text" class="form-control" [(ngModel)]="postupci" />
-  <button class="btn btn-warning" (click)="loadPageSifraPonudePostupak()">PostupakP</button>
-  <button class="btn btn-warning" (click)="ponudePostupci()">PostupakYY</button>
+  <!--  <input type="text" class="form-control" [(ngModel)]="postupci" />-->
+  <!--  <button class="btn btn-warning" (click)="loadPageSifraPonudePostupak()">PostupakP</button>-->
+  <!--  <button class="btn btn-warning" (click)="ponudePostupci()">PostupakYY</button>-->
   <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="add()">
     <fa-icon icon="plus"></fa-icon>
     <span jhiTranslate="tenderApp.ponude.home.createLabel"> Create a new Ponude </span>
