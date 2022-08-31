@@ -82,41 +82,6 @@ export class PonudeComponent implements OnInit {
       });
   }
 
-  loadPageSifraPonudePostupakNadji(page?: number, dontNavigate?: boolean): void {
-    this.isLoading = true;
-    const pageToLoad: number = page ?? this.page ?? 1;
-
-    this.ponudeService
-      .query({
-        'sifraPostupka.in': this.postupak,
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-      })
-      .subscribe({
-        next: (res: HttpResponse<IPonude[]>) => {
-          this.isLoading = false;
-          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
-          this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
-          this.ponudes = res.body?.filter(val => val.sifraPonude === 200);
-          // const unique = [...new Set(res.body?.map(item => item.ponudjaci?.nazivPonudjaca))];
-          //
-          // const unique1 = [...new Set(res.body?.map(item => item.sifraPonude))];
-          // this.ucesnici = unique;
-          // this.sifraPonnude = unique1;
-          // console.log('====================>', this.sifraPonnude);
-          // console.log('====================>', this.ucesnici);
-          // console.log('====================>', this.postupak);
-          // console.log('Postupak je iz menija ........', this.postupak);
-          // this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca)
-          // console.log('===================>',res.body?.pop()?.ponudjaci?.nazivPonudjaca?.toUpperCase()) ;
-        },
-        error: () => {
-          this.isLoading = false;
-          this.onError();
-        },
-      });
-  }
   loadPageSifra(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
@@ -133,18 +98,6 @@ export class PonudeComponent implements OnInit {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
           this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
-          // this.ponudes = res.body?.filter(val => val.sifraPonude === 200);
-          // const unique = [...new Set(res.body?.map(item => item.ponudjaci?.nazivPonudjaca))];
-          //
-          // const unique1 = [...new Set(res.body?.map(item => item.sifraPonude))];
-          // this.ucesnici = unique;
-          // this.sifraPonnude = unique1;
-          // console.log('====================>', this.sifraPonnude);
-          // console.log('====================>', this.ucesnici);
-          // console.log('====================>', this.postupak);
-          // console.log('Postupak je iz menija ........', this.postupak);
-          // this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca)
-          // console.log('===================>',res.body?.pop()?.ponudjaci?.nazivPonudjaca?.toUpperCase()) ;
         },
         error: () => {
           this.isLoading = false;
@@ -192,8 +145,8 @@ export class PonudeComponent implements OnInit {
 
     this.ponudeService
       .query({
-        'sifraPostupka.in': 1,
-        'sifraPonude.in': 200,
+        'sifraPostupka.in': this.postupci,
+        'sifraPonude.in': this.brPonude,
 
         page: pageToLoad - 1,
         size: this.itemsPerPage,
@@ -228,13 +181,20 @@ export class PonudeComponent implements OnInit {
     this.loadPageSifraPonude();
   }
 
+  ponudePostupci(): void {
+    this.ponudeService.ponudePostupci(1, 200).subscribe((res: any) => {
+      this.ponudes = res;
+      console.log(this.ponudes);
+    });
+  }
+
   nadji(): void {
     if (this.postupak !== undefined) {
-      // this.loadPageSifraPonudePostupakNadji();
+      this.loadPageSifraPonudePostupak();
       console.log('To je iz metoda Nadji sa postupkom');
       console.log(this.postupak);
     } else {
-      // this.loadPageSifraPonude();
+      this.loadPageSifraPonude();
       console.log('To je iz metoda Nadji bez postupka');
       console.log(this.postupak);
     }
@@ -303,7 +263,7 @@ export class PonudeComponent implements OnInit {
       if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
         this.predicate = predicate;
         this.ascending = ascending;
-        this.loadPageSifraPonudePostupakNadji(pageNumber, true);
+        this.loadPageSifraPonudePostupak(pageNumber, true);
       }
     });
   }

@@ -14,6 +14,7 @@ export type EntityArrayResponseType = HttpResponse<IPonude[]>;
 export class PonudeService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/ponudes');
   protected resourceUrlPonudePonudjaci = this.applicationConfigService.getEndpointFor('api/ponude-ponudjaci');
+  protected resourceUrlPonudePostupci = this.applicationConfigService.getEndpointFor('api/ponude-postupci');
   public resourceUrlExcelUpload = SERVER_API_URL + 'api/upload';
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
@@ -35,6 +36,10 @@ export class PonudeService {
   }
   ponudePonudjaci(sifraPostupka: number): Observable<IPonude> {
     return this.http.get<IPonude>(`${this.resourceUrlPonudePonudjaci}/${sifraPostupka}`);
+  }
+
+  ponudePostupci(sifraPostupka: number, sifraPonude: number): any {
+    return this.http.get<IPonude>(`${this.resourceUrlPonudePostupci}/${sifraPostupka}/${sifraPonude}`);
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

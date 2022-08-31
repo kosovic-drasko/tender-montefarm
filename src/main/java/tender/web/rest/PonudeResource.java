@@ -203,6 +203,12 @@ public class PonudeResource {
         return ResponseUtil.wrapOrNotFound(ponude);
     }
 
+    @GetMapping("/ponude-postupci/{sifraPostupka}/{sifraPonude}")
+    public ResponseEntity<?> getPonudePonudjaci(@PathVariable Integer sifraPostupka, @PathVariable Integer sifraPonude) {
+        Optional<? extends List<?>> ponude = Optional.ofNullable(ponudeRepository.findPonudaPostupak(sifraPostupka, sifraPonude));
+        return ResponseUtil.wrapOrNotFound(ponude);
+    }
+
     /**
      * {@code DELETE  /ponudes/:id} : delete the "id" ponude.
      *

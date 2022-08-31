@@ -24,6 +24,9 @@ public interface PonudeRepository extends JpaRepository<Ponude, Long>, JpaSpecif
     @Query("select distinct p.sifraPonude,p.ponudjaci.nazivPonudjaca from Ponude p where p.sifraPostupka=:sifraPostupka")
     List<?> distinctBy(@Param("sifraPostupka") Integer sifraPostupka);
 
+    @Query("select  p from Ponude p where p.sifraPostupka=:sifraPostupka and p.sifraPonude=:sifraPonude")
+    List<Ponude> findPonudaPostupak(@Param("sifraPostupka") Integer sifraPostupka, @Param("sifraPonude") Integer sifraPonude);
+
     @Modifying
     @Transactional
     @Query("DELETE from Ponude p WHERE p.selected = true")
