@@ -15,6 +15,7 @@ export class PonudeService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/ponudes');
   protected resourceUrlPonudePonudjaci = this.applicationConfigService.getEndpointFor('api/ponude-ponudjaci');
   protected resourceUrlPonudePostupci = this.applicationConfigService.getEndpointFor('api/ponude-postupci');
+  protected resourceUrlPostupciSifra = this.applicationConfigService.getEndpointFor('api/sifra-postupka');
   public resourceUrlExcelUpload = SERVER_API_URL + 'api/upload';
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
@@ -38,8 +39,12 @@ export class PonudeService {
     return this.http.get<IPonude>(`${this.resourceUrlPonudePonudjaci}/${sifraPostupka}`);
   }
 
-  ponudePostupci(sifraPostupka: number, sifraPonude: number): any {
+  ponudePostupci(sifraPostupka: number | undefined, sifraPonude: null | undefined): any {
     return this.http.get<IPonude>(`${this.resourceUrlPonudePostupci}/${sifraPostupka}/${sifraPonude}`);
+  }
+
+  ponudePostupciSifra(sifraPostupka: number | undefined): any {
+    return this.http.get<IPonude>(`${this.resourceUrlPostupciSifra}/${sifraPostupka}`);
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

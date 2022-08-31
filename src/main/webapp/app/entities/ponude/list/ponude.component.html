@@ -10,7 +10,7 @@
       <label class="form-label" for="ponuda1">Ponuda</label>
     </div>
 
-    <button *ngIf="postupak" class="btn btn-warning" (click)="loadPageSifraPonudePostupak()">PonudaPostupak</button>
+    <button *ngIf="postupak" class="btn btn-warning" (click)="ponudePostupci()">PonudaPostupak</button>
     <button *ngIf="postupak" class="btn btn-info" (click)="brPonudeNullSifra()">Ponisti</button>
   </div>
   <ng-template #elseBlock>
@@ -19,9 +19,10 @@
       <label class="form-label" for="ponuda">Ponuda</label>
     </div>
 
-    <button class="btn btn-info" (click)="loadPageSifraPonudePostupak()">Ponuda</button>
+    <button class="btn btn-info" (click)="loadPageSifraPonude()">Ponuda</button>
     <button class="btn btn-info" (click)="brPonudeNull()">Ponisti</button>
   </ng-template>
+  <button class="btn btn-info" (click)="ponudePostupciSifra()">Load</button>
 
   <!--      <input type="text" class="form-control" [(ngModel)]="brPonude" />-->
   <input type="text" class="form-control" [(ngModel)]="postupci" />

@@ -31,8 +31,8 @@ export class PonudeComponent implements OnInit {
   ngbPaginationPage = 1;
   ukupno?: number;
   ucesnici?: (string | null | undefined)[] | undefined;
-  postupci?: number = 1;
-  sifraPonnude?: (number | undefined)[];
+  postupci?: number;
+  sifraPonnude?: (number | null)[];
 
   public parameterValue?: number;
   @ViewChild('fileInput') fileInput: any;
@@ -178,11 +178,18 @@ export class PonudeComponent implements OnInit {
 
   brPonudeNullSifra(): void {
     this.brPonude = null;
-    this.loadPageSifraPonude();
+    this.handleNavigationSifra();
   }
 
   ponudePostupci(): void {
-    this.ponudeService.ponudePostupci(1, 200).subscribe((res: any) => {
+    this.ponudeService.ponudePostupci(this.postupak, this.brPonude).subscribe((res: any) => {
+      this.ponudes = res;
+      console.log(this.ponudes);
+    });
+  }
+
+  ponudePostupciSifra(): void {
+    this.ponudeService.ponudePostupciSifra(this.postupak).subscribe((res: any) => {
       this.ponudes = res;
       console.log(this.ponudes);
     });

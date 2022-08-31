@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="subota 28 kuca 2">
-      <change afterPath="$PROJECT_DIR$/Razno/code.md" afterDir="false" />
+    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="subota 31 kuca 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tender/repository/PonudeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tender/repository/PonudeRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tender/web/rest/PonudeResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tender/web/rest/PonudeResource.java" afterDir="false" />
@@ -140,14 +139,7 @@
       <workItem from="1660920966217" duration="5809000" />
       <workItem from="1661009189820" duration="13670000" />
       <workItem from="1661318917980" duration="5201000" />
-      <workItem from="1661628494212" duration="24866000" />
-    </task>
-    <task id="LOCAL-00001" summary="init-tabele-osnovne">
-      <created>1660374945836</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1660374945837</updated>
+      <workItem from="1661628494212" duration="27816000" />
     </task>
     <task id="LOCAL-00002" summary="init-tabele-osnovne">
       <created>1660375035576</created>
@@ -485,7 +477,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661799368932</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="subota 31 kuca 1">
+      <created>1661924938342</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1661924938344</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -515,7 +514,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="prije hvale ponude" />
     <MESSAGE value="subota" />
     <MESSAGE value="subota2" />
     <MESSAGE value="subota3" />
@@ -540,7 +538,8 @@
     <MESSAGE value="subota 27 kuca 1" />
     <MESSAGE value="subota 28 kuca 1" />
     <MESSAGE value="subota 28 kuca 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="subota 28 kuca 2" />
+    <MESSAGE value="subota 31 kuca 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="subota 31 kuca 1" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
