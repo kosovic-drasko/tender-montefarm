@@ -2,13 +2,13 @@
   <h2>
     <span jhiTranslate="tenderApp.ponude.home.title">Ponudes</span>
   </h2>
-  <div class="form-floating">
-    <input id="ponuda1" placeholder="ponuda" type="text" class="form-control" [(ngModel)]="brPonude" />
-    <label class="form-label" for="ponuda1">Ponuda</label>
-  </div>
-  <button class="btn btn-info" (click)="nadji()">Nadji</button>
 
+  <button class="btn btn-info" (click)="nadji()">NadjiPonudu</button>
   <button class="btn btn-info" (click)="ponisti()">Ponisti</button>
+  <div class="form-floating">
+    <input id="ponuda" placeholder="ponuda" type="text" class="form-control" [(ngModel)]="brPonude" />
+    <label class="form-label" for="ponuda">Ponuda</label>
+  </div>
 
   <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="add()">
     <fa-icon icon="plus"></fa-icon>
