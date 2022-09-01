@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { observable, Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
@@ -39,12 +39,12 @@ export class PonudeService {
     return this.http.get<IPonude>(`${this.resourceUrlPonudePonudjaci}/${sifraPostupka}`);
   }
 
-  ponudePostupci(sifraPostupka: number | undefined, sifraPonude: null | undefined): any {
-    return this.http.get<IPonude>(`${this.resourceUrlPonudePostupci}/${sifraPostupka}/${sifraPonude}`);
+  ponudePostupci(sifraPostupka: number | undefined, sifraPonude: null | undefined): Observable<EntityArrayResponseType> {
+    return this.http.get<IPonude[]>(`${this.resourceUrlPonudePostupci}/${sifraPostupka}/${sifraPonude}`, { observe: 'response' });
   }
 
-  ponudePostupciSifra(sifraPostupka: number | undefined): any {
-    return this.http.get<IPonude>(`${this.resourceUrlPostupciSifra}/${sifraPostupka}`);
+  ponudePostupciSifra(sifraPostupka: number | undefined): Observable<EntityArrayResponseType> {
+    return this.http.get<IPonude[]>(`${this.resourceUrlPostupciSifra}/${sifraPostupka}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

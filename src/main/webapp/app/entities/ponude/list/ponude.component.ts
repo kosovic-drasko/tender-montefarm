@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
+import { combineLatest, from, reduce } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IPonude } from '../ponude.model';
@@ -11,7 +11,6 @@ import { PonudeService } from '../service/ponude.service';
 import { PonudeDeleteDialogComponent } from '../delete/ponude-delete-dialog.component';
 import { PonudeUpdateComponent } from '../update/ponude-update.component';
 import { IPonudjaci } from '../../ponudjaci/ponudjaci.model';
-import { PonudjaciService } from '../../ponudjaci/service/ponudjaci.service';
 
 @Component({
   selector: 'jhi-ponude',
@@ -30,9 +29,6 @@ export class PonudeComponent implements OnInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
   ukupno?: number;
-  ucesnici?: (string | null | undefined)[] | undefined;
-  postupci?: number;
-  sifraPonnude?: (number | null)[];
 
   public parameterValue?: number;
   @ViewChild('fileInput') fileInput: any;
@@ -44,11 +40,8 @@ export class PonudeComponent implements OnInit {
     protected ponudeService: PonudeService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
-    protected ponudjaciService: PonudjaciService,
     protected modalService: NgbModal
-  ) {
-    this.postupci = this.postupak;
-  }
+  ) {}
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
@@ -65,15 +58,6 @@ export class PonudeComponent implements OnInit {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
           this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
-          // this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca);
-
-          const unique = [...new Set(res.body?.map(item => item.ponudjaci?.nazivPonudjaca))];
-          // const unique1 = [...new Set(res.body?.map(item => item.sifraPonude))];// [ 'A', 'B']
-          this.ucesnici = unique;
-          // this.brPonude=unique1;
-          // console.log('To je ================>',unique);
-
-          console.log('================>', this.ucesnici);
         },
         error: () => {
           this.isLoading = false;
@@ -85,7 +69,6 @@ export class PonudeComponent implements OnInit {
   loadPageSifra(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
-
     this.ponudeService
       .query({
         'sifraPostupka.in': this.postupak,
@@ -130,7 +113,7 @@ export class PonudeComponent implements OnInit {
         next: (res: HttpResponse<IPonude[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
-          this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
+          this.ukupno = res.body?.reduce((acc, ponudes) => acc + ponudes.ponudjenaVrijednost!, 0);
         },
         error: () => {
           this.isLoading = false;
@@ -138,16 +121,14 @@ export class PonudeComponent implements OnInit {
         },
       });
   }
-
-  loadPageSifraPonudePostupak(page?: number, dontNavigate?: boolean): void {
+  loadSifraPonudesifraPostupka(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
 
     this.ponudeService
       .query({
-        'sifraPostupka.in': this.postupci,
+        'sifraPostupka.in': 1,
         'sifraPonude.in': this.brPonude,
-
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
@@ -156,13 +137,8 @@ export class PonudeComponent implements OnInit {
         next: (res: HttpResponse<IPonude[]>) => {
           this.isLoading = false;
           this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
-          // this.ponudes = res.body?.filter(val => val.sifraPonude === this.brPonude);
-          this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
-          // const unique = [...new Set(res.body?.map(item => item.ponudjaci?.nazivPonudjaca))]; // [ 'A', 'B']
-          // this.ucesnici = unique;
-          console.log('Postupak je iz metoda je ........', this.postupak);
-          // this.ucesnici = res.body?.map(val => val.ponudjaci?.nazivPonudjaca)
-          // console.log('===================>',res.body?.pop()?.ponudjaci?.nazivPonudjaca?.toUpperCase()) ;
+          this.ukupno = res.body?.reduce((acc, ponudes) => acc + ponudes.ponudjenaVrijednost!, 0);
+          console.log('===================>', this.ukupno);
         },
         error: () => {
           this.isLoading = false;
@@ -171,39 +147,54 @@ export class PonudeComponent implements OnInit {
       });
   }
 
-  brPonudeNull(): void {
-    this.brPonude = null;
-    this.loadPage();
+  ponisti(): void {
+    if (this.postupak !== undefined) {
+      this.brPonude = null;
+      this.loadPageSifra();
+      console.log(this.postupak);
+    } else {
+      this.brPonude = null;
+      this.loadPage();
+    }
   }
-
-  brPonudeNullSifra(): void {
+  ponistiPostupak(): void {
     this.brPonude = null;
     this.ponudePostupciSifra();
   }
 
   ponudePostupci(): void {
     this.ponudeService.ponudePostupci(this.postupak, this.brPonude).subscribe((res: any) => {
-      this.ponudes = res;
+      this.ponudes = res.body;
+      this.ukupno = res.body?.reduce((acc: number, ponudes: { ponudjenaVrijednost: number }) => acc + ponudes.ponudjenaVrijednost, 0);
+      const final_val = res.body.pipe(
+        reduce((acc: number, productsdet: { ponudjenaVrijednost: number }) => acc + productsdet.ponudjenaVrijednost, 0)
+      );
       console.log(this.ponudes);
+      this.ukupno = final_val;
+      console.log('Ukupno je iz postupka filter  ', final_val);
     });
   }
 
   ponudePostupciSifra(): void {
     this.ponudeService.ponudePostupciSifra(this.postupak).subscribe((res: any) => {
-      this.ponudes = res;
+      this.ponudes = res.body;
+      this.ukupno = res.body?.reduce((acc: number, ponudes: { ponudjenaVrijednost: number }) => acc + ponudes.ponudjenaVrijednost, 0);
       console.log(this.ponudes);
     });
   }
 
   nadji(): void {
     if (this.postupak !== undefined) {
-      this.loadPageSifraPonudePostupak();
-      console.log('To je iz metoda Nadji sa postupkom');
-      console.log(this.postupak);
+      this.ponudePostupci();
+      //   console.log('To je iz metoda Nadji sa postupkom');
+      //   console.log(this.postupak);
+      //   // console.log('Ukupno je  ', this.ukupno);
     } else {
+      //   this.loadSifraPonudesifraPostupka();
       this.loadPageSifraPonude();
-      console.log('To je iz metoda Nadji bez postupka');
-      console.log(this.postupak);
+      // console.log('To je iz metoda Nadji bez postupka');
+      // console.log(this.postupak);
+      // console.log('Ukupno je  ', this.ukupno);
     }
   }
 
@@ -218,8 +209,6 @@ export class PonudeComponent implements OnInit {
     } else {
       this.handleNavigation();
     }
-    console.log('Parametar', this.parameterValue);
-    console.log('Postupak iz init je', this.postupak);
   }
 
   trackId(_index: number, item: IPonude): number {
@@ -256,21 +245,6 @@ export class PonudeComponent implements OnInit {
         this.predicate = predicate;
         this.ascending = ascending;
         this.loadPage(pageNumber, true);
-      }
-    });
-  }
-
-  public handleNavigationPonudePostupak(): void {
-    combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
-      const page = params.get('page');
-      const pageNumber = +(page ?? 1);
-      const sort = (params.get(SORT) ?? data['defaultSort']).split(',');
-      const predicate = sort[0];
-      const ascending = sort[1] === ASC;
-      if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
-        this.predicate = predicate;
-        this.ascending = ascending;
-        this.loadPageSifraPonudePostupak(pageNumber, true);
       }
     });
   }
