@@ -121,6 +121,7 @@ export class PonudeComponent implements OnInit {
         },
       });
   }
+
   loadSifraPonudesifraPostupka(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
     const pageToLoad: number = page ?? this.page ?? 1;
@@ -150,13 +151,14 @@ export class PonudeComponent implements OnInit {
   ponisti(): void {
     if (this.postupak !== undefined) {
       this.brPonude = null;
-      this.loadPageSifra();
+      this.ponudePostupciSifra();
       console.log(this.postupak);
     } else {
       this.brPonude = null;
       this.loadPage();
     }
   }
+
   ponistiPostupak(): void {
     this.brPonude = null;
     this.ponudePostupciSifra();
@@ -186,15 +188,8 @@ export class PonudeComponent implements OnInit {
   nadji(): void {
     if (this.postupak !== undefined) {
       this.ponudePostupci();
-      //   console.log('To je iz metoda Nadji sa postupkom');
-      //   console.log(this.postupak);
-      //   // console.log('Ukupno je  ', this.ukupno);
     } else {
-      //   this.loadSifraPonudesifraPostupka();
       this.loadPageSifraPonude();
-      // console.log('To je iz metoda Nadji bez postupka');
-      // console.log(this.postupak);
-      // console.log('Ukupno je  ', this.ukupno);
     }
   }
 

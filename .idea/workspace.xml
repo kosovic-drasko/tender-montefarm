@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="subota 31 kuca 4">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Razno/code.md" beforeDir="false" afterPath="$PROJECT_DIR$/Razno/code.md" afterDir="false" />
+    <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="01.09 kuca 1">
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/service/ponude.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/service/ponude.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,14 +134,7 @@
       <workItem from="1660920966217" duration="5809000" />
       <workItem from="1661009189820" duration="13670000" />
       <workItem from="1661318917980" duration="5201000" />
-      <workItem from="1661628494212" duration="41371000" />
-    </task>
-    <task id="LOCAL-00005" summary="ponude update">
-      <created>1660417652784</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1660417652784</updated>
+      <workItem from="1661628494212" duration="41673000" />
     </task>
     <task id="LOCAL-00006" summary="ponude update 3">
       <created>1660544508563</created>
@@ -483,7 +472,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661961745544</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="01.09 kuca 1">
+      <created>1662009983978</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1662009983978</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,7 +509,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="subota4" />
     <MESSAGE value="subota5" />
     <MESSAGE value="nedelja 21.08 br1" />
     <MESSAGE value="nedelja 21.08 br2" />
@@ -538,7 +533,8 @@
     <MESSAGE value="subota 31 kuca 2" />
     <MESSAGE value="subota 31 kuca 3" />
     <MESSAGE value="subota 31 kuca 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="subota 31 kuca 4" />
+    <MESSAGE value="01.09 kuca 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="01.09 kuca 1" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -6,11 +6,9 @@
     <input id="ponuda1" placeholder="ponuda" type="text" class="form-control" [(ngModel)]="brPonude" />
     <label class="form-label" for="ponuda1">Ponuda</label>
   </div>
-  <button class="btn btn-info" (click)="ponudePostupci()">NadjiPonuduPostupak</button>
-  <button class="btn btn-info" (click)="ponisti()">Ponisti</button>
-  <button class="btn btn-info" (click)="ponistiPostupak()">PonistiPostupak</button>
+  <button class="btn btn-info" (click)="nadji()">Nadji</button>
 
-  <button class="btn btn-info" (click)="loadPageSifraPonude()">NadjiPonudu</button>
+  <button class="btn btn-info" (click)="ponisti()">Ponisti</button>
 
   <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="add()">
     <fa-icon icon="plus"></fa-icon>
