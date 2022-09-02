@@ -6,7 +6,7 @@
   <button class="btn btn-info" (click)="nadji()">NadjiPonudu</button>
   <button class="btn btn-info" (click)="ponisti()">Ponisti</button>
   <div class="form-floating">
-    <input id="ponuda" placeholder="ponuda" type="text" class="form-control" [(ngModel)]="brPonude" />
+    <input *ngIf="!postupak" id="ponuda" placeholder="ponuda" type="text" class="form-control" [(ngModel)]="brPonude" />
     <label class="form-label" for="ponuda">Ponuda</label>
   </div>
 
@@ -29,13 +29,14 @@
   </button>
 </div>
 
-<div class="form-floating">
+<div *ngIf="postupak" class="form-floating">
   <select
     class="form-control"
     id="field_sifraPonudjaca"
     data-cy="sifraPonudjaca"
     name="sifraPonudjaca"
     [(ngModel)]="brPonude"
+    (change)="ponudePostupci()"
     cl="loadPageSifraPonude()"
   >
     <option [ngValue]="null"></option>
@@ -57,7 +58,7 @@
 <div class="table-responsive" id="entities" *ngIf="ponudes && ponudes.length > 0">
   <table class="table table-striped" aria-describedby="page-heading">
     <thead>
-      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" *ngIf="!postupak" (sortChange)="loadPage()">
         <th scope="col" jhiSortBy="id">
           <span jhiTranslate="global.field.id">ID</span>
           <fa-icon icon="sort"></fa-icon>

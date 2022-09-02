@@ -30,6 +30,23 @@ export class PonudeComponent implements OnInit {
   ngbPaginationPage = 1;
   ukupno?: number;
 
+  public displayedColumns = [
+    'sifra postupka',
+    'sifraPonude',
+    'brojPartije',
+    'naziv proizvodjaca',
+    'zasticeni naziv',
+    'ponudjena vrijednost',
+    'sifra ponudjaca',
+    'jedinicna cijena',
+    'rok isporuke',
+    // 'kreirao',
+    // 'datum kreiranja',
+    // 'zadnji izmjenio',
+    // 'selected',
+    'edit',
+    'delete',
+  ];
   public parameterValue?: number;
   @ViewChild('fileInput') fileInput: any;
   @Input() postupak: any;
@@ -157,11 +174,6 @@ export class PonudeComponent implements OnInit {
       this.brPonude = null;
       this.loadPage();
     }
-  }
-
-  ponistiPostupak(): void {
-    this.brPonude = null;
-    this.ponudePostupciSifra();
   }
 
   ponudePostupci(): void {
