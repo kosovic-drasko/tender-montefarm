@@ -3,7 +3,6 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, reduce } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { IPonude } from '../ponude.model';
 
 import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
@@ -106,7 +105,7 @@ export class PonudeComponent implements OnInit {
       });
   }
 
-  ponudePonudjaci(sifraPostupka: number): void {
+  loadPonudePonudjaci(sifraPostupka: number): void {
     this.ponudeService.ponudePonudjaci(sifraPostupka).subscribe({
       next: res => {
         this.ponudjaciPostupak = res;
@@ -168,7 +167,7 @@ export class PonudeComponent implements OnInit {
   ponisti(): void {
     if (this.postupak !== undefined) {
       this.brPonude = null;
-      this.ponudePostupciSifra();
+      this.loadPonudePostupciSifra();
       console.log(this.postupak);
     } else {
       this.brPonude = null;
@@ -189,7 +188,7 @@ export class PonudeComponent implements OnInit {
     });
   }
 
-  ponudePostupciSifra(): void {
+  loadPonudePostupciSifra(): void {
     this.ponudeService.ponudePostupciSifra(this.postupak).subscribe((res: any) => {
       this.ponudes = res.body;
       this.ukupno = res.body?.reduce((acc: number, ponudes: { ponudjenaVrijednost: number }) => acc + ponudes.ponudjenaVrijednost, 0);
@@ -211,7 +210,7 @@ export class PonudeComponent implements OnInit {
     });
 
     if (this.postupak !== undefined) {
-      this.ponudePonudjaci(this.postupak);
+      this.loadPonudePonudjaci(this.postupak);
       this.handleNavigationSifra();
     } else {
       this.handleNavigation();
@@ -341,7 +340,7 @@ export class PonudeComponent implements OnInit {
     });
   }
 
-  obrazacExcelPostupak(sifra: number): void {
-    window.location.href = `${this.resourceUrlExcelDownloadPostupak}/${sifra}`;
+  obrazacExcelPostupak(): void {
+    window.location.href = `${this.resourceUrlExcelDownloadPostupak}/${this.postupak}`;
   }
 }

@@ -40,6 +40,6 @@ public class DownloadFileRestAPIsPonude {
             .ok()
             .headers(headers)
             .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
-            .body(new InputStreamResource(fileServices.loadFilePostupak(sifraPostupka)));
+            .body(new InputStreamResource(fileServices.loadPonudeExelFilePostupak(sifraPostupka)));
     }
 }
