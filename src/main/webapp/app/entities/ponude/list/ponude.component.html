@@ -86,7 +86,7 @@
       <ng-container matColumnDef="zasticeni naziv">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Zasticeni naziv</th>
         <td mat-cell *matCellDef="let element">{{ element.zasticeniNaziv }}</td>
-        <td mat-footer-cell *matFooterCellDef>{{ 'Ukupno ponuđena:' }}</td>
+        <td mat-footer-cell *matFooterCellDef>{{ 'Ukupno:' }}</td>
       </ng-container>
       <ng-container matColumnDef="jedinicna cijena">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Jedinicna cijena</th>
@@ -96,7 +96,7 @@
       <ng-container matColumnDef="ponudjena vrijednost">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Ponudjena cijena</th>
         <td mat-cell *matCellDef="let element">{{ element.ponudjenaVrijednost }}</td>
-        <td mat-footer-cell *matFooterCellDef>{{ ukupno }}</td>
+        <td mat-footer-cell *matFooterCellDef>{{ ukupno | number: '1.2-2' }}</td>
       </ng-container>
       <ng-container matColumnDef="rok isporuke">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Rok isporuke</th>

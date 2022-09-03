@@ -1,37 +1,47 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { ISpecifikacije } from '../specifikacije.model';
-
-import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { SpecifikacijeService } from '../service/specifikacije.service';
 import { SpecifikacijeDeleteDialogComponent } from '../delete/specifikacije-delete-dialog.component';
 import { SpecifikacijeUpdateComponent } from '../update/specifikacije-update.component';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'jhi-specifikacije',
   templateUrl: './specifikacije.component.html',
+  styleUrls: ['./specifikacije.scss'],
 })
 export class SpecifikacijeComponent implements OnInit {
-  specifikacijes?: ISpecifikacije[];
+  specifikacijes?: HttpResponse<ISpecifikacije[]>;
   isLoading = false;
-  totalItems = 0;
-  itemsPerPage = ITEMS_PER_PAGE;
-  page?: number;
-  predicate!: string;
-  ascending!: boolean;
-  ngbPaginationPage = 1;
   brojObrazac?: number = 0;
-  public parameterValue?: number;
+  ukupno?: number;
+  public displayedColumns = [
+    'sifra postupka',
+    'broj partije',
+    'atc',
+    'inn',
+    'farmaceutski oblik',
+    'jacina lijeka',
+    'trazena kolicina',
+    'pakovanje',
+    'jedinica mjere',
+    'procijenjena vrijednost',
+    'action',
+  ];
+
+  public dataSource = new MatTableDataSource<ISpecifikacije>();
+
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('fileInput') fileInput: any;
   @Input() postupak: any;
   message: string | undefined;
   public resourceUrlExcelDownload = SERVER_API_URL + 'api/specifikacije/file';
-  public resourceUrlExcelDownloadPostupak = SERVER_API_URL + 'api/specifikacije/file/';
-
   constructor(
     protected specifikacijeService: SpecifikacijeService,
     protected activatedRoute: ActivatedRoute,
@@ -39,42 +49,33 @@ export class SpecifikacijeComponent implements OnInit {
     protected modalService: NgbModal
   ) {}
 
-  loadPage(page?: number, dontNavigate?: boolean): void {
+  loadPage(): void {
     this.isLoading = true;
-    const pageToLoad: number = page ?? this.page ?? 1;
-
-    this.specifikacijeService
-      .query({
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-      })
-      .subscribe({
-        next: (res: HttpResponse<ISpecifikacije[]>) => {
-          this.isLoading = false;
-          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
-        },
-        error: () => {
-          this.isLoading = false;
-          this.onError();
-        },
-      });
+    this.specifikacijeService.query().subscribe({
+      next: (res: HttpResponse<ISpecifikacije[]>) => {
+        this.isLoading = false;
+        this.dataSource.data = res.body ?? [];
+        this.specifikacijes = res;
+        this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.procijenjenaVrijednost!, 0);
+      },
+      error: () => {
+        this.isLoading = false;
+        this.onError();
+      },
+    });
   }
-  loadPageSifra(page?: number, dontNavigate?: boolean): void {
+  loadPageSifra(): void {
     this.isLoading = true;
-    const pageToLoad: number = page ?? this.page ?? 1;
-
     this.specifikacijeService
       .query({
         'sifraPostupka.in': this.postupak,
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
       })
       .subscribe({
         next: (res: HttpResponse<ISpecifikacije[]>) => {
           this.isLoading = false;
-          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+          this.dataSource.data = res.body ?? [];
+          this.specifikacijes = res;
+          this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.procijenjenaVrijednost!, 0);
         },
         error: () => {
           this.isLoading = false;
@@ -84,24 +85,16 @@ export class SpecifikacijeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(parameter => {
-      this.parameterValue = parameter.id;
-    });
     if (this.postupak !== undefined) {
-      this.handleNavigationSifra();
+      this.loadPageSifra();
     } else {
-      this.handleNavigation();
+      this.loadPage();
     }
-  }
-
-  trackId(_index: number, item: ISpecifikacije): number {
-    return item.id!;
   }
 
   delete(specifikacije: ISpecifikacije): void {
     const modalRef = this.modalService.open(SpecifikacijeDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.specifikacije = specifikacije;
-    // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
         this.loadPage();
@@ -109,61 +102,8 @@ export class SpecifikacijeComponent implements OnInit {
     });
   }
 
-  protected sort(): string[] {
-    const result = [this.predicate + ',' + (this.ascending ? ASC : DESC)];
-    if (this.predicate !== 'id') {
-      result.push('id');
-    }
-    return result;
-  }
-
-  protected handleNavigation(): void {
-    combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
-      const page = params.get('page');
-      const pageNumber = +(page ?? 1);
-      const sort = (params.get(SORT) ?? data['defaultSort']).split(',');
-      const predicate = sort[0];
-      const ascending = sort[1] === ASC;
-      if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
-        this.predicate = predicate;
-        this.ascending = ascending;
-        this.loadPage(pageNumber, true);
-      }
-    });
-  }
-  protected handleNavigationSifra(): void {
-    combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
-      const page = params.get('page');
-      const pageNumber = +(page ?? 1);
-      const sort = (params.get(SORT) ?? data['defaultSort']).split(',');
-      const predicate = sort[0];
-      const ascending = sort[1] === ASC;
-      if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
-        this.predicate = predicate;
-        this.ascending = ascending;
-        this.loadPageSifra(pageNumber, true);
-      }
-    });
-  }
-
-  protected onSuccess(data: ISpecifikacije[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
-    this.totalItems = Number(headers.get('X-Total-Count'));
-    this.page = page;
-    if (navigate) {
-      this.router.navigate(['/specifikacije'], {
-        queryParams: {
-          page: this.page,
-          size: this.itemsPerPage,
-          sort: this.predicate + ',' + (this.ascending ? ASC : DESC),
-        },
-      });
-    }
-    this.specifikacijes = data ?? [];
-    this.ngbPaginationPage = this.page;
-  }
-
   protected onError(): void {
-    this.ngbPaginationPage = this.page ?? 1;
+    console.log('Greska');
   }
   update(
     id?: number,
