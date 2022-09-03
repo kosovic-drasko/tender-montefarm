@@ -5,9 +5,11 @@ import { PonudeDetailComponent } from './detail/ponude-detail.component';
 import { PonudeUpdateComponent } from './update/ponude-update.component';
 import { PonudeDeleteDialogComponent } from './delete/ponude-delete-dialog.component';
 import { PonudeRoutingModule } from './route/ponude-routing.module';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 @NgModule({
-  imports: [SharedModule, PonudeRoutingModule],
+  imports: [SharedModule, PonudeRoutingModule, MatSortModule, MatTableExporterModule],
   declarations: [PonudeComponent, PonudeDetailComponent, PonudeUpdateComponent, PonudeDeleteDialogComponent],
   entryComponents: [PonudeDeleteDialogComponent],
   exports: [PonudeComponent],

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, reduce } from 'rxjs';
@@ -10,14 +10,18 @@ import { PonudeService } from '../service/ponude.service';
 import { PonudeDeleteDialogComponent } from '../delete/ponude-delete-dialog.component';
 import { PonudeUpdateComponent } from '../update/ponude-update.component';
 import { IPonudjaci } from '../../ponudjaci/ponudjaci.model';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'jhi-ponude',
   templateUrl: './ponude.component.html',
+  styleUrls: ['./ponude.component.scss'],
 })
-export class PonudeComponent implements OnInit {
+export class PonudeComponent implements AfterViewInit, OnInit {
   ponudjaci?: IPonudjaci[] = [];
-  ponudes?: IPonude[];
+  ponudes?: HttpResponse<IPonude[]>;
   ponudjaciPostupak?: any;
   brPonude?: null;
   isLoading = false;
@@ -43,13 +47,15 @@ export class PonudeComponent implements OnInit {
     // 'datum kreiranja',
     // 'zadnji izmjenio',
     // 'selected',
-    'edit',
-    'delete',
+    // 'edit',
+    // 'delete',
   ];
   public parameterValue?: number;
   @ViewChild('fileInput') fileInput: any;
   @Input() postupak: any;
-
+  public dataSource = new MatTableDataSource<IPonude>();
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   resourceUrlExcelDownloadPostupak = SERVER_API_URL + 'api/ponude/file/';
 
   constructor(
@@ -58,28 +64,25 @@ export class PonudeComponent implements OnInit {
     protected router: Router,
     protected modalService: NgbModal
   ) {}
-
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
   loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
-    const pageToLoad: number = page ?? this.page ?? 1;
-
-    this.ponudeService
-      .query({
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
-      })
-      .subscribe({
-        next: (res: HttpResponse<IPonude[]>) => {
-          this.isLoading = false;
-          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
-          this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
-        },
-        error: () => {
-          this.isLoading = false;
-          this.onError();
-        },
-      });
+    this.ponudeService.query().subscribe({
+      next: (res: HttpResponse<IPonude[]>) => {
+        this.isLoading = false;
+        this.dataSource.data = res.body ?? [];
+        this.ponudes = res;
+        // this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+        this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
+      },
+      error: () => {
+        this.isLoading = false;
+        this.onError();
+      },
+    });
   }
 
   loadPageSifra(page?: number, dontNavigate?: boolean): void {
@@ -89,13 +92,12 @@ export class PonudeComponent implements OnInit {
       .query({
         'sifraPostupka.in': this.postupak,
         page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
       })
       .subscribe({
         next: (res: HttpResponse<IPonude[]>) => {
           this.isLoading = false;
-          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+          this.dataSource.data = res.body ?? [];
+          this.ponudes = res;
           this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
         },
         error: () => {
@@ -121,9 +123,6 @@ export class PonudeComponent implements OnInit {
     this.ponudeService
       .query({
         'sifraPonude.in': this.brPonude,
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
       })
       .subscribe({
         next: (res: HttpResponse<IPonude[]>) => {
@@ -146,9 +145,6 @@ export class PonudeComponent implements OnInit {
       .query({
         'sifraPostupka.in': 1,
         'sifraPonude.in': this.brPonude,
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
       })
       .subscribe({
         next: (res: HttpResponse<IPonude[]>) => {
@@ -182,7 +178,7 @@ export class PonudeComponent implements OnInit {
       const final_val = res.body.pipe(
         reduce((acc: number, productsdet: { ponudjenaVrijednost: number }) => acc + productsdet.ponudjenaVrijednost, 0)
       );
-      console.log(this.ponudes);
+      // console.log(this.ponudes);
       this.ukupno = final_val;
       console.log('Ukupno je iz postupka filter  ', final_val);
     });
@@ -211,9 +207,9 @@ export class PonudeComponent implements OnInit {
 
     if (this.postupak !== undefined) {
       this.loadPonudePonudjaci(this.postupak);
-      this.handleNavigationSifra();
+      this.loadPageSifra();
     } else {
-      this.handleNavigation();
+      this.loadPage();
     }
   }
 
@@ -232,13 +228,13 @@ export class PonudeComponent implements OnInit {
     });
   }
 
-  protected sort(): string[] {
-    const result = [this.predicate + ',' + (this.ascending ? ASC : DESC)];
-    if (this.predicate !== 'id') {
-      result.push('id');
-    }
-    return result;
-  }
+  // protected sort(): string[] {
+  //   const result = [this.predicate + ',' + (this.ascending ? ASC : DESC)];
+  //   if (this.predicate !== 'id') {
+  //     result.push('id');
+  //   }
+  //   return result;
+  // }
 
   protected handleNavigation(): void {
     combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
@@ -282,7 +278,7 @@ export class PonudeComponent implements OnInit {
         },
       });
     }
-    this.ponudes = data ?? [];
+    // this.ponudes = data ?? [];
     this.ngbPaginationPage = this.page;
   }
 

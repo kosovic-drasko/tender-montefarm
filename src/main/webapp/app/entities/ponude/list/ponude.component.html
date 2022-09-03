@@ -1,199 +1,61 @@
-<div>
-  <h2>
-    <span jhiTranslate="tenderApp.ponude.home.title">Ponudes</span>
-  </h2>
+<div class="table-responsive" id="entities">
+  <jhi-alert-error></jhi-alert-error>
+  <jhi-alert></jhi-alert>
 
-  <button class="btn btn-info" (click)="nadji()">NadjiPonudu</button>
-  <button class="btn btn-info" (click)="ponisti()">Ponisti</button>
-  <div class="form-floating">
-    <input *ngIf="!postupak" id="ponuda" placeholder="ponuda" type="text" class="form-control" [(ngModel)]="brPonude" />
-    <label class="form-label" for="ponuda">Ponuda</label>
+  <div class="alert alert-warning" id="no-result" *ngIf="ponudes?.body?.length === 0">
+    <span>Nema zapisa Ponuda</span>
   </div>
+  <table mat-table id="ExampleTable" matTableExporter [dataSource]="dataSource" matSort matSortStart="desc" #exporter="matTableExporter">
+    <ng-container matColumnDef="sifra postupka">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Postupka</th>
+      <td mat-cell *matCellDef="let element">{{ element.sifraPostupka }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="sifraPonude">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Ponude</th>
+      <td mat-cell *matCellDef="let element">{{ element.sifraPonude }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
 
-  <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="add()">
-    <fa-icon icon="plus"></fa-icon>
-    <span jhiTranslate="tenderApp.ponude.home.createLabel"> Create a new Ponude </span>
-  </button>
-  <input hidden #fileInput type="file" id="file" />
-  <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-specifikacije" (click)="fileInput.click()">
-    <!--        <fa-icon icon="plus"></fa-icon>-->
-    <span> Nadji </span>
-  </button>
-  <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-specifikacije" (click)="uploadFile()">
-    <!--        <fa-icon icon="plus"></fa-icon>-->
-    <span>Dodaj Excel</span>
-  </button>
-  <button class="btn btn-warning" (click)="obrazacExcelPostupak()">
-    <!--        <fa-icon icon="plus"></fa-icon>-->
-    <span>Excel </span>
-  </button>
-</div>
-
-<div *ngIf="postupak" class="form-floating">
-  <select
-    class="form-control"
-    id="field_sifraPonudjaca"
-    data-cy="sifraPonudjaca"
-    name="sifraPonudjaca"
-    [(ngModel)]="brPonude"
-    (change)="ponudePostupci()"
-    cl="loadPageSifraPonude()"
-  >
-    <option [ngValue]="null"></option>
-    <option [ngValue]="ponudjaciOption.sifraPonude" *ngFor="let ponudjaciOption of ponudjaciPostupak">
-      {{ ponudjaciOption.ponudjaci.nazivPonudjaca }}
-    </option>
-  </select>
-  <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPonudjaca" for="field_sifraPonudjaca">Sifra Ponudjaca</label>
-</div>
-
-<jhi-alert-error></jhi-alert-error>
-
-<jhi-alert></jhi-alert>
-
-<div class="alert alert-warning" id="no-result" *ngIf="ponudes?.length === 0">
-  <span jhiTranslate="tenderApp.ponude.home.notFound">No ponudes found</span>
-</div>
-
-<div class="table-responsive" id="entities" *ngIf="ponudes && ponudes.length > 0">
-  <table class="table table-striped" aria-describedby="page-heading">
-    <thead>
-      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-        <!--      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPageSifra()">-->
-        <th scope="col" jhiSortBy="id">
-          <span jhiTranslate="global.field.id">ID</span>
-          <fa-icon icon="sort"></fa-icon>
-        </th>
-        <th scope="col" jhiSortBy="sifraPostupka">
-          <span jhiTranslate="tenderApp.ponude.sifraPostupka">Sifra Postupka</span>
-          <fa-icon icon="sort"></fa-icon>
-        </th>
-        <th scope="col" jhiSortBy="sifraPonude">
-          <span jhiTranslate="tenderApp.ponude.sifraPonude">Sifra Ponude</span>
-          <fa-icon icon="sort"></fa-icon>
-        </th>
-        <th scope="col" jhiSortBy="brojPartije">
-          <span jhiTranslate="tenderApp.ponude.brojPartije">Broj Partije</span>
-          <fa-icon icon="sort"></fa-icon>
-        </th>
-        <th scope="col" jhiSortBy="nazivProizvodjaca">
-          <span jhiTranslate="tenderApp.ponude.nazivProizvodjaca">Naziv Proizvodjaca</span>
-          <fa-icon icon="sort"></fa-icon>
-        </th>
-        <th scope="col" jhiSortBy="zasticeniNaziv">
-          <span jhiTranslate="tenderApp.ponude.zasticeniNaziv">Zasticeni Naziv</span>
-          <fa-icon icon="sort"></fa-icon>
-        </th>
-        <th scope="col" jhiSortBy="ponudjenaVrijednost">
-          <span jhiTranslate="tenderApp.ponude.ponudjenaVrijednost">Ponudjena Vrijednost</span>
-          <fa-icon icon="sort"></fa-icon>
-        </th>
-        <th scope="col" jhiSortBy="rokIsporuke">
-          <span jhiTranslate="tenderApp.ponude.rokIsporuke">Rok Isporuke</span>
-          <fa-icon icon="sort"></fa-icon>
-        </th>
-        <th scope="col" jhiSortBy="jedinicnaCijena">
-          <span jhiTranslate="tenderApp.ponude.jedinicnaCijena">Jedinicna Cijena</span>
-          <fa-icon icon="sort"></fa-icon>
-        </th>
-        <th scope="col" jhiSortBy="selected">
-          <span jhiTranslate="tenderApp.ponude.selected">Selected</span>
-          <fa-icon icon="sort"></fa-icon>
-        </th>
-        <th scope="col" jhiSortBy="sifraPonudjaca">
-          <span jhiTranslate="tenderApp.ponude.sifraPonudjaca">Sifra Ponudjaca</span>
-          <fa-icon icon="sort"></fa-icon>
-        </th>
-        <th scope="col" jhiSortBy="ponudjaci.id">
-          <span jhiTranslate="tenderApp.ponude.ponudjaci">Ponudjaci</span>
-          <fa-icon icon="sort"></fa-icon>
-        </th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let ponude of ponudes; trackBy: trackId" data-cy="entityTable">
-        <td>
-          <a [routerLink]="['/ponude', ponude.id, 'view']">{{ ponude.id }}</a>
-        </td>
-        <td>{{ ponude.sifraPostupka }}</td>
-        <td>{{ ponude.sifraPonude }}</td>
-        <td>{{ ponude.brojPartije }}</td>
-        <td>{{ ponude.nazivProizvodjaca }}</td>
-        <td>{{ ponude.zasticeniNaziv }}</td>
-        <td>{{ ponude.ponudjenaVrijednost }}</td>
-        <td>{{ ponude.rokIsporuke }}</td>
-        <td>{{ ponude.jedinicnaCijena }}</td>
-        <td>{{ ponude.selected }}</td>
-        <td>{{ ponude.sifraPonudjaca }}</td>
-        <td>
-          <div *ngIf="ponude.ponudjaci">
-            <a [routerLink]="['/ponudjaci', ponude.ponudjaci?.id, 'view']">{{ ponude.ponudjaci?.nazivPonudjaca }}</a>
-          </div>
-        </td>
-        <td class="text-end">
-          <div class="btn-group">
-            <button
-              type="submit"
-              (click)="
-                update(
-                  ponude.id,
-                  ponude.sifraPostupka,
-                  ponude.sifraPonude,
-                  ponude.brojPartije,
-                  ponude.sifraPonudjaca,
-                  ponude.nazivProizvodjaca,
-                  ponude.zasticeniNaziv,
-                  ponude.ponudjenaVrijednost,
-                  ponude.jedinicnaCijena,
-                  ponude.selected,
-                  ponude.rokIsporuke
-                )
-              "
-              class="btn btn-primary btn-sm"
-              data-cy="entityEditButton"
-            >
-              <fa-icon icon="pencil-alt"></fa-icon>
-              <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-
-            <button type="submit" (click)="delete(ponude)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-              <fa-icon icon="times"></fa-icon>
-              <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-
-    <tfoot>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>Ukupno:</td>
-        <td>{{ ukupno }}</td>
-      </tr>
-    </tfoot>
+    <ng-container matColumnDef="brojPartije">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj Partije</th>
+      <td mat-cell *matCellDef="let element">{{ element.brojPartije }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="naziv proizvodjaca">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Proizvodjac</th>
+      <td mat-cell *matCellDef="let element">{{ element.nazivProizvodjaca }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="zasticeni naziv">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Zasticeni naziv</th>
+      <td mat-cell *matCellDef="let element">{{ element.zasticeniNaziv }}</td>
+      <td mat-footer-cell *matFooterCellDef>{{ 'Ukupno ponuđena:' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="jedinicna cijena">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Jedinicna cijena</th>
+      <td mat-cell *matCellDef="let element">{{ element.jedinicnaCijena }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="ponudjena vrijednost">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ponudjena cijena</th>
+      <td mat-cell *matCellDef="let element">{{ element.ponudjenaVrijednost }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="rok isporuke">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rok isporuke</th>
+      <td mat-cell *matCellDef="let element"></td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="sifra ponudjaca">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Ponudjaca</th>
+      <td mat-cell *matCellDef="let element">{{ element.sifraPonudjaca }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <tr class="heder" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
   </table>
-</div>
 
-<div *ngIf="ponudes && ponudes.length > 0">
-  <div class="d-flex justify-content-center">
-    <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
-  </div>
-
-  <div class="d-flex justify-content-center">
-    <ngb-pagination
-      [collectionSize]="totalItems"
-      [(page)]="ngbPaginationPage"
-      [pageSize]="itemsPerPage"
-      [maxSize]="5"
-      [rotate]="true"
-      [boundaryLinks]="true"
-      (pageChange)="loadPage($event)"
-    ></ngb-pagination>
-  </div>
+  <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[20, 30, 50, 100]" showFirstLastButtons> </mat-paginator>
 </div>
