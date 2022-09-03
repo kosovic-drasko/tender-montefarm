@@ -38,10 +38,9 @@ export class PonudeComponent implements AfterViewInit, OnInit {
     'selected',
     'action',
   ];
-  public parameterValue?: number;
+  public dataSource = new MatTableDataSource<IPonude>();
   @ViewChild('fileInput') fileInput: any;
   @Input() postupak: any;
-  public dataSource = new MatTableDataSource<IPonude>();
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   resourceUrlExcelDownloadPostupak = SERVER_API_URL + 'api/ponude/file/';
@@ -94,14 +93,6 @@ export class PonudeComponent implements AfterViewInit, OnInit {
       });
   }
 
-  loadPonudePonudjaci(sifraPostupka: number): void {
-    this.ponudeService.ponudePonudjaci(sifraPostupka).subscribe({
-      next: res => {
-        this.ponudjaciPostupak = res;
-      },
-    });
-  }
-
   loadPageSifraPonude(): void {
     this.isLoading = true;
     this.ponudeService
@@ -143,6 +134,14 @@ export class PonudeComponent implements AfterViewInit, OnInit {
       });
   }
 
+  loadPonudePonudjaci(sifraPostupka: number): void {
+    this.ponudeService.ponudePonudjaci(sifraPostupka).subscribe({
+      next: res => {
+        this.ponudjaciPostupak = res;
+      },
+    });
+  }
+
   ponisti(): void {
     if (this.postupak !== undefined) {
       this.brPonude = null;
@@ -174,7 +173,6 @@ export class PonudeComponent implements AfterViewInit, OnInit {
   delete(ponude: IPonude): void {
     const modalRef = this.modalService.open(PonudeDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.ponude = ponude;
-    // unsubscribe not needed because closed completes on modal close
     modalRef.closed.subscribe(reason => {
       if (reason === 'deleted') {
         this.loadPage();
