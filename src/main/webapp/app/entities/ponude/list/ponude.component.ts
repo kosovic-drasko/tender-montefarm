@@ -75,7 +75,7 @@ export class PonudeComponent implements AfterViewInit, OnInit {
         this.isLoading = false;
         this.dataSource.data = res.body ?? [];
         this.ponudes = res;
-        // this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+
         this.ukupno = res.body?.reduce((acc, ponude) => acc + ponude.ponudjenaVrijednost!, 0);
       },
       error: () => {
@@ -127,7 +127,8 @@ export class PonudeComponent implements AfterViewInit, OnInit {
       .subscribe({
         next: (res: HttpResponse<IPonude[]>) => {
           this.isLoading = false;
-          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+          this.dataSource.data = res.body ?? [];
+          this.ponudes = res;
           this.ukupno = res.body?.reduce((acc, ponudes) => acc + ponudes.ponudjenaVrijednost!, 0);
         },
         error: () => {
@@ -143,13 +144,14 @@ export class PonudeComponent implements AfterViewInit, OnInit {
 
     this.ponudeService
       .query({
-        'sifraPostupka.in': 1,
+        'sifraPostupka.in': this.postupak,
         'sifraPonude.in': this.brPonude,
       })
       .subscribe({
         next: (res: HttpResponse<IPonude[]>) => {
           this.isLoading = false;
-          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+          this.dataSource.data = res.body ?? [];
+          this.ponudes = res;
           this.ukupno = res.body?.reduce((acc, ponudes) => acc + ponudes.ponudjenaVrijednost!, 0);
           console.log('===================>', this.ukupno);
         },
@@ -163,7 +165,7 @@ export class PonudeComponent implements AfterViewInit, OnInit {
   ponisti(): void {
     if (this.postupak !== undefined) {
       this.brPonude = null;
-      this.loadPonudePostupciSifra();
+      this.loadPageSifra();
       console.log(this.postupak);
     } else {
       this.brPonude = null;
@@ -194,7 +196,7 @@ export class PonudeComponent implements AfterViewInit, OnInit {
 
   nadji(): void {
     if (this.postupak !== undefined) {
-      this.ponudePostupci();
+      this.loadSifraPonudesifraPostupka();
     } else {
       this.loadPageSifraPonude();
     }
