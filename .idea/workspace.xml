@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="material table">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/list/vrednovanje.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/list/specifikacije.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/specifikacije.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/specifikacije/specifikacije.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/list/vrednovanje.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/list/vrednovanje.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/list/vrednovanje.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/list/vrednovanje.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/vrednovanje.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/vrednovanje/vrednovanje.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +84,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/pc/IdeaProjects/tender-montefarm/src/main/webapp/app/entities/specifikacije/list",
+    "last_opened_file_path": "C:/Users/pc/IdeaProjects/tender-montefarm/src/main/webapp/app/entities/vrednovanje/list",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -103,11 +102,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app\entities\vrednovanje\list" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app\entities\specifikacije\list" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app\entities\ponude\list" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app\shared" />
-      <recent name="C:\Users\Win\IdeaProjects\tender-montefarm\src\main\webapp\app\entities\postupci\list" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="tender.web.rest" />
@@ -153,13 +152,6 @@
       <workItem from="1661009189820" duration="13670000" />
       <workItem from="1661318917980" duration="5201000" />
       <workItem from="1661628494212" duration="52764000" />
-    </task>
-    <task id="LOCAL-00016" summary="specifikacije">
-      <created>1660891764480</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1660891764480</updated>
     </task>
     <task id="LOCAL-00017" summary="specifikacije kraj">
       <created>1660892135407</created>
@@ -497,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662236590772</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="material table">
+      <created>1662239412162</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1662239412162</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
