@@ -1,17 +1,24 @@
-<div *ngIf="!postupak" class="input-group mb-3">
-  <input
-    [(ngModel)]="brPonude"
-    (input)="nadji()"
-    type="text"
-    class="form-control"
-    placeholder="Izaberi sifru ponude"
-    aria-label="Recipient's username"
-    aria-describedby="button-addon2"
-  />
-  <div class="input-group-append">
-    <button (click)="ponisti()" class="btn btn-outline-secondary" type="button" id="button-addon2">Ponisti</button>
-  </div>
-</div>
+<!--<div *ngIf="!postupak" class="input-group mb-3">-->
+<!--  <input-->
+<!--    [(ngModel)]="brPonude"-->
+<!--    (input)="nadji()"-->
+<!--    type="text"-->
+<!--    class="form-control"-->
+<!--    placeholder="Izaberi sifru ponude"-->
+<!--    aria-label="Recipient's username"-->
+<!--    aria-describedby="button-addon2"-->
+<!--  />-->
+<!--  <div class="input-group-append">-->
+<!--    <button (click)="ponisti()" class="btn btn-outline-secondary" type="button" id="button-addon2">Ponisti</button>-->
+<!--  </div>-->
+<!--</div>-->
+
+<mat-form-field *ngIf="!postupak">
+  <input matInput [(ngModel)]="brPonude" placeholder="Sifra Ponude" (keyup)="nadji()" />
+  <button *ngIf="brPonude" matSuffix mat-icon-button aria-label="Clear" (click)="ponisti()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
 
 <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="add()">
   <fa-icon icon="plus"></fa-icon>
@@ -30,7 +37,9 @@
   <!--        <fa-icon icon="plus"></fa-icon>-->
   <span>Excel </span>
 </button>
-
+<button *ngIf="postupak" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="ponisti()">
+  <span> Ponisti </span>
+</button>
 <div class="form-floating">
   <div *ngIf="postupak" class="form-floating">
     <select

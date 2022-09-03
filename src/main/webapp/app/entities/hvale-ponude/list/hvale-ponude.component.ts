@@ -1,105 +1,76 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { combineLatest } from 'rxjs';
-
 import { IHvalePonude } from '../hvale-ponude.model';
-
-import { ASC, DESC, ITEMS_PER_PAGE, SORT } from 'app/config/pagination.constants';
 import { HvalePonudeService } from '../service/hvale-ponude.service';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'jhi-hvale-ponude',
   templateUrl: './hvale-ponude.component.html',
+  styleUrls: ['./hvale-ponude.component.scss'],
 })
-export class HvalePonudeComponent implements OnInit {
-  hvalePonudes?: IHvalePonude[];
+export class HvalePonudeComponent implements AfterViewInit, OnInit {
+  hvalePonudes?: HttpResponse<IHvalePonude[]>;
   isLoading = false;
-  totalItems = 0;
-  itemsPerPage = ITEMS_PER_PAGE;
-  page?: number;
-  predicate!: string;
-  ascending!: boolean;
-  ngbPaginationPage = 1;
+  ukupnaProcijenjena?: number;
+  sifraPonude?: any;
+  public displayedColumns = [
+    'sifra postupka',
+    'broj partije',
+    'inn',
+    'farmaceutski oblik',
+    'pakovanje',
+    'kolicina',
+    'procijenjena vrijednost',
+  ];
+
+  public dataSource = new MatTableDataSource<IHvalePonude>();
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @Input() postupak: any;
   constructor(protected hvaleService: HvalePonudeService, protected activatedRoute: ActivatedRoute, protected router: Router) {}
 
-  public getSifraHvali(): void {
-    this.hvaleService.hvali(1).subscribe((res: IHvalePonude[]) => {
+  public getSifraPostupka(): void {
+    this.hvaleService.hvali(this.postupak).subscribe((res: HttpResponse<IHvalePonude[]>) => {
+      this.dataSource.data = res.body ?? [];
       this.hvalePonudes = res;
+      console.log('=========================================>', this.hvalePonudes);
+      this.ukupnaProcijenjena = res.body?.reduce((acc, ponude) => acc + ponude.procijenjenaVrijednost!, 0);
     });
   }
-  loadPage(page?: number, dontNavigate?: boolean): void {
-    this.isLoading = true;
-    const pageToLoad: number = page ?? this.page ?? 1;
 
+  ngOnInit(): void {
+    this.getSifraPostupka();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  nadjiPoSifriPonude(): void {
+    this.isLoading = true;
     this.hvaleService
       .query({
-        'sifraPostupka.in': this.postupak,
-        page: pageToLoad - 1,
-        size: this.itemsPerPage,
-        sort: this.sort(),
+        'sifraPonude.in': this.sifraPonude,
       })
       .subscribe({
         next: (res: HttpResponse<IHvalePonude[]>) => {
           this.isLoading = false;
-          this.onSuccess(res.body, res.headers, pageToLoad, !dontNavigate);
+          this.dataSource.data = res.body ?? [];
+          this.ukupnaProcijenjena = res.body?.reduce((acc, ponude) => acc + ponude.procijenjenaVrijednost!, 0);
         },
         error: () => {
           this.isLoading = false;
-          this.onError();
         },
       });
   }
-
-  ngOnInit(): void {
-    this.getSifraHvali();
-  }
-
-  trackId(_index: number, item: IHvalePonude): number {
-    return item.id!;
-  }
-
-  protected sort(): string[] {
-    const result = [this.predicate + ',' + (this.ascending ? ASC : DESC)];
-    if (this.predicate !== 'id') {
-      result.push('id');
-    }
-    return result;
-  }
-
-  protected handleNavigation(): void {
-    combineLatest([this.activatedRoute.data, this.activatedRoute.queryParamMap]).subscribe(([data, params]) => {
-      const page = params.get('page');
-      const pageNumber = +(page ?? 1);
-      const sort = (params.get(SORT) ?? data['defaultSort']).split(',');
-      const predicate = sort[0];
-      const ascending = sort[1] === ASC;
-      if (pageNumber !== this.page || predicate !== this.predicate || ascending !== this.ascending) {
-        this.predicate = predicate;
-        this.ascending = ascending;
-        this.loadPage(pageNumber, true);
-      }
-    });
-  }
-
-  protected onSuccess(data: IHvalePonude[] | null, headers: HttpHeaders, page: number, navigate: boolean): void {
-    this.totalItems = Number(headers.get('X-Total-Count'));
-    this.page = page;
-    if (navigate) {
-      this.router.navigate(['/hvale-ponude'], {
-        queryParams: {
-          page: this.page,
-          size: this.itemsPerPage,
-          sort: this.predicate + ',' + (this.ascending ? ASC : DESC),
-        },
-      });
-    }
-    this.hvalePonudes = data ?? [];
-    this.ngbPaginationPage = this.page;
-  }
-
-  protected onError(): void {
-    this.ngbPaginationPage = this.page ?? 1;
+  sifraPonudeNull(): void {
+    this.sifraPonude = null;
+    this.sifraPonude = '';
+    this.getSifraPostupka();
   }
 }
