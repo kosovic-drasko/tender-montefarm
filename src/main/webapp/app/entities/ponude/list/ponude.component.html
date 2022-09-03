@@ -1,9 +1,16 @@
-<button *ngIf="!postupak" class="btn btn-info" (click)="nadji()">NadjiPonudu</button>
-<button class="btn btn-info" (click)="ponisti()">Ponisti</button>
-<div class="form-floating">
-  <input *ngIf="!postupak" id="ponuda1" placeholder="ponuda" type="text" class="form-control" [(ngModel)]="brPonude" />
-  <input *ngIf="!postupak" id="ponuda" placeholder="ponuda" type="text" class="form-control" [(ngModel)]="brPonude" />
-  <label class="form-label" for="ponuda">Ponuda</label>
+<div *ngIf="!postupak" class="input-group mb-3">
+  <input
+    [(ngModel)]="brPonude"
+    (input)="nadji()"
+    type="text"
+    class="form-control"
+    placeholder="Izaberi sifru ponude"
+    aria-label="Recipient's username"
+    aria-describedby="button-addon2"
+  />
+  <div class="input-group-append">
+    <button (click)="ponisti()" class="btn btn-outline-secondary" type="button" id="button-addon2">Ponisti</button>
+  </div>
 </div>
 
 <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponude" (click)="add()">
@@ -35,7 +42,6 @@
       (change)="loadSifraPonudesifraPostupka()"
       cl="loadPageSifraPonude()"
     >
-      <option [ngValue]="null"></option>
       <option [ngValue]="ponudjaciOption.sifraPonude" *ngFor="let ponudjaciOption of ponudjaciPostupak">
         {{ ponudjaciOption.ponudjaci.nazivPonudjaca }}
       </option>
@@ -72,6 +78,11 @@
         <td mat-cell *matCellDef="let element">{{ element.nazivProizvodjaca }}</td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
+      <ng-container matColumnDef="ponudjac">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ponudjac</th>
+        <td mat-cell *matCellDef="let element">{{ element.ponudjaci.nazivPonudjaca }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
       <ng-container matColumnDef="zasticeni naziv">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Zasticeni naziv</th>
         <td mat-cell *matCellDef="let element">{{ element.zasticeniNaziv }}</td>
@@ -85,16 +96,64 @@
       <ng-container matColumnDef="ponudjena vrijednost">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Ponudjena cijena</th>
         <td mat-cell *matCellDef="let element">{{ element.ponudjenaVrijednost }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
+        <td mat-footer-cell *matFooterCellDef>{{ ukupno }}</td>
       </ng-container>
       <ng-container matColumnDef="rok isporuke">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Rok isporuke</th>
-        <td mat-cell *matCellDef="let element"></td>
+        <td mat-cell *matCellDef="let element">{{ element.rokIsporuke }}</td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
       <ng-container matColumnDef="sifra ponudjaca">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Ponudjaca</th>
         <td mat-cell *matCellDef="let element">{{ element.sifraPonudjaca }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <ng-container matColumnDef="selected">
+        <th mat-header-cell *matHeaderCellDef>
+          <button type="submit" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+            <fa-icon icon="times"></fa-icon>
+            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+          </button>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="btn-group">
+            <button
+              type="submit"
+              (click)="
+                update(
+                  element.id,
+                  element.sifraPostupka,
+                  element.sifraelement,
+                  element.brojPartije,
+                  element.sifraPonudjaca,
+                  element.nazivProizvodjaca,
+                  element.zasticeniNaziv,
+                  element.ponudjenaVrijednost,
+                  element.jedinicnaCijena,
+                  element.selected,
+                  element.rokIsporuke
+                )
+              "
+              class="btn btn-primary btn-sm"
+              data-cy="entityEditButton"
+            >
+              <fa-icon icon="pencil-alt"></fa-icon>
+              <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+
+            <button type="submit" (click)="delete(element)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+              <fa-icon icon="times"></fa-icon>
+              <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+            </button>
+          </div>
+        </td>
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
       <tr class="heder" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

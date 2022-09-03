@@ -151,13 +151,6 @@
       <workItem from="1661318917980" duration="5201000" />
       <workItem from="1661628494212" duration="52764000" />
     </task>
-    <task id="LOCAL-00012" summary="ponude update add">
-      <created>1660632784737</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1660632784737</updated>
-    </task>
     <task id="LOCAL-00013" summary="ponude update add zavrseno">
       <created>1660635515706</created>
       <option name="number" value="00013" />
@@ -494,7 +487,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662224590806</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="material table">
+      <created>1662226558741</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1662226558741</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
