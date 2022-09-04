@@ -23,6 +23,7 @@ export class PonudeComponent implements AfterViewInit, OnInit {
   brPonude?: null;
   isLoading = false;
   ukupno?: number;
+  brojObrazac?: number = 0;
 
   public displayedColumns = [
     'sifra postupka',
@@ -221,7 +222,9 @@ export class PonudeComponent implements AfterViewInit, OnInit {
       this.loadPage();
     });
   }
-
+  obrazacExcel(): void {
+    window.location.href = `${this.resourceUrlExcelDownloadPostupak}/${this.brojObrazac}`;
+  }
   uploadFile(): any {
     const formData = new FormData();
     formData.append('files', this.fileInput.nativeElement.files[0]);

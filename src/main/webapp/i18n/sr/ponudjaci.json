@@ -8,11 +8,11 @@
         "createOrEditLabel": "Kreirajte ili izmenite Ponudjaca",
         "notFound": "Nema poonudjaca"
       },
-      "created": "Kreiran je novi Ponudjaci pod nazivom {{ param }}",
-      "updated": "Ponudjaci pod nazivom {{ param }} je ažuriran",
-      "deleted": "Ponudjaci pod nazivom {{ param }} je obrisan",
+      "created": "Kreiran je novi Ponudjac sa id {{ param }}",
+      "updated": "Ponudjaci sa id {{ param }} je ažuriran",
+      "deleted": "Ponudjaci sa id {{ param }} je obrisan",
       "delete": {
-        "question": "Da li ste sigurni da želite da obrišete Ponudjaci pod nazivom {{ id }}?"
+        "question": "Da li ste sigurni da želite da obrišete Ponudjaca sa id {{ id }}?"
       },
       "detail": {
         "title": "Ponudjaci"

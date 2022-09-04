@@ -7,9 +7,10 @@ import { PonudeDeleteDialogComponent } from './delete/ponude-delete-dialog.compo
 import { PonudeRoutingModule } from './route/ponude-routing.module';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableExporterModule } from 'mat-table-exporter';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
-  imports: [SharedModule, PonudeRoutingModule, MatSortModule, MatTableExporterModule],
+  imports: [SharedModule, PonudeRoutingModule, MatSortModule, MatTableExporterModule, MatSidenavModule],
   declarations: [PonudeComponent, PonudeDetailComponent, PonudeUpdateComponent, PonudeDeleteDialogComponent],
   entryComponents: [PonudeDeleteDialogComponent],
   exports: [PonudeComponent],

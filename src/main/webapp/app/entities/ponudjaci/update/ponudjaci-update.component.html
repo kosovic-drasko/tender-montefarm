@@ -2,9 +2,9 @@
   <div class="d-flex justify-content-center">
     <div class="col-8">
       <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-        <h2 id="jhi-ponudjaci-heading" data-cy="PonudjaciCreateUpdateHeading" jhiTranslate="tenderApp.ponudjaci.home.createOrEditLabel">
+        <h5 id="jhi-ponudjaci-heading" data-cy="PonudjaciCreateUpdateHeading" jhiTranslate="tenderApp.ponudjaci.home.createOrEditLabel">
           Create or edit a Ponudjaci
-        </h2>
+        </h5>
 
         <div>
           <jhi-alert-error></jhi-alert-error>
@@ -67,21 +67,22 @@
             <label class="form-label" jhiTranslate="tenderApp.ponudjaci.bankaRacun" for="field_bankaRacun">Banka Racun</label>
           </div>
         </div>
+        <div class="modal-footer">
+          <div>
+            <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+            </button>
 
-        <div>
-          <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-          </button>
-
-          <button
-            type="submit"
-            id="save-entity"
-            data-cy="entityCreateSaveButton"
-            [disabled]="editForm.invalid || isSaving"
-            class="btn btn-primary"
-          >
-            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-          </button>
+            <button
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="editForm.invalid || isSaving"
+              class="btn btn-primary"
+            >
+              <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+          </div>
         </div>
       </form>
     </div>

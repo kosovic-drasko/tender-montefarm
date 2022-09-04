@@ -1,107 +1,79 @@
 <div>
-  <h2 id="page-heading" data-cy="PonudjaciHeading">
-    <span jhiTranslate="tenderApp.ponudjaci.home.title">Ponudjacis</span>
+  <h5 id="page-heading" data-cy="PonudjaciHeading">
+    <span jhiTranslate="tenderApp.ponudjaci.home.title">Ponudjaci</span>
 
     <div class="d-flex justify-content-end">
-      <!--      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">-->
-      <!--        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>-->
-      <!--        <span jhiTranslate="tenderApp.ponudjaci.home.refreshListLabel">Refresh List</span>-->
-      <!--      </button>-->
-
       <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ponudjaci" (click)="add()">
         <fa-icon icon="plus"></fa-icon>
         <span jhiTranslate="tenderApp.ponudjaci.home.createLabel"> Create a new Ponudjaci </span>
       </button>
     </div>
-  </h2>
+  </h5>
 
   <jhi-alert-error></jhi-alert-error>
 
   <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="ponudjacis?.length === 0">
+  <div class="alert alert-warning" id="no-result" *ngIf="ponudjacis?.body?.length === 0">
     <span jhiTranslate="tenderApp.ponudjaci.home.notFound">No ponudjacis found</span>
   </div>
 
-  <div class="table-responsive" id="entities" *ngIf="ponudjacis && ponudjacis.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="nazivPonudjaca">
-            <span jhiTranslate="tenderApp.ponudjaci.nazivPonudjaca">Naziv Ponudjaca</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="odgovornoLice">
-            <span jhiTranslate="tenderApp.ponudjaci.odgovornoLice">Odgovorno Lice</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="adresaPonudjaca">
-            <span jhiTranslate="tenderApp.ponudjaci.adresaPonudjaca">Adresa Ponudjaca</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col" jhiSortBy="bankaRacun">
-            <span jhiTranslate="tenderApp.ponudjaci.bankaRacun">Banka Racun</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ponudjaci of ponudjacis; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/ponudjaci', ponudjaci.id, 'view']">{{ ponudjaci.id }}</a>
-          </td>
-          <td>{{ ponudjaci.nazivPonudjaca }}</td>
-          <td>{{ ponudjaci.odgovornoLice }}</td>
-          <td>{{ ponudjaci.adresaPonudjaca }}</td>
-          <td>{{ ponudjaci.bankaRacun }}</td>
-          <td class="text-end">
-            <div class="btn-group">
-              <!--              <button-->
-              <!--                type="submit"-->
-              <!--                [routerLink]="['/ponudjaci', ponudjaci.id, 'view']"-->
-              <!--                class="btn btn-info btn-sm"-->
-              <!--                data-cy="entityDetailsButton"-->
-              <!--              >-->
-              <!--                <fa-icon icon="eye"></fa-icon>-->
-              <!--                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>-->
-              <!--              </button>-->
+  <table mat-table id="ExampleTable" matTableExporter [dataSource]="dataSource" matSort matSortStart="desc">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="naziv ponudjaca">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Naziv Ponudjaca</th>
+      <td mat-cell *matCellDef="let element">{{ element.nazivPonudjaca }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="odgovorno lice">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Odgovorno Lice</th>
+      <td mat-cell *matCellDef="let element">{{ element.odgovornoLice }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
 
-              <button
-                type="submit"
-                (click)="
-                  update(ponudjaci.id, ponudjaci.nazivPonudjaca, ponudjaci.odgovornoLice, ponudjaci.adresaPonudjaca, ponudjaci.bankaRacun)
-                "
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
+    <ng-container matColumnDef="adresa ponudjaca">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Adresa</th>
+      <td mat-cell *matCellDef="let element">{{ element.adresaPonudjaca }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="banka racun">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Bakarski Racun</th>
+      <td mat-cell *matCellDef="let element">{{ element.bankaRacun }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
 
-              <button type="submit" (click)="delete(ponudjaci)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <ng-container matColumnDef="action" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let ponudjaci; let i = index">
+        <div class="btn-group">
+          <button
+            type="submit"
+            (click)="
+              update(ponudjaci.id, ponudjaci.nazivPonudjaca, ponudjaci.odgovornoLice, ponudjaci.adresaPonudjaca, ponudjaci.bankaRacun)
+            "
+            class="btn btn-primary btn-sm"
+            data-cy="entityEditButton"
+          >
+            <fa-icon icon="pencil-alt"></fa-icon>
+            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+          </button>
 
-  <div *ngIf="ponudjacis && ponudjacis.length > 0">
-    <div class="d-flex justify-content-center">
-      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
-    </div>
+          <button type="submit" (click)="delete(ponudjaci)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+            <fa-icon icon="times"></fa-icon>
+            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+          </button>
+        </div>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
 
-    <div class="d-flex justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [(page)]="ngbPaginationPage"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="loadPage($event)"
-      ></ngb-pagination>
-    </div>
-  </div>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+  <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
 </div>

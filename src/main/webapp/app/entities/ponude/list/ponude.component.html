@@ -1,157 +1,180 @@
-<div id="page-heading" data-cy="SpecifikacijeHeading">
-  <h2>
-    <span jhiTranslate="tenderApp.ponude.home.title">Ponude</span>
-
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side">
     <mat-form-field *ngIf="!postupak">
       <input matInput [(ngModel)]="brPonude" placeholder="Sifra Ponude" (keyup)="nadji()" />
       <button *ngIf="brPonude" matSuffix mat-icon-button aria-label="Clear" (click)="ponisti()">
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-    <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-secondary">
-        <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="tenderApp.ponude.home.createLabel" (click)="add()"> Create a new Ponude </span>
-      </button>
-      <button type="button" class="btn btn-secondary" (click)="fileInput.click()">Nadji Excel</button>
-      <button type="button" class="btn btn-secondary" (click)="uploadFile()">Dodaj Excel</button>
-      <button type="button" class="btn btn-secondary" (click)="obrazacExcelPostupak()">Excel</button>
-      <button *ngIf="postupak" type="button" class="btn btn-secondary" (click)="ponisti()">Ponisti</button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-button-toggle class="nadji" (click)="sidenav.toggle()"><mat-icon>search</mat-icon></mat-button-toggle>
+    <div id="page-heading" data-cy="SpecifikacijeHeading">
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+        <input hidden #fileInput type="file" id="file" />
+
+        <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="add()" matTooltip="Dodaj novu ponudu">Dodaj </mat-button-toggle>
+        <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" matTooltip="Napravi formu za unos Excel" (click)="obrazacExcel()"
+          >Napravi Obrazac
+        </mat-button-toggle>
+        <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" matTooltip="Nadji Excel fajl" (click)="fileInput.click()">
+          Nadji Fajl
+        </mat-button-toggle>
+        <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" matTooltip="Unesi Excel fajl" (click)="uploadFile()"
+          >Dodaj Fajl
+        </mat-button-toggle>
+        <mat-button-toggle *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']" matTooltip=" Excel fajl" (click)="obrazacExcelPostupak()">
+          <img src="../../../../content/images/icons8-microsoft-excel-48.png" alt="" />
+        </mat-button-toggle>
+
+        <!--      <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" matTooltip="Ukloni cijelu ponudu" (click)="open(contentBrisiPoSifriPonude)">-->
+        <!--        Ukloni Ponudu</mat-button-toggle-->
+        <!--      >-->
+      </mat-button-toggle-group>
+      <input hidden #fileInput type="file" id="file1" />
+
+      <div class="form-floating">
+        <div *ngIf="postupak" class="form-floating">
+          <select
+            class="form-control"
+            id="field_sifraPonudjaca"
+            data-cy="sifraPonudjaca"
+            name="sifraPonudjaca"
+            [(ngModel)]="brPonude"
+            (change)="loadSifraPonudesifraPostupka()"
+            cl="loadPageSifraPonude()"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="ponudjaciOption.sifraPonude" *ngFor="let ponudjaciOption of ponudjaciPostupak">
+              {{ ponudjaciOption.ponudjaci.nazivPonudjaca }}
+            </option>
+          </select>
+          <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPonudjaca" for="field_sifraPonudjaca">Sifra Ponudjaca</label>
+        </div>
+      </div>
+
+      <div class="table-responsive" id="entities">
+        <jhi-alert-error></jhi-alert-error>
+        <jhi-alert></jhi-alert>
+
+        <div class="alert alert-warning" id="no-result" *ngIf="ponudes?.body?.length === 0">
+          <span>Nema zapisa Ponuda</span>
+        </div>
+        <table
+          mat-table
+          id="ExampleTable"
+          matTableExporter
+          [dataSource]="dataSource"
+          matSort
+          matSortStart="desc"
+          #exporter="matTableExporter"
+        >
+          <ng-container matColumnDef="sifra postupka">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Postupka</th>
+            <td mat-cell *matCellDef="let element">{{ element.sifraPostupka }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="sifraPonude">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Ponude</th>
+            <td mat-cell *matCellDef="let element">{{ element.sifraPonude }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+
+          <ng-container matColumnDef="brojPartije">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj Partije</th>
+            <td mat-cell *matCellDef="let element">{{ element.brojPartije }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="naziv proizvodjaca">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Proizvodjac</th>
+            <td mat-cell *matCellDef="let element">{{ element.nazivProizvodjaca }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="ponudjac">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ponudjac</th>
+            <td mat-cell *matCellDef="let element">{{ element.ponudjaci.nazivPonudjaca }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="zasticeni naziv">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Zasticeni naziv</th>
+            <td mat-cell *matCellDef="let element">{{ element.zasticeniNaziv }}</td>
+            <td mat-footer-cell *matFooterCellDef>{{ 'Ukupno:' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="jedinicna cijena">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Jedinicna cijena</th>
+            <td mat-cell *matCellDef="let element">{{ element.jedinicnaCijena }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="ponudjena vrijednost">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ponudjena cijena</th>
+            <td mat-cell *matCellDef="let element">{{ element.ponudjenaVrijednost }}</td>
+            <td mat-footer-cell *matFooterCellDef>{{ ukupno | number: '1.2-2' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="rok isporuke">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Rok isporuke</th>
+            <td mat-cell *matCellDef="let element">{{ element.rokIsporuke }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="sifra ponudjaca">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Ponudjaca</th>
+            <td mat-cell *matCellDef="let element">{{ element.sifraPonudjaca }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="selected">
+            <th mat-header-cell *matHeaderCellDef>
+              <button type="submit" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+            </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <div class="btn-group">
+                <button
+                  type="submit"
+                  (click)="
+                    update(
+                      element.id,
+                      element.sifraPostupka,
+                      element.sifraPonude,
+                      element.brojPartije,
+                      element.sifraPonudjaca,
+                      element.nazivProizvodjaca,
+                      element.zasticeniNaziv,
+                      element.ponudjenaVrijednost,
+                      element.jedinicnaCijena,
+                      element.selected,
+                      element.rokIsporuke
+                    )
+                  "
+                  class="btn btn-primary btn-sm"
+                  data-cy="entityEditButton"
+                >
+                  <fa-icon icon="pencil-alt"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                </button>
+
+                <button type="submit" (click)="delete(element)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                  <fa-icon icon="times"></fa-icon>
+                  <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                </button>
+              </div>
+            </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <tr class="heder" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+        </table>
+
+        <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[20, 30, 50, 100]" showFirstLastButtons> </mat-paginator>
+      </div>
     </div>
-    <input hidden #fileInput type="file" id="file" />
-  </h2>
-  <hr />
-  <div class="form-floating">
-    <div *ngIf="postupak" class="form-floating">
-      <select
-        class="form-control"
-        id="field_sifraPonudjaca"
-        data-cy="sifraPonudjaca"
-        name="sifraPonudjaca"
-        [(ngModel)]="brPonude"
-        (change)="loadSifraPonudesifraPostupka()"
-        cl="loadPageSifraPonude()"
-      >
-        <option [ngValue]="ponudjaciOption.sifraPonude" *ngFor="let ponudjaciOption of ponudjaciPostupak">
-          {{ ponudjaciOption.ponudjaci.nazivPonudjaca }}
-        </option>
-      </select>
-      <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPonudjaca" for="field_sifraPonudjaca">Sifra Ponudjaca</label>
-    </div>
-  </div>
-
-  <div class="table-responsive" id="entities">
-    <jhi-alert-error></jhi-alert-error>
-    <jhi-alert></jhi-alert>
-
-    <div class="alert alert-warning" id="no-result" *ngIf="ponudes?.body?.length === 0">
-      <span>Nema zapisa Ponuda</span>
-    </div>
-    <table mat-table id="ExampleTable" matTableExporter [dataSource]="dataSource" matSort matSortStart="desc" #exporter="matTableExporter">
-      <ng-container matColumnDef="sifra postupka">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Postupka</th>
-        <td mat-cell *matCellDef="let element">{{ element.sifraPostupka }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="sifraPonude">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Ponude</th>
-        <td mat-cell *matCellDef="let element">{{ element.sifraPonude }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-
-      <ng-container matColumnDef="brojPartije">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj Partije</th>
-        <td mat-cell *matCellDef="let element">{{ element.brojPartije }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="naziv proizvodjaca">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Proizvodjac</th>
-        <td mat-cell *matCellDef="let element">{{ element.nazivProizvodjaca }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="ponudjac">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ponudjac</th>
-        <td mat-cell *matCellDef="let element">{{ element.ponudjaci.nazivPonudjaca }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="zasticeni naziv">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Zasticeni naziv</th>
-        <td mat-cell *matCellDef="let element">{{ element.zasticeniNaziv }}</td>
-        <td mat-footer-cell *matFooterCellDef>{{ 'Ukupno:' }}</td>
-      </ng-container>
-      <ng-container matColumnDef="jedinicna cijena">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Jedinicna cijena</th>
-        <td mat-cell *matCellDef="let element">{{ element.jedinicnaCijena }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="ponudjena vrijednost">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ponudjena cijena</th>
-        <td mat-cell *matCellDef="let element">{{ element.ponudjenaVrijednost }}</td>
-        <td mat-footer-cell *matFooterCellDef>{{ ukupno | number: '1.2-2' }}</td>
-      </ng-container>
-      <ng-container matColumnDef="rok isporuke">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Rok isporuke</th>
-        <td mat-cell *matCellDef="let element">{{ element.rokIsporuke }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="sifra ponudjaca">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Ponudjaca</th>
-        <td mat-cell *matCellDef="let element">{{ element.sifraPonudjaca }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="selected">
-        <th mat-header-cell *matHeaderCellDef>
-          <button type="submit" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-            <fa-icon icon="times"></fa-icon>
-            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-          </button>
-        </th>
-        <td mat-cell *matCellDef="let element">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        </td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">
-          <div class="btn-group">
-            <button
-              type="submit"
-              (click)="
-                update(
-                  element.id,
-                  element.sifraPostupka,
-                  element.sifraPonude,
-                  element.brojPartije,
-                  element.sifraPonudjaca,
-                  element.nazivProizvodjaca,
-                  element.zasticeniNaziv,
-                  element.ponudjenaVrijednost,
-                  element.jedinicnaCijena,
-                  element.selected,
-                  element.rokIsporuke
-                )
-              "
-              class="btn btn-primary btn-sm"
-              data-cy="entityEditButton"
-            >
-              <fa-icon icon="pencil-alt"></fa-icon>
-              <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-            </button>
-
-            <button type="submit" (click)="delete(element)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-              <fa-icon icon="times"></fa-icon>
-              <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-            </button>
-          </div>
-        </td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <tr class="heder" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-    </table>
-
-    <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[20, 30, 50, 100]" showFirstLastButtons> </mat-paginator>
-  </div>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -14,6 +14,16 @@
   </div>
 
   <div class="table-responsive" id="entities" *ngIf="prvorangiranis">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="exporter.exportTable('xlsx', { fileName: 'Prvorangirani', sheet: 'sheet_name', Props: { Author: 'Drasko' } })"
+      >
+        Excel
+      </button>
+    </div>
+
     <table mat-table id="ExampleTable" matTableExporter [dataSource]="dataSource" matSort matSortStart="desc" #exporter="matTableExporter">
       <ng-container matColumnDef="sifra postupka">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Postupka</th>
