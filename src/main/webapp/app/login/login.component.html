@@ -3,6 +3,9 @@
 </head>
 
 <div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">Prijava</h5>
+  </div>
   <div id="centar">
     <div id="text">
       <div class="alert alert-danger" *ngIf="authenticationError" jhiTranslate="login.messages.error.authentication" data-cy="loginError">
@@ -43,8 +46,9 @@
             <span jhiTranslate="login.form.rememberme">Remember me</span>
           </label>
         </div>
-
-        <button type="submit" class="btn btn-primary" jhiTranslate="login.form.button" data-cy="submit">Sign in</button>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" jhiTranslate="login.form.button" data-cy="submit">Sign in</button>
+        </div>
       </form>
     </div>
   </div>

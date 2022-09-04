@@ -5,19 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="456a7a14-d341-4edb-a42d-213f012674c3" name="Changes" comment="material table">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/hvale-ponude/list/hvale-ponude.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/prvorangirani/list/prvorangirani.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/content/images/icons8-microsoft-excel-48.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/content/images/icons8-pdf-48.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/update/postupci-update.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/hvale-ponude/hvale-ponude.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/hvale-ponude/hvale-ponude.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/hvale-ponude/list/hvale-ponude.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/hvale-ponude/list/hvale-ponude.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/hvale-ponude/list/hvale-ponude.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/hvale-ponude/list/hvale-ponude.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/hvale-ponude/service/hvale-ponude.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/hvale-ponude/service/hvale-ponude.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/ponude/list/ponude.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/prvorangirani/list/prvorangirani.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/prvorangirani/list/prvorangirani.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/prvorangirani/list/prvorangirani.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/prvorangirani/list/prvorangirani.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/prvorangirani/prvorangirani.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/prvorangirani/prvorangirani.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/update/postupci-update.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/update/postupci-update.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/update/postupci-update.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/update/postupci-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/entities/postupci/update/postupci-update.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/app/login/login.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/app/login/login.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +87,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/pc/IdeaProjects/tender-montefarm/src/main/webapp/content/images",
+    "last_opened_file_path": "C:/Users/pc/IdeaProjects/tender-montefarm/src/main/webapp/app/entities/postupci/update",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -110,11 +105,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app\entities\postupci\update" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\content\images" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app\entities\hvale-ponude\list" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app\entities\prvorangirani\list" />
       <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app\entities\vrednovanje\list" />
-      <recent name="C:\Users\pc\IdeaProjects\tender-montefarm\src\main\webapp\app\entities\specifikacije\list" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="tender.web.rest" />
@@ -160,13 +155,6 @@
       <workItem from="1661009189820" duration="13670000" />
       <workItem from="1661318917980" duration="5201000" />
       <workItem from="1661628494212" duration="52764000" />
-    </task>
-    <task id="LOCAL-00018" summary="vrednovanje 1">
-      <created>1660893814187</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1660893814187</updated>
     </task>
     <task id="LOCAL-00019" summary="prvorangirani">
       <created>1660923926926</created>
@@ -504,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662241409143</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="material table">
+      <created>1662247502714</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1662247502714</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

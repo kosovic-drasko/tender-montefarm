@@ -12,6 +12,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'jhi-postupci-update',
   templateUrl: './postupci-update.component.html',
+  styleUrls: ['./postupci-update.scss'],
 })
 export class PostupciUpdateComponent implements OnInit {
   isSaving = false;
