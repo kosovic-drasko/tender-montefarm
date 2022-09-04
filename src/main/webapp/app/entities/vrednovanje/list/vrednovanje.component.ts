@@ -37,7 +37,14 @@ export class VrednovanjeComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @Input() postupak: any;
+  // @ViewChild(MatTableExporterDirective) exporter: MatTableExporterDirective ;
   constructor(protected vrednovanjeService: VrednovanjeService, protected activatedRoute: ActivatedRoute, protected router: Router) {}
+
+  // importAsXlsx(){
+  //
+  //   this.exporter.exportTable('xlsx', {fileName:'test', sheet: 'sheet_name'});
+  //
+  // }
 
   loadPage(): void {
     this.isLoading = true;

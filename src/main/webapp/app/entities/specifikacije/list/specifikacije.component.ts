@@ -20,6 +20,7 @@ export class SpecifikacijeComponent implements OnInit {
   isLoading = false;
   brojObrazac?: number = 0;
   ukupno?: number;
+
   public displayedColumns = [
     'sifra postupka',
     'broj partije',

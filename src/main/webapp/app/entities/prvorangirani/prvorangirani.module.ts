@@ -5,9 +5,10 @@ import { PrvorangiraniDetailComponent } from './detail/prvorangirani-detail.comp
 import { PrvorangiraniRoutingModule } from './route/prvorangirani-routing.module';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
-  imports: [SharedModule, PrvorangiraniRoutingModule, MatTableExporterModule, MatSortModule],
+  imports: [SharedModule, PrvorangiraniRoutingModule, MatTableExporterModule, MatSortModule, MatSidenavModule],
   declarations: [PrvorangiraniComponent, PrvorangiraniDetailComponent],
   exports: [PrvorangiraniComponent],
 })

@@ -1,122 +1,139 @@
-<div>
-  <h2 id="page-heading" data-cy="SpecifikacijeHeading">
-    <div class="btn-group" role="group" aria-label="Basic example">
-      <button type="button" id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-secondary">
-        <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="tenderApp.specifikacije.home.createLabel" (click)="add()"> Create a new Ponude </span>
-      </button>
-      <button type="button" class="btn btn-secondary" (click)="fileInput.click()">Nadji Excel</button>
-      <button type="button" class="btn btn-secondary" (click)="uploadFile()">Dodaj Excel</button>
-      <button type="button" class="btn btn-secondary" (click)="obrazacExcel()">Excel</button>
-    </div>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side"> </mat-sidenav>
+  <mat-sidenav-content>
+    <div>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+          <input hidden #fileInput type="file" id="file" />
+          <mat-button-toggle *ngIf="!postupak" class="nadji" (click)="sidenav.toggle()">
+            <mat-icon>search</mat-icon>
+          </mat-button-toggle>
+          <div></div>
+          <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="add()" matTooltip="Dodaj novu ponudu">Dodaj </mat-button-toggle>
+          <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" matTooltip="Napravi formu za unos Excel" (click)="obrazacExcel()"
+            >Napravi Obrazac
+          </mat-button-toggle>
+          <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" matTooltip="Nadji Excel fajl" (click)="fileInput.click()">
+            Nadji Fajl
+          </mat-button-toggle>
+          <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" matTooltip="Unesi Excel fajl" (click)="uploadFile()"
+            >Dodaj Fajl
+          </mat-button-toggle>
+          <mat-button-toggle *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']" matTooltip=" Excel fajl" (click)="obrazacExcelPostupak(1)">
+            <img src="../../../../content/images/icons8-microsoft-excel-48.png" alt="" />
+          </mat-button-toggle>
 
-    <input hidden #fileInput type="file" id="file" />
-  </h2>
+          <!--      <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" matTooltip="Ukloni cijelu ponudu" (click)="open(contentBrisiPoSifriPonude)">-->
+          <!--        Ukloni Ponudu</mat-button-toggle-->
+          <!--      >-->
+        </mat-button-toggle-group>
+      </div>
+      <jhi-alert-error></jhi-alert-error>
 
-  <jhi-alert-error></jhi-alert-error>
+      <jhi-alert></jhi-alert>
 
-  <jhi-alert></jhi-alert>
-
-  <div class="alert alert-warning" id="no-result" *ngIf="specifikacijes?.body?.length === 0">
-    <span jhiTranslate="tenderApp.specifikacije.home.notFound">No specifikacijes found</span>
-  </div>
-
-  <div class="table-responsive" id="entities" *ngIf="specifikacijes">
-    <table mat-table id="ExampleTable" [dataSource]="dataSource" matSort matSortStart="desc" matSort matSortStart="desc">
-      <ng-container matColumnDef="sifra postupka">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Postupka</th>
-        <td mat-cell *matCellDef="let element">{{ element.sifraPostupka }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-
-      <ng-container matColumnDef="broj partije">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj Partije</th>
-        <td mat-cell *matCellDef="let element">{{ element.brojPartije }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="atc">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Atc</th>
-        <td mat-cell *matCellDef="let element">{{ element.atc }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="inn">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Inn</th>
-        <td mat-cell *matCellDef="let element">{{ element.inn }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="farmaceutski oblik">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Farmaceutski Oblik</th>
-        <td mat-cell *matCellDef="let element">{{ element.farmaceutskiOblikLijeka }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="jacina lijeka">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Jacina Lijeka</th>
-        <td mat-cell *matCellDef="let element">{{ element.jacinaLijeka }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="trazena kolicina">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Kolicina</th>
-        <td mat-cell *matCellDef="let element">{{ element.trazenaKolicina }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="pakovanje">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Pakovanje</th>
-        <td mat-cell *matCellDef="let element">{{ element.pakovanje }}</td>
-        <td mat-footer-cell *matFooterCellDef></td>
-      </ng-container>
-      <ng-container matColumnDef="jedinica mjere">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Jedinica Mjere</th>
-        <td mat-cell *matCellDef="let element">{{ element.jedinicaMjere }}</td>
-        <td mat-footer-cell *matFooterCellDef>Procijenjena:</td>
-      </ng-container>
-      <ng-container matColumnDef="procijenjena vrijednost">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Procijenjena Vrijednost</th>
-        <td mat-cell *matCellDef="let element">{{ element.procijenjenaVrijednost }}</td>
-        <td mat-footer-cell *matFooterCellDef>{{ ukupno | number: '1.2-2' }}</td>
-      </ng-container>
-      <div>
-        <ng-container matColumnDef="action" stickyEnd>
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element">
-            <div class="btn-group">
-              <button
-                type="submit"
-                (click)="
-                  update(
-                    element.id,
-                    element.sifraPostupka,
-                    element.brojPartije,
-                    element.atc,
-                    element.inn,
-                    element.farmaceutskiOblikLijeka,
-                    element.jacinaLijeka,
-                    element.trazenaKolicina,
-                    element.pakovanje,
-                    element.jedinicaMjere,
-                    element.procijenjenaVrijednost
-                  )
-                "
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-              </button>
-
-              <button type="submit" (click)="delete(element)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-          <td mat-footer-cell *matFooterCellDef></td>
-        </ng-container>
+      <div class="alert alert-warning" id="no-result" *ngIf="specifikacijes?.body?.length === 0">
+        <span jhiTranslate="tenderApp.specifikacije.home.notFound">No specifikacijes found</span>
       </div>
 
-      <tr class="heder" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-    </table>
-    <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[20, 30, 50, 100]" showFirstLastButtons></mat-paginator>
-  </div>
-</div>
+      <div class="table-responsive" id="entities" *ngIf="specifikacijes">
+        <table mat-table id="ExampleTable" [dataSource]="dataSource" matSort matSortStart="desc" matSort matSortStart="desc">
+          <ng-container matColumnDef="sifra postupka">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Sifra Postupka</th>
+            <td mat-cell *matCellDef="let element">{{ element.sifraPostupka }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+
+          <ng-container matColumnDef="broj partije">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj Partije</th>
+            <td mat-cell *matCellDef="let element">{{ element.brojPartije }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="atc">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Atc</th>
+            <td mat-cell *matCellDef="let element">{{ element.atc }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="inn">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Inn</th>
+            <td mat-cell *matCellDef="let element">{{ element.inn }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="farmaceutski oblik">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Farmaceutski Oblik</th>
+            <td mat-cell *matCellDef="let element">{{ element.farmaceutskiOblikLijeka }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="jacina lijeka">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Jacina Lijeka</th>
+            <td mat-cell *matCellDef="let element">{{ element.jacinaLijeka }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="trazena kolicina">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Kolicina</th>
+            <td mat-cell *matCellDef="let element">{{ element.trazenaKolicina }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="pakovanje">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Pakovanje</th>
+            <td mat-cell *matCellDef="let element">{{ element.pakovanje }}</td>
+            <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="jedinica mjere">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Jedinica Mjere</th>
+            <td mat-cell *matCellDef="let element">{{ element.jedinicaMjere }}</td>
+            <td mat-footer-cell *matFooterCellDef>Procijenjena:</td>
+          </ng-container>
+          <ng-container matColumnDef="procijenjena vrijednost">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Procijenjena Vrijednost</th>
+            <td mat-cell *matCellDef="let element">{{ element.procijenjenaVrijednost }}</td>
+            <td mat-footer-cell *matFooterCellDef>{{ ukupno | number: '1.2-2' }}</td>
+          </ng-container>
+          <div>
+            <ng-container matColumnDef="action" stickyEnd>
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                <div class="btn-group">
+                  <button
+                    type="submit"
+                    (click)="
+                      update(
+                        element.id,
+                        element.sifraPostupka,
+                        element.brojPartije,
+                        element.atc,
+                        element.inn,
+                        element.farmaceutskiOblikLijeka,
+                        element.jacinaLijeka,
+                        element.trazenaKolicina,
+                        element.pakovanje,
+                        element.jedinicaMjere,
+                        element.procijenjenaVrijednost
+                      )
+                    "
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </button>
+
+                  <button type="submit" (click)="delete(element)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+              <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+          </div>
+
+          <tr class="heder" mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+        </table>
+        <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[20, 30, 50, 100]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
