@@ -8,11 +8,11 @@
     </mat-form-field>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-button-toggle class="nadji" (click)="sidenav.toggle()"><mat-icon>search</mat-icon></mat-button-toggle>
     <div id="page-heading" data-cy="SpecifikacijeHeading">
       <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
         <input hidden #fileInput type="file" id="file" />
-
+        <mat-button-toggle *ngIf="!postupak" class="nadji" (click)="sidenav.toggle()"><mat-icon>search</mat-icon></mat-button-toggle>
+        <div></div>
         <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" (click)="add()" matTooltip="Dodaj novu ponudu">Dodaj </mat-button-toggle>
         <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" matTooltip="Napravi formu za unos Excel" (click)="obrazacExcel()"
           >Napravi Obrazac
@@ -23,6 +23,7 @@
         <mat-button-toggle *jhiHasAnyAuthority="'ROLE_ADMIN'" matTooltip="Unesi Excel fajl" (click)="uploadFile()"
           >Dodaj Fajl
         </mat-button-toggle>
+        <mat-button-toggle *ngIf="postupak" matTooltip="Ponisti" (click)="ponisti()">Ponisti </mat-button-toggle>
         <mat-button-toggle *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']" matTooltip=" Excel fajl" (click)="obrazacExcelPostupak()">
           <img src="../../../../content/images/icons8-microsoft-excel-48.png" alt="" />
         </mat-button-toggle>
