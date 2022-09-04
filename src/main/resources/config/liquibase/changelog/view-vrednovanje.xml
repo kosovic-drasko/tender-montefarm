@@ -4,7 +4,7 @@
 
     <changeSet author="Drasko" id="view-vrednovanje">
         <createView catalogName="tender" schemaName="public" viewName="view_vrednovanje">
-            SELECT ponude.id,
+            SELECT DISTINCT ON ( ponude.id)ponude.id,
                    ponude.sifra_postupka,
                    ponude.sifra_ponude,
                    ponude.broj_partije,
