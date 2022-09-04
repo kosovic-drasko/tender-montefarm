@@ -2,34 +2,32 @@
   <h2 id="page-heading" data-cy="SpecifikacijeHeading">
     <span jhiTranslate="tenderApp.specifikacije.home.title">Specifikacijes</span>
 
-    <div class="d-flex justify-content-end">
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-specifikacije"
-        (click)="add()"
-      >
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-secondary">
         <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="tenderApp.specifikacije.home.createLabel"> Create a new Specifikacije </span>
+        <span jhiTranslate="tenderApp.specifikacije.home.createLabel" (click)="add()"> Create a new Ponude </span>
       </button>
-      <input hidden #fileInput type="file" id="file" />
-      <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-specifikacije" (click)="fileInput.click()">
-        <!--        <fa-icon icon="plus"></fa-icon>-->
-        <span> Nadji </span>
-      </button>
-      <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-specifikacije" (click)="uploadFile()">
-        <!--        <fa-icon icon="plus"></fa-icon>-->
-        <span>Dodaj Excel</span>
-      </button>
-      <button class="btn btn-info" (click)="obrazacExcel()">
-        <!--        <fa-icon icon="plus"></fa-icon>-->
-        <span>Obrazac</span>
-      </button>
-      <button class="btn btn-warning" (click)="obrazacExcelPostupak(1)">
-        <!--        <fa-icon icon="plus"></fa-icon>-->
-        <span>Excel </span>
-      </button>
+      <button type="button" class="btn btn-secondary" (click)="fileInput.click()">Nadji Excel</button>
+      <button type="button" class="btn btn-secondary" (click)="uploadFile()">Dodaj Excel</button>
+      <button type="button" class="btn btn-secondary" (click)="obrazacExcelPostupak(1)">Excel</button>
     </div>
+    <input hidden #fileInput type="file" id="file" />
+    <!--      <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-specifikacije" (click)="fileInput.click()">-->
+    <!--        &lt;!&ndash;        <fa-icon icon="plus"></fa-icon>&ndash;&gt;-->
+    <!--        <span> Nadji </span>-->
+    <!--      </button>-->
+    <!--      <button data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-specifikacije" (click)="uploadFile()">-->
+    <!--        &lt;!&ndash;        <fa-icon icon="plus"></fa-icon>&ndash;&gt;-->
+    <!--        <span>Dodaj Excel</span>-->
+    <!--      </button>-->
+    <!--      <button class="btn btn-info" (click)="obrazacExcel()">-->
+    <!--        &lt;!&ndash;        <fa-icon icon="plus"></fa-icon>&ndash;&gt;-->
+    <!--        <span>Obrazac</span>-->
+    <!--      </button>-->
+    <!--      <button class="btn btn-warning" (click)="obrazacExcelPostupak(1)">-->
+    <!--        &lt;!&ndash;        <fa-icon icon="plus"></fa-icon>&ndash;&gt;-->
+    <!--        <span>Excel </span>-->
+    <!--      </button>-->
   </h2>
 
   <jhi-alert-error></jhi-alert-error>
