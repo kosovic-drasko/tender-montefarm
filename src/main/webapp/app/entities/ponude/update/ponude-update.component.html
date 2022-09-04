@@ -1,11 +1,15 @@
 <div class="modal-content">
+  <div class="modal-header">
+    <h5
+      class="modal-title"
+      id="jhi-ponude-heading"
+      data-cy="PonudeCreateUpdateHeading"
+      jhiTranslate="tenderApp.ponude.home.createOrEditLabel"
+    ></h5>
+  </div>
   <div class="d-flex justify-content-center">
     <div class="col-8">
       <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-        <h2 id="jhi-ponude-heading" data-cy="PonudeCreateUpdateHeading" jhiTranslate="tenderApp.ponude.home.createOrEditLabel">
-          Create or edit a Ponude
-        </h2>
-
         <div>
           <jhi-alert-error></jhi-alert-error>
 
@@ -218,21 +222,22 @@
             <label class="form-label" jhiTranslate="tenderApp.ponude.sifraPonudjaca" for="field_sifraPonudjaca">Sifra Ponudjaca</label>
           </div>
         </div>
+        <div class="modal-footer">
+          <div>
+            <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+            </button>
 
-        <div>
-          <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-          </button>
-
-          <button
-            type="submit"
-            id="save-entity"
-            data-cy="entityCreateSaveButton"
-            [disabled]="editForm.invalid || isSaving"
-            class="btn btn-primary"
-          >
-            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-          </button>
+            <button
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="editForm.invalid || isSaving"
+              class="btn btn-primary"
+            >
+              <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+          </div>
         </div>
       </form>
     </div>
